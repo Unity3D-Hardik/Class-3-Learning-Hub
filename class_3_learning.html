@@ -19,6 +19,22 @@
             background-color: #f1f5f9;
             color: #0f172a;
             -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .touch-target {
+            min-height: 48px;
+            touch-action: manipulation;
+        }
+
+        /* Hide scrollbars for mobile tab scrolling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         .pop-in {
@@ -71,57 +87,57 @@
 
     <!-- TOP GLOBAL HEADER -->
     <header class="bg-slate-900 text-white sticky top-0 z-40 shadow-lg border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+        <div class="max-w-6xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between gap-2">
             <!-- Brand Logo & Title -->
-            <div onclick="showPortal()" class="flex items-center gap-2.5 cursor-pointer group">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-400 to-amber-200 flex items-center justify-center text-slate-900 font-black text-xl shadow-md group-hover:scale-105 transition">
+            <div onclick="showPortal()" class="flex items-center gap-2 cursor-pointer group select-none">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-amber-400 to-amber-200 flex items-center justify-center text-slate-900 font-black text-lg sm:text-xl shadow-md group-hover:scale-105 transition shrink-0">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
-                <div>
-                    <h1 class="font-extrabold text-base sm:text-lg tracking-tight text-white leading-none">
+                <div class="min-w-0">
+                    <h1 class="font-extrabold text-sm sm:text-lg tracking-tight text-white leading-tight truncate">
                         Class 3 <span class="text-amber-400">Learning Hub</span>
                     </h1>
-                    <p class="text-[10px] sm:text-xs text-slate-400 font-medium">NCERT Math Mela • Santoor • World Around Us</p>
+                    <p class="text-[9px] sm:text-xs text-slate-400 font-medium truncate">NCERT Math • Santoor • World Around Us</p>
                 </div>
             </div>
 
             <!-- Navigation Controls -->
-            <div class="flex items-center gap-2">
-                <button onclick="showPortal()" title="Home Portal" class="bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-200 px-3 py-2 rounded-2xl text-xs sm:text-sm font-bold border border-slate-700/80 transition flex items-center gap-1.5 touch-manipulation">
+            <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                <button onclick="showPortal()" title="Home Portal" class="touch-target bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-200 px-3 py-2 rounded-2xl text-xs sm:text-sm font-bold border border-slate-700/80 transition flex items-center gap-1.5 select-none">
                     <i class="fa-solid fa-house text-amber-400"></i>
                     <span class="hidden sm:inline">Home</span>
                 </button>
                 
-                <button onclick="openChapterManagerModal()" title="Manage NCERT Chapters & Syllabus" class="bg-slate-800 hover:bg-slate-700 text-amber-300 px-3 py-2 rounded-2xl text-xs sm:text-sm font-bold border border-slate-700/80 transition flex items-center gap-1.5 touch-manipulation">
+                <button onclick="openChapterManagerModal()" title="Manage NCERT Chapters & Syllabus" class="touch-target bg-slate-800 hover:bg-slate-700 text-amber-300 px-3 py-2 rounded-2xl text-xs sm:text-sm font-bold border border-slate-700/80 transition flex items-center gap-1.5 select-none">
                     <i class="fa-solid fa-book-bookmark text-amber-400"></i>
                     <span class="hidden sm:inline">Chapters</span>
                 </button>
 
-                <button onclick="openSettingsModal()" title="Settings & Learning Dashboard" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-3.5 py-2 rounded-2xl text-xs sm:text-sm font-extrabold shadow-md border border-indigo-400/30 transition flex items-center gap-2 touch-manipulation">
+                <button onclick="openSettingsModal()" title="Settings & Learning Dashboard" class="touch-target bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-3 py-2 sm:px-3.5 sm:py-2 rounded-2xl text-xs sm:text-sm font-extrabold shadow-md border border-indigo-400/30 transition flex items-center gap-1.5 select-none">
                     <i class="fa-solid fa-sliders text-amber-300"></i>
-                    <span id="header-user-name" class="max-w-[100px] truncate">Learner</span>
+                    <span id="header-user-name" class="max-w-[70px] sm:max-w-[100px] truncate">Learner</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- MAIN CONTAINER -->
-    <main class="flex-grow max-w-6xl w-full mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-6">
+    <main class="flex-grow max-w-6xl w-full mx-auto px-2.5 sm:px-4 py-3 sm:py-6 space-y-4 sm:space-y-6">
 
         <!-- ================= PAGE 1: HOME PORTAL ================= -->
-        <section id="view-portal" class="space-y-6">
+        <section id="view-portal" class="space-y-4 sm:space-y-6">
             <!-- Hero Banner -->
-            <div class="bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-600 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
-                <div class="absolute -right-10 -bottom-10 opacity-15 text-9xl font-black pointer-events-none">⭐</div>
-                <div class="relative z-10 max-w-2xl space-y-3">
-                    <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-extrabold text-amber-300 border border-white/20">
+            <div class="bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-600 rounded-3xl p-5 sm:p-8 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-15 text-8xl sm:text-9xl font-black pointer-events-none">⭐</div>
+                <div class="relative z-10 max-w-2xl space-y-2 sm:space-y-3">
+                    <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-extrabold text-amber-300 border border-white/20">
                         <i class="fa-solid fa-star"></i> NCERT Class 3 Master Suite
                     </div>
-                    <h2 class="text-2xl sm:text-4xl font-black leading-tight">
+                    <h2 class="text-xl sm:text-4xl font-black leading-tight">
                         Welcome, <span id="portal-user-greeting" class="text-amber-300">Little Explorer</span>! 👋
                     </h2>
                     <p class="text-xs sm:text-base text-indigo-100 font-medium leading-relaxed">
-                        Master Class 3 concepts with unlimited interactive practice questions, 20-Question quiz challenges, and fun STEAM labs for Math, English, and EVS!
+                        Master Class 3 concepts with unlimited interactive practice questions, 20-Question quiz challenges, and fun STEAM labs!
                     </p>
                 </div>
             </div>
@@ -232,25 +248,25 @@
             </div>
 
             <!-- Sub-tab Navigation Bar -->
-            <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-2 rounded-2xl shadow-sm border border-slate-200">
-                <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-                    <button id="tab-practice-btn" onclick="switchSubjectTab('practice')" class="sub-tab-btn px-4 py-2 rounded-xl font-bold text-sm transition flex items-center gap-2 bg-slate-900 text-white shadow">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 bg-white p-2 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0 touch-pan-x">
+                    <button id="tab-practice-btn" onclick="switchSubjectTab('practice')" class="touch-target sub-tab-btn px-3.5 py-2 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-1.5 bg-slate-900 text-white shadow whitespace-nowrap">
                         <i class="fa-solid fa-bullseye"></i> Practice Mode
                     </button>
-                    <button id="tab-exam-btn" onclick="switchSubjectTab('exam')" class="sub-tab-btn px-4 py-2 rounded-xl font-bold text-sm transition flex items-center gap-2 bg-white text-slate-600 hover:bg-slate-50">
-                        <i class="fa-solid fa-award text-amber-500"></i> 20-Q Quiz Challenge
+                    <button id="tab-exam-btn" onclick="switchSubjectTab('exam')" class="touch-target sub-tab-btn px-3.5 py-2 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-1.5 bg-white text-slate-600 hover:bg-slate-50 whitespace-nowrap">
+                        <i class="fa-solid fa-award text-amber-500"></i> 20-Q Quiz
                     </button>
-                    <button id="tab-lab-btn" onclick="switchSubjectTab('lab')" class="sub-tab-btn px-4 py-2 rounded-xl font-bold text-sm transition flex items-center gap-2 bg-white text-slate-600 hover:bg-slate-50">
+                    <button id="tab-lab-btn" onclick="switchSubjectTab('lab')" class="touch-target sub-tab-btn px-3.5 py-2 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-1.5 bg-white text-slate-600 hover:bg-slate-50 whitespace-nowrap">
                         <i class="fa-solid fa-flask text-purple-500"></i> <span id="lab-tab-label">Interactive Tools</span>
                     </button>
                 </div>
 
                 <div class="w-full sm:w-auto flex items-center gap-2">
-                    <select id="topic-select" onchange="generateNewQuestion()" class="w-full bg-slate-50 border-2 border-slate-200 text-slate-800 font-bold text-xs sm:text-sm rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500">
+                    <select id="topic-select" onchange="generateNewQuestion()" class="w-full bg-slate-50 border-2 border-slate-200 text-slate-800 font-bold text-xs sm:text-sm rounded-xl px-2.5 py-2 focus:outline-none focus:border-indigo-500 touch-target">
                         <!-- Options generated dynamically -->
                     </select>
-                    <button onclick="openChapterManagerModal()" title="Customize Active Chapters" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs px-3 py-2 rounded-xl border border-indigo-200 transition whitespace-nowrap flex items-center gap-1">
-                        <i class="fa-solid fa-filter text-indigo-500"></i> Filter Chapters
+                    <button onclick="openChapterManagerModal()" title="Customize Active Chapters" class="touch-target bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs px-2.5 py-2 rounded-xl border border-indigo-200 transition whitespace-nowrap flex items-center gap-1">
+                        <i class="fa-solid fa-filter text-indigo-500"></i> Filter
                     </button>
                 </div>
             </div>
@@ -258,50 +274,50 @@
             <!-- SUB-TAB 1: PRACTICE MODE WORKSPACE -->
             <div id="subtab-practice" class="space-y-4">
                 
-                <div id="practice-card" class="bg-white rounded-3xl p-5 sm:p-7 shadow-md border-2 border-slate-200 space-y-5 relative">
+                <div id="practice-card" class="bg-white rounded-3xl p-4 sm:p-7 shadow-md border-2 border-slate-200 space-y-4 sm:space-y-5 relative">
                     
                     <!-- Question Category Badge -->
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                        <span id="q-badge" class="bg-indigo-100 text-indigo-700 text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wider">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                        <span id="q-badge" class="bg-indigo-100 text-indigo-700 text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider truncate max-w-[200px] sm:max-w-none">
                             Topic Loading...
                         </span>
-                        <div class="text-xs font-bold text-slate-400 flex items-center gap-1">
-                            <i class="fa-solid fa-rotate text-amber-500"></i> Unlimited Practice Mode
+                        <div class="text-[10px] sm:text-xs font-bold text-slate-400 flex items-center gap-1">
+                            <i class="fa-solid fa-rotate text-amber-500"></i> Unlimited Practice
                         </div>
                     </div>
 
                     <!-- Question Text -->
-                    <div id="q-text" class="text-base sm:text-xl font-extrabold text-slate-800 leading-snug">
+                    <div id="q-text" class="text-sm sm:text-xl font-extrabold text-slate-800 leading-snug">
                         Question loading...
                     </div>
 
                     <!-- Visual SVG Container (If applicable) -->
-                    <div id="q-visual" class="hidden my-3 p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center min-h-[120px]">
+                    <div id="q-visual" class="hidden my-2 p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center min-h-[100px] overflow-x-auto">
                         <!-- Visual SVGs populated dynamically -->
                     </div>
 
                     <!-- Options Grid -->
-                    <div id="q-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <div id="q-options" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                         <!-- Option buttons generated dynamically -->
                     </div>
 
                     <!-- Hint & Explanation Accordion Boxes -->
-                    <div id="hint-box" class="hidden p-4 rounded-2xl bg-amber-50 border-2 border-amber-200 text-amber-900 text-xs sm:text-sm font-semibold leading-relaxed">
+                    <div id="hint-box" class="hidden p-3.5 rounded-2xl bg-amber-50 border-2 border-amber-200 text-amber-900 text-xs sm:text-sm font-semibold leading-relaxed">
                         <i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> <span id="hint-text"></span>
                     </div>
 
-                    <div id="explanation-box" class="hidden p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-200 text-emerald-900 text-xs sm:text-sm font-semibold leading-relaxed">
+                    <div id="explanation-box" class="hidden p-3.5 rounded-2xl bg-emerald-50 border-2 border-emerald-200 text-emerald-900 text-xs sm:text-sm font-semibold leading-relaxed">
                         <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> <span id="explanation-text"></span>
                     </div>
 
                     <!-- Action Toolbar -->
-                    <div class="flex items-center justify-between gap-3 pt-3 border-t border-slate-100">
-                        <button onclick="toggleHint()" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-amber-300 transition flex items-center gap-1.5">
+                    <div class="flex items-center justify-between gap-2.5 pt-2 border-t border-slate-100">
+                        <button onclick="toggleHint()" class="touch-target bg-amber-100 hover:bg-amber-200 text-amber-800 font-extrabold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-amber-300 transition flex items-center gap-1.5 select-none">
                             <i class="fa-solid fa-lightbulb text-amber-600"></i> Show Hint
                         </button>
                         
-                        <button onclick="generateNewQuestion()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm px-6 py-2.5 rounded-xl shadow transition block-3d flex items-center gap-2">
-                            Next Question <i class="fa-solid fa-arrow-right"></i>
+                        <button onclick="generateNewQuestion()" class="touch-target bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow transition block-3d flex items-center gap-2 select-none">
+                            Next <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
 
@@ -462,51 +478,51 @@
                 </div>
 
                 <!-- ENGLISH LAB TOOL: WORD & GRAMMAR INSPECTOR -->
-                <div id="lab-tool-english" class="bg-white rounded-3xl p-5 sm:p-7 shadow-md border-2 border-slate-200 space-y-5 hidden">
+                <div id="lab-tool-english" class="bg-white rounded-3xl p-4 sm:p-7 shadow-md border-2 border-slate-200 space-y-4 sm:space-y-5 hidden">
                     <div class="border-b border-slate-100 pb-3">
-                        <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                        <h3 class="text-base sm:text-lg font-black text-slate-800 flex items-center gap-2">
                             <i class="fa-solid fa-spell-check text-sky-600"></i> Word & Grammar Inspector
                         </h3>
                         <p class="text-xs text-slate-500 font-medium">Type any English word to analyze syllables, vowels, plurals, and tenses!</p>
                     </div>
 
-                    <div class="flex gap-2">
-                        <input type="text" id="eng-word-input" placeholder="Type a word (e.g. happy, run, child)..." class="flex-grow bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:border-sky-500">
-                        <button onclick="inspectEnglishWord()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow">
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input type="text" id="eng-word-input" placeholder="Type a word (e.g. happy, run, child)..." class="flex-grow bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:border-sky-500 touch-target">
+                        <button onclick="inspectEnglishWord()" class="touch-target bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow">
                             Inspect Word
                         </button>
                     </div>
 
-                    <div id="eng-inspector-output" class="p-5 bg-sky-50 rounded-2xl border border-sky-100 space-y-3 text-xs sm:text-sm font-semibold text-sky-900 hidden">
+                    <div id="eng-inspector-output" class="p-4 bg-sky-50 rounded-2xl border border-sky-100 space-y-3 text-xs sm:text-sm font-semibold text-sky-900 hidden">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
                 <!-- EVS LAB TOOL: STEAM ECOSYSTEM & PLANT EXPLORER -->
-                <div id="lab-tool-evs" class="bg-white rounded-3xl p-5 sm:p-7 shadow-md border-2 border-slate-200 space-y-5 hidden">
+                <div id="lab-tool-evs" class="bg-white rounded-3xl p-4 sm:p-7 shadow-md border-2 border-slate-200 space-y-4 sm:space-y-5 hidden">
                     <div class="border-b border-slate-100 pb-3">
-                        <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                        <h3 class="text-base sm:text-lg font-black text-slate-800 flex items-center gap-2">
                             <i class="fa-solid fa-leaf text-emerald-600"></i> STEAM Activity & Ecosystem Inspector
                         </h3>
                         <p class="text-xs text-slate-500 font-medium">Explore nature connections, plant biology, and eco-harmony!</p>
                     </div>
 
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                        <button onclick="showEvsSteamTopic('plant')" class="p-3 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl font-bold text-xs text-emerald-800 text-center">
+                        <button onclick="showEvsSteamTopic('plant')" class="touch-target p-2.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl font-bold text-xs text-emerald-800 text-center flex items-center justify-center">
                             🌱 Plant Anatomy
                         </button>
-                        <button onclick="showEvsSteamTopic('ecosystem')" class="p-3 bg-teal-50 hover:bg-teal-100 border border-teal-200 rounded-xl font-bold text-xs text-teal-800 text-center">
+                        <button onclick="showEvsSteamTopic('ecosystem')" class="touch-target p-2.5 bg-teal-50 hover:bg-teal-100 border border-teal-200 rounded-xl font-bold text-xs text-teal-800 text-center flex items-center justify-center">
                             🐝 Pollination & Bees
                         </button>
-                        <button onclick="showEvsSteamTopic('festival')" class="p-3 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl font-bold text-xs text-amber-800 text-center">
+                        <button onclick="showEvsSteamTopic('festival')" class="touch-target p-2.5 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl font-bold text-xs text-amber-800 text-center flex items-center justify-center">
                             🌾 Harvest Science
                         </button>
-                        <button onclick="showEvsSteamTopic('harmony')" class="p-3 bg-cyan-50 hover:bg-cyan-100 border border-cyan-200 rounded-xl font-bold text-xs text-cyan-800 text-center">
+                        <button onclick="showEvsSteamTopic('harmony')" class="touch-target p-2.5 bg-cyan-50 hover:bg-cyan-100 border border-cyan-200 rounded-xl font-bold text-xs text-cyan-800 text-center flex items-center justify-center">
                             💧 Water Conservation
                         </button>
                     </div>
 
-                    <div id="evs-steam-output" class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <div id="evs-steam-output" class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
                         <p class="text-xs font-bold text-slate-500 text-center">Click any topic button above to launch visual STEAM science models!</p>
                     </div>
                 </div>
@@ -517,130 +533,59 @@
 
     </main>
 
-    <!-- UNIFIED SETTINGS & DASHBOARD MODAL -->
-    <div id="modal-settings" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl space-y-5 border-2 border-slate-200 max-h-[90vh] overflow-y-auto pop-in">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="text-xl font-black text-slate-800 flex items-center gap-2">
-                    <i class="fa-solid fa-sliders text-indigo-600"></i> Settings & Dashboard
-                </h3>
-                <button onclick="closeSettingsModal()" class="w-9 h-9 rounded-2xl bg-slate-100 text-slate-500 hover:text-slate-800 font-bold text-base flex items-center justify-center">✕</button>
-            </div>
-
-            <!-- Profile Name Editor -->
-            <div class="bg-indigo-50/70 p-4 rounded-2xl border border-indigo-100 space-y-3">
-                <label class="block text-xs font-black text-indigo-900 uppercase">Student Name Profile</label>
-                <div class="flex gap-2">
-                    <input type="text" id="input-student-name" placeholder="Enter student name..." class="flex-grow bg-white border border-indigo-200 rounded-xl px-3.5 py-2 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-indigo-400">
-                    <button onclick="saveStudentName()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs shadow">Save</button>
-                </div>
-            </div>
-
-            <!-- Sound Preferences -->
-            <div class="flex items-center justify-between p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
-                <div class="flex items-center gap-2.5">
-                    <i class="fa-solid fa-volume-high text-amber-500 text-lg"></i>
-                    <div>
-                        <div class="text-xs font-extrabold text-slate-800">Interactive Audio Effects</div>
-                        <div class="text-[10px] text-slate-500">Sound chimes for clicks and correct answers</div>
-                    </div>
-                </div>
-                <input type="checkbox" id="chk-sound" onchange="toggleSoundSetting(this.checked)" checked class="w-5 h-5 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-            </div>
-
-            <!-- Overall Performance Analytics -->
-            <div class="space-y-3">
-                <h4 class="font-black text-slate-800 text-xs uppercase tracking-wider">Practice Stats Analytics</h4>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
-                    <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
-                        <div id="stat-total" class="text-xl font-black text-indigo-600">0</div>
-                        <div class="text-[10px] font-bold text-slate-400">Total Solved</div>
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
-                        <div id="stat-correct" class="text-xl font-black text-emerald-600">0</div>
-                        <div class="text-[10px] font-bold text-slate-400">Correct</div>
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
-                        <div id="stat-wrong" class="text-xl font-black text-rose-500">0</div>
-                        <div class="text-[10px] font-bold text-slate-400">Wrong</div>
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200">
-                        <div id="stat-accuracy" class="text-xl font-black text-amber-500">0%</div>
-                        <div class="text-[10px] font-bold text-slate-400">Accuracy</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quiz History Log -->
-            <div class="space-y-2">
-                <h4 class="font-black text-slate-800 text-xs uppercase tracking-wider">Recent Quiz Results</h4>
-                <div id="settings-quiz-history" class="space-y-2 max-h-40 overflow-y-auto pr-1">
-                    <!-- Populated dynamically -->
-                </div>
-            </div>
-
-            <div class="pt-2 border-t border-slate-100 flex justify-between items-center">
-                <button onclick="resetAllData()" class="text-rose-600 hover:text-rose-800 text-xs font-bold flex items-center gap-1">
-                    <i class="fa-solid fa-trash-can"></i> Reset Progress Data
-                </button>
-                <button onclick="closeSettingsModal()" class="bg-slate-800 text-white font-bold text-xs px-5 py-2 rounded-xl">Done</button>
-            </div>
-        </div>
-    </div>
-
     <!-- CHAPTER & SYLLABUS MANAGER MODAL -->
-    <div id="modal-chapter-manager" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
-        <div class="bg-white rounded-3xl max-w-3xl w-full p-5 sm:p-6 shadow-2xl space-y-5 border-2 border-slate-200 max-h-[92vh] overflow-y-auto pop-in">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+    <div id="modal-chapter-manager" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-2.5 sm:p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-3xl w-full p-4 sm:p-6 shadow-2xl space-y-4 sm:space-y-5 border-2 border-slate-200 max-h-[88vh] overflow-y-auto pop-in">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div>
-                    <h3 class="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-2">
-                        <i class="fa-solid fa-book-bookmark text-amber-500"></i> NCERT Chapter & Syllabus Manager
+                    <h3 class="text-lg sm:text-2xl font-black text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-book-bookmark text-amber-500"></i> Syllabus Manager
                     </h3>
-                    <p class="text-xs text-slate-500 font-medium">Select which chapters to include in Practice Mode and 20-Q Quizzes</p>
+                    <p class="text-[11px] sm:text-xs text-slate-500 font-medium">Select active chapters for Practice Mode & Quizzes</p>
                 </div>
-                <button onclick="closeChapterManagerModal()" class="w-10 h-10 rounded-2xl bg-slate-100 text-slate-500 hover:text-slate-800 font-bold text-lg flex items-center justify-center">✕</button>
+                <button onclick="closeChapterManagerModal()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-slate-100 text-slate-500 hover:text-slate-800 font-bold text-base sm:text-lg flex items-center justify-center shrink-0">✕</button>
             </div>
 
             <!-- Subject Tab Switcher for Chapter Manager -->
-            <div class="flex items-center gap-2 border-b border-slate-200 pb-2">
-                <button id="cm-tab-math" onclick="switchChapterTab('math')" class="px-4 py-2 rounded-xl font-black text-xs sm:text-sm bg-indigo-600 text-white shadow">
+            <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar border-b border-slate-200 pb-2">
+                <button id="cm-tab-math" onclick="switchChapterTab('math')" class="touch-target px-3.5 py-2 rounded-xl font-black text-xs sm:text-sm bg-indigo-600 text-white shadow whitespace-nowrap">
                     📐 Math Mela
                 </button>
-                <button id="cm-tab-english" onclick="switchChapterTab('english')" class="px-4 py-2 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-slate-600 hover:bg-slate-200">
+                <button id="cm-tab-english" onclick="switchChapterTab('english')" class="touch-target px-3.5 py-2 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 whitespace-nowrap">
                     📚 Santoor & Echoes
                 </button>
-                <button id="cm-tab-evs" onclick="switchChapterTab('evs')" class="px-4 py-2 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-slate-600 hover:bg-slate-200">
+                <button id="cm-tab-evs" onclick="switchChapterTab('evs')" class="touch-target px-3.5 py-2 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 whitespace-nowrap">
                     🌿 World Around Us
                 </button>
             </div>
 
             <!-- Quick Action Toolbar -->
-            <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-50 p-3 rounded-2xl border border-slate-200 text-xs">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 bg-slate-50 p-2.5 rounded-2xl border border-slate-200 text-xs">
                 <span id="cm-active-count-badge" class="font-extrabold text-indigo-700">
                     Active Syllabus: Loading...
                 </span>
-                <div class="flex items-center gap-2">
-                    <button onclick="selectAllChapters(true)" class="text-indigo-600 hover:text-indigo-800 font-bold bg-white px-2.5 py-1.5 rounded-lg border border-slate-200">
+                <div class="flex items-center gap-1.5 w-full sm:w-auto justify-end">
+                    <button onclick="selectAllChapters(true)" class="text-indigo-600 hover:text-indigo-800 font-bold bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-[11px]">
                         Select All
                     </button>
-                    <button onclick="selectAllChapters(false)" class="text-slate-600 hover:text-slate-800 font-bold bg-white px-2.5 py-1.5 rounded-lg border border-slate-200">
+                    <button onclick="selectAllChapters(false)" class="text-slate-600 hover:text-slate-800 font-bold bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-[11px]">
                         Deselect All
                     </button>
-                    <button onclick="resetDefaultChapters()" class="text-rose-600 hover:text-rose-800 font-bold bg-white px-2.5 py-1.5 rounded-lg border border-slate-200">
-                        Reset Defaults
+                    <button onclick="resetDefaultChapters()" class="text-rose-600 hover:text-rose-800 font-bold bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-[11px]">
+                        Reset
                     </button>
                 </div>
             </div>
 
             <!-- Chapter Checkbox List Container -->
-            <div id="cm-chapter-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-80 overflow-y-auto p-1">
+            <div id="cm-chapter-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-72 overflow-y-auto p-1">
                 <!-- Dynamically populated chapter checkboxes -->
             </div>
 
             <div class="flex items-center justify-between border-t border-slate-100 pt-3">
                 <span id="cm-save-msg" class="text-xs font-bold text-emerald-600 hidden">Syllabus Saved! ✓</span>
-                <button onclick="saveChapterSelection()" class="ml-auto px-6 py-2.5 bg-indigo-600 text-white rounded-xl font-extrabold text-sm hover:bg-indigo-700 shadow">
-                    Save Chapter Settings
+                <button onclick="saveChapterSelection()" class="touch-target ml-auto px-5 py-2.5 bg-indigo-600 text-white rounded-xl font-extrabold text-xs sm:text-sm hover:bg-indigo-700 shadow">
+                    Save Syllabus Settings
                 </button>
             </div>
         </div>
@@ -1824,7 +1769,7 @@
                 optionsContainer.innerHTML = '';
                 currentPracticeQ.options.forEach(opt => {
                     const btn = document.createElement('button');
-                    btn.className = "p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-400 font-bold text-base text-slate-800 text-left transition shadow-sm block-3d touch-manipulation";
+                    btn.className = "touch-target min-h-[52px] p-3.5 sm:p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-400 font-extrabold text-sm sm:text-base text-slate-800 text-left transition shadow-sm block-3d select-none flex items-center";
                     btn.dataset.optVal = opt;
                     btn.innerHTML = opt;
                     btn.onclick = () => checkPracticeAnswer(btn, opt);
