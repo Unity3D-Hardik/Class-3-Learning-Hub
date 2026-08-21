@@ -60,11 +60,24 @@
                 </div>
             </div>
 
-            <div class="flex items-center space-x-2">
+            <div class="flex flex-wrap items-center gap-2">
+                <!-- User Profile Badge -->
+                <button onclick="openNameModal()" class="bg-slate-800 hover:bg-slate-700 text-amber-300 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border border-slate-700 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span id="header-user-name">Learner</span>
+                </button>
+
+                <!-- Analytics Dashboard Button -->
+                <button onclick="openAnalyticsModal()" class="bg-slate-800 hover:bg-slate-700 text-emerald-400 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border border-slate-700 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span class="hidden sm:inline">Analytics</span>
+                </button>
+
                 <button onclick="showPortal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border border-slate-700 transition flex items-center gap-1.5">
                     <i class="fa-solid fa-house"></i>
-                    <span class="hidden sm:inline">Subjects Portal</span>
+                    <span class="hidden sm:inline">Portal</span>
                 </button>
+                
                 <button id="sound-btn" onclick="toggleSound()" class="bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border border-slate-700 transition flex items-center gap-1.5">
                     <i id="sound-icon" class="fa-solid fa-volume-high"></i>
                     <span id="sound-label" class="hidden sm:inline">Sound On</span>
@@ -75,14 +88,15 @@
 
     <main class="max-w-6xl mx-auto w-full px-4 py-6 flex-grow">
 
-        <!-- LANDING SUBJECT SELECTION PORTAL -->
         <div id="view-portal" class="space-y-8 pop-in">
             <div class="text-center max-w-2xl mx-auto space-y-3">
                 <span class="bg-indigo-100 text-indigo-800 font-black text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider inline-block">
                     NCERT Class 3 Practice & Test Suite
                 </span>
-                <h2 class="text-3xl sm:text-4xl font-black text-slate-800">What do you want to learn today?</h2>
-                <p class="text-sm text-slate-600 font-medium">Select a subject below to practice unlimited questions, test your knowledge with quizzes, or explore interactive STEAM labs!</p>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-800">
+                    Welcome, <span id="portal-user-greeting" class="text-indigo-600">Champion</span>! 👋
+                </h2>
+                <p class="text-sm text-slate-600 font-medium">Select a subject below to practice unlimited questions, test your knowledge with non-repeating quizzes, or explore interactive STEAM labs!</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -99,8 +113,8 @@
                             <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Book: Math Mela</span>
                             <h3 class="text-2xl font-black text-slate-800 group-hover:text-indigo-600 transition">Mathematics</h3>
                             <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-                                • Ch-4 Vacation with My Nani Maa (2D Shapes, Edges, Vertices, Grid Paths, Footspan)<br>
-                                • Ch-6 House of Hundreds - I (Place Value, Expanded Form, Number Patterns, Building Numbers)
+                                • Ch-4 Vacation with My Nani Maa (2D Shapes, Edges, Grid Paths, Footspan)<br>
+                                • Ch-6 House of Hundreds - I (Place Value, Expanded Form, Skip Counting, Building Numbers)
                             </p>
                         </div>
                     </div>
@@ -224,7 +238,6 @@
                 </div>
             </div>
 
-            <!-- Tab Navigation within Subject -->
             <div class="flex flex-wrap gap-2 border-b border-slate-200 pb-2">
                 <button id="tab-practice-btn" onclick="switchSubjectTab('practice')" class="sub-tab-btn px-4 py-2 rounded-xl font-bold text-sm transition flex items-center gap-2 bg-slate-800 text-white shadow">
                     <i class="fa-solid fa-gamepad"></i> Unlimited Practice Mode
@@ -311,7 +324,7 @@
                     </div>
                     <h2 class="text-2xl font-black text-slate-800" id="exam-title">20-Question Challenge Quiz</h2>
                     <p class="text-sm text-slate-600 font-medium leading-relaxed" id="exam-desc">
-                        Test your child's mastery with a 20-question quiz across all topics in this subject!
+                        Test your mastery with a 20-question quiz! Smart no-repeat logic ensures you get fresh questions until all topic variations are covered.
                     </p>
                     <button onclick="startExam()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-black py-3.5 px-6 rounded-2xl text-base shadow-lg transition">
                         Start 20-Question Quiz Now 🚀
@@ -344,7 +357,7 @@
                     </div>
 
                     <div class="flex justify-between items-center pt-4 border-t border-slate-100">
-                        <button id="exam-prev-btn" onclick="navigateExam(-1)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-sm">
+                        <button id="exam-prev-btn" onclick="navigateExam(-1)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-sm disabled:opacity-40 disabled:cursor-not-allowed">
                             ← Previous
                         </button>
                         <button id="exam-next-btn" onclick="navigateExam(1)" class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold text-sm">
@@ -358,7 +371,10 @@
                     <div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center text-4xl mx-auto bounce-short">
                         🥇
                     </div>
-                    <h2 class="text-3xl font-black text-slate-800">Quiz Completed! 🎉</h2>
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-800">Quiz Completed! 🎉</h2>
+                        <p class="text-sm font-semibold text-indigo-600 mt-1" id="report-student-name">Certificate for Learner</p>
+                    </div>
                     
                     <div id="exam-stars" class="text-3xl text-amber-400 space-x-1">
                         <i class="fa-solid fa-star"></i>
@@ -366,14 +382,18 @@
                         <i class="fa-solid fa-star"></i>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 max-w-md mx-auto">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 max-w-lg mx-auto">
                         <div>
-                            <div class="text-xs font-bold text-slate-400 uppercase">Score</div>
-                            <div class="text-2xl font-black text-indigo-600" id="report-score">18/20</div>
+                            <div class="text-xs font-bold text-slate-400 uppercase">Correct</div>
+                            <div class="text-2xl font-black text-emerald-600" id="report-correct-count">18</div>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-400 uppercase">Wrong</div>
+                            <div class="text-2xl font-black text-rose-500" id="report-wrong-count">2</div>
                         </div>
                         <div>
                             <div class="text-xs font-bold text-slate-400 uppercase">Percentage</div>
-                            <div class="text-2xl font-black text-emerald-600" id="report-pct">90%</div>
+                            <div class="text-2xl font-black text-indigo-600" id="report-pct">90%</div>
                         </div>
                         <div>
                             <div class="text-xs font-bold text-slate-400 uppercase">Grade</div>
@@ -391,6 +411,9 @@
                         </button>
                         <button onclick="switchSubjectTab('practice')" class="bg-slate-100 text-slate-700 px-6 py-3 rounded-xl font-extrabold hover:bg-slate-200 transition">
                             Back to Practice
+                        </button>
+                        <button onclick="openAnalyticsModal()" class="bg-emerald-600 text-white px-6 py-3 rounded-xl font-extrabold hover:bg-emerald-700 transition">
+                            View Analytics 📊
                         </button>
                     </div>
                 </div>
@@ -498,6 +521,104 @@
 
     </main>
 
+    <!-- STUDENT NAME MODAL -->
+    <div id="modal-name" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 border-2 border-slate-200 pop-in">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="text-xl font-black text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-user-pen text-indigo-600"></i> Student Profile
+                </h3>
+                <button onclick="closeNameModal()" class="text-slate-400 hover:text-slate-600 font-bold text-lg px-2">✕</button>
+            </div>
+            <p class="text-xs text-slate-500 font-medium leading-relaxed">
+                Enter your child's name to personalize greetings, customize progress logs, and put their name on quiz certificates!
+            </p>
+            <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Student Name</label>
+                <input id="input-student-name" type="text" placeholder="e.g. Aarav, Ananya, Kabir" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-3 text-base font-bold text-slate-800 focus:outline-none focus:border-indigo-500">
+            </div>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeNameModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-sm">Cancel</button>
+                <button onclick="saveStudentName()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-black text-sm shadow">Save Name</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANALYTICS DASHBOARD MODAL -->
+    <div id="modal-analytics" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-6 border-2 border-slate-200 max-h-[90vh] overflow-y-auto pop-in">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div>
+                    <h3 class="text-2xl font-black text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-column text-emerald-600"></i> Learning Analytics Dashboard
+                    </h3>
+                    <p class="text-xs text-slate-500 font-medium mt-0.5">Progress report for <span id="analytics-user-title" class="font-bold text-indigo-600">Learner</span></p>
+                </div>
+                <button onclick="closeAnalyticsModal()" class="text-slate-400 hover:text-slate-600 font-bold text-xl px-2">✕</button>
+            </div>
+
+            <!-- Overview Cards -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-3 text-center">
+                    <div class="text-xs font-bold text-indigo-600 uppercase">Total Questions</div>
+                    <div class="text-2xl font-black text-indigo-900" id="an-total-q">0</div>
+                </div>
+                <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-3 text-center">
+                    <div class="text-xs font-bold text-emerald-600 uppercase">Correct Answers</div>
+                    <div class="text-2xl font-black text-emerald-900" id="an-correct-q">0</div>
+                </div>
+                <div class="bg-rose-50 border border-rose-100 rounded-2xl p-3 text-center">
+                    <div class="text-xs font-bold text-rose-600 uppercase">Wrong Answers</div>
+                    <div class="text-2xl font-black text-rose-900" id="an-wrong-q">0</div>
+                </div>
+                <div class="bg-amber-50 border border-amber-100 rounded-2xl p-3 text-center">
+                    <div class="text-xs font-bold text-amber-600 uppercase">Overall Accuracy</div>
+                    <div class="text-2xl font-black text-amber-900" id="an-accuracy-q">0%</div>
+                </div>
+            </div>
+
+            <!-- Subject Performance Breakdown -->
+            <div class="space-y-3">
+                <h4 class="text-sm font-black text-slate-800 uppercase tracking-wider">Subject Performance Breakdown</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="an-subject-cards">
+                    <!-- Dynamic subject stats inserted here -->
+                </div>
+            </div>
+
+            <!-- Past Quizzes Log -->
+            <div class="space-y-3">
+                <h4 class="text-sm font-black text-slate-800 uppercase tracking-wider">Recent Quiz History</h4>
+                <div id="an-quiz-history" class="space-y-2 max-h-48 overflow-y-auto text-xs">
+                    <!-- History rows inserted here -->
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-4">
+                <button onclick="confirmResetAnalytics()" class="text-xs text-rose-600 hover:text-rose-800 font-bold flex items-center gap-1.5">
+                    <i class="fa-solid fa-trash-can"></i> Clear All Progress Data
+                </button>
+                <button onclick="closeAnalyticsModal()" class="px-5 py-2 bg-slate-900 text-white rounded-xl font-bold text-sm hover:bg-slate-800">
+                    Close Dashboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CLEAR DATA CONFIRMATION MODAL -->
+    <div id="modal-confirm-reset" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4 border-2 border-rose-200 text-center pop-in">
+            <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-xl font-black mx-auto">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 class="text-lg font-black text-slate-800">Reset Analytics Data?</h3>
+            <p class="text-xs text-slate-500 font-medium">This will clear all question attempts, accuracy records, and quiz history. This action cannot be undone.</p>
+            <div class="flex justify-center gap-2 pt-2">
+                <button onclick="closeConfirmResetModal()" class="px-4 py-2 bg-slate-100 text-slate-700 rounded-xl font-bold text-sm">Cancel</button>
+                <button onclick="executeResetAnalytics()" class="px-4 py-2 bg-rose-600 text-white rounded-xl font-extrabold text-sm hover:bg-rose-700">Yes, Clear Data</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="bg-white border-t border-slate-200 py-4 mt-8">
         <div class="max-w-6xl mx-auto px-4 text-center text-xs font-semibold text-slate-400">
             NCERT Joyful Mathematics (Math Mela) • Santoor 3 & Echoes English • World Around Us EVS
@@ -570,15 +691,172 @@
             document.getElementById('sound-label').innerText = soundEnabled ? 'Sound On' : 'Muted';
         }
 
+        const STORAGE_KEY = 'class3_learning_hub_data';
+
+        function getInitialState() {
+            return {
+                studentName: 'Learner',
+                stats: {
+                    math: { score: 0, total: 0, wrong: 0, streak: 0 },
+                    english: { score: 0, total: 0, wrong: 0, streak: 0 },
+                    evs: { score: 0, total: 0, wrong: 0, streak: 0 }
+                },
+                quizHistory: [],
+                usedExamSignatures: { math: [], english: [], evs: [] }
+            };
+        }
+
+        let appData = getInitialState();
+
+        function loadAppData() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    appData = { ...getInitialState(), ...parsed };
+                }
+            } catch (e) {
+                console.log("Local storage restricted or unavailable, using in-memory state.");
+            }
+            updateUserUI();
+        }
+
+        function saveAppData() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+            } catch (e) {
+                console.log("Failed to save to local storage.");
+            }
+            updateUserUI();
+        }
+
+        function updateUserUI() {
+            const name = appData.studentName || 'Learner';
+            document.getElementById('header-user-name').innerText = name;
+            document.getElementById('portal-user-greeting').innerText = name;
+            document.getElementById('analytics-user-title').innerText = name;
+            document.getElementById('report-student-name').innerText = `Certificate of Completion for ${name}`;
+        }
+
+        function openNameModal() {
+            playSound('click');
+            document.getElementById('input-student-name').value = appData.studentName || 'Learner';
+            document.getElementById('modal-name').classList.remove('hidden');
+        }
+
+        function closeNameModal() {
+            playSound('click');
+            document.getElementById('modal-name').classList.add('hidden');
+        }
+
+        function saveStudentName() {
+            playSound('click');
+            const val = document.getElementById('input-student-name').value.trim();
+            if (val) {
+                appData.studentName = val;
+                saveAppData();
+            }
+            closeNameModal();
+        }
+
+        function openAnalyticsModal() {
+            playSound('click');
+            renderAnalyticsModal();
+            document.getElementById('modal-analytics').classList.remove('hidden');
+        }
+
+        function closeAnalyticsModal() {
+            playSound('click');
+            document.getElementById('modal-analytics').classList.add('hidden');
+        }
+
+        function confirmResetAnalytics() {
+            playSound('click');
+            document.getElementById('modal-confirm-reset').classList.remove('hidden');
+        }
+
+        function closeConfirmResetModal() {
+            playSound('click');
+            document.getElementById('modal-confirm-reset').classList.add('hidden');
+        }
+
+        function executeResetAnalytics() {
+            playSound('click');
+            const currentName = appData.studentName;
+            appData = getInitialState();
+            appData.studentName = currentName;
+            saveAppData();
+            closeConfirmResetModal();
+            renderAnalyticsModal();
+            updateStats();
+        }
+
+        function renderAnalyticsModal() {
+            let totalQ = 0, totalCorrect = 0, totalWrong = 0;
+            const cardContainer = document.getElementById('an-subject-cards');
+            cardContainer.innerHTML = '';
+
+            const subjectMeta = {
+                math: { name: 'Mathematics', icon: '📐', color: 'indigo' },
+                english: { name: 'English', icon: '📚', color: 'sky' },
+                evs: { name: 'EVS', icon: '🌿', color: 'emerald' }
+            };
+
+            Object.keys(appData.stats).forEach(subj => {
+                const s = appData.stats[subj];
+                totalQ += s.total;
+                totalCorrect += s.score;
+                totalWrong += (s.wrong || (s.total - s.score));
+                const pct = s.total > 0 ? Math.round((s.score / s.total) * 100) : 0;
+                const meta = subjectMeta[subj];
+
+                cardContainer.innerHTML += `
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 space-y-1">
+                        <div class="flex items-center justify-between text-xs font-extrabold text-slate-700">
+                            <span>${meta.icon} ${meta.name}</span>
+                            <span class="text-${meta.color}-600">${pct}% Acc</span>
+                        </div>
+                        <div class="text-xs text-slate-500 font-medium flex justify-between pt-1 border-t border-slate-200/60">
+                            <span>Attempts: ${s.total}</span>
+                            <span class="text-emerald-600 font-bold">✓ ${s.score}</span>
+                            <span class="text-rose-500 font-bold">✗ ${s.wrong || (s.total - s.score)}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('an-total-q').innerText = totalQ;
+            document.getElementById('an-correct-q').innerText = totalCorrect;
+            document.getElementById('an-wrong-q').innerText = totalWrong;
+            const overallAcc = totalQ > 0 ? Math.round((totalCorrect / totalQ) * 100) : 0;
+            document.getElementById('an-accuracy-q').innerText = `${overallAcc}%`;
+
+            // Quiz History
+            const historyContainer = document.getElementById('an-quiz-history');
+            if (appData.quizHistory.length === 0) {
+                historyContainer.innerHTML = `<div class="p-4 bg-slate-50 rounded-xl text-center text-slate-400 font-medium">No quiz attempts recorded yet. Take a 20-Q Challenge Quiz to see your logs!</div>`;
+            } else {
+                historyContainer.innerHTML = '';
+                appData.quizHistory.slice(-10).reverse().forEach(h => {
+                    historyContainer.innerHTML += `
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 flex items-center justify-between font-semibold text-slate-700">
+                            <div>
+                                <span class="font-bold text-slate-900">${h.subjectName}</span>
+                                <span class="text-slate-400 text-[10px] ml-2">${h.date}</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-emerald-600 font-bold">✓ ${h.correct}/20</span>
+                                <span class="text-rose-500 font-bold">✗ ${20 - h.correct}</span>
+                                <span class="bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-md font-black text-[11px]">${h.percentage}% (${h.grade})</span>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        }
+
         let currentSubject = 'math';
         let currentSubjectTab = 'practice';
-        
-        // Subject-specific score tracking
-        const stats = {
-            math: { score: 0, total: 0, streak: 0 },
-            english: { score: 0, total: 0, streak: 0 },
-            evs: { score: 0, total: 0, streak: 0 }
-        };
 
         let currentPracticeQ = null;
         let practiceAnswered = false;
@@ -669,6 +947,7 @@
                 }
 
                 return {
+                    signature: `math_ch4_shapes_${item.name}_${target}`,
                     badge: "Ch-4: Shapes & Corners",
                     q: `Look at the shape below. How many <strong>${target}</strong> does a <strong>${item.name}</strong> have?`,
                     visualSVG: `<svg class="w-28 h-28 mx-auto" viewBox="0 0 100 100">${item.svg}</svg>`,
@@ -688,6 +967,7 @@
                 ];
                 const item = items[randInt(0, items.length - 1)];
                 return {
+                    signature: `math_ch4_lines_${item.name}`,
                     badge: "Ch-4: Straight vs Curved",
                     q: `Does a <strong>${item.name}</strong> have straight edges or curved edges?`,
                     options: shuffleArr(["Straight Edges", "Curved Edges", "Both Straight & Curved", "No Edges at All"]),
@@ -708,6 +988,7 @@
                 }
 
                 return {
+                    signature: `math_ch4_paths_${east}_${north}`,
                     badge: "Ch-4: Village Grid Path",
                     q: `Rahul walks <strong>${east} grid blocks East</strong> and <strong>${north} grid blocks North</strong> to reach the mango orchard. What is the total distance in blocks?`,
                     visualSVG: `<div class="text-center text-3xl">🏡 ➔ 🚶‍♂️ ➔ 🥭</div>`,
@@ -722,6 +1003,7 @@
                 const kidSpan = randInt(14, 18);
                 const naniSpan = randInt(9, 12);
                 return {
+                    signature: `math_ch4_spans_${kidSpan}_${naniSpan}`,
                     badge: "Ch-4: Footspan Measurement",
                     q: `A room floor measures <strong>${kidSpan} footspans</strong> of young Dhyana, but only <strong>${naniSpan} footspans</strong> of Nani Maa. Why does Nani Maa have a smaller step count?`,
                     options: shuffleArr([
@@ -759,6 +1041,7 @@
                 }
 
                 return {
+                    signature: `math_ch6_placeval_${num}_${pick}`,
                     badge: "Ch-6: Place Value",
                     q: `In the number <strong>${num}</strong>, what is the <strong>place value</strong> of digit <strong>${targetDigit}</strong> (${pick} place)?`,
                     options: shuffleArr(Array.from(opts)),
@@ -783,6 +1066,7 @@
                 ];
 
                 return {
+                    signature: `math_ch6_expanded_${num}`,
                     badge: "Ch-6: Expanded Form",
                     q: `What is the correct expanded form of <strong>${num}</strong>?`,
                     options: shuffleArr(opts),
@@ -816,6 +1100,7 @@
                 }
 
                 return {
+                    signature: `math_ch6_words_${num}`,
                     badge: "Ch-6: Number Names",
                     q: `Which 3-digit number is written in words as: <strong>"${wordStr}"</strong>?`,
                     options: shuffleArr(Array.from(distractors)),
@@ -832,6 +1117,7 @@
                 const ans = a > b ? ">" : "<";
 
                 return {
+                    signature: `math_ch6_compare_${a}_${b}`,
                     badge: "Ch-6: Comparing Numbers",
                     q: `Fill in the correct comparison symbol: <strong>${a}  [ ? ]  ${b}</strong>`,
                     options: shuffleArr(["> (Greater than)", "< (Less than)", "= (Equal to)", "≈ (Approximately)"]),
@@ -854,6 +1140,7 @@
                 }
 
                 return {
+                    signature: `math_ch6_patterns_${start}_${step}`,
                     badge: "Ch-6: Skip Counting",
                     q: `Find the next number in this sequence: <strong>${seq.join(", ")}, ___</strong>`,
                     options: shuffleArr(Array.from(opts)),
@@ -886,6 +1173,7 @@
                 perms.forEach(p => { if (optsSet.size < 4) optsSet.add(p); });
 
                 return {
+                    signature: `math_ch6_building_${digits.join('')}_${isLargest}`,
                     badge: "Ch-6: Building Numbers",
                     q: `Form the <strong>${isLargest ? 'LARGEST' : 'SMALLEST'}</strong> 3-digit number using digits <strong>${digits.join(", ")}</strong> without repeating!`,
                     options: shuffleArr(Array.from(optsSet)),
@@ -907,6 +1195,7 @@
                 const item = vocabulary[randInt(0, vocabulary.length - 1)];
                 const opts = shuffleArr([item.meaning, "sleepy and tired", "very angry", "running fast"]);
                 return {
+                    signature: `eng_meanings_${item.word}`,
                     badge: "Santoor English: Word Meanings",
                     q: `What is the meaning of <strong>"${item.word}"</strong> in this sentence?<br><em>"${item.sentence}"</em>`,
                     options: opts,
@@ -935,6 +1224,7 @@
                 pool.forEach(p => { if (optsSet.size < 4) optsSet.add(p); });
 
                 return {
+                    signature: `eng_syn_ant_${item.word}_${askSyn}`,
                     badge: "Santoor English: Synonyms & Antonyms",
                     q: `What is the <strong>${target}</strong> of the word: <strong>"${item.word}"</strong>?`,
                     options: shuffleArr(Array.from(optsSet)),
@@ -956,6 +1246,7 @@
                     ];
                     const item = compounds[randInt(0, compounds.length - 1)];
                     return {
+                        signature: `eng_compound_${item.res}`,
                         badge: "Santoor English: Compound Words",
                         q: `Join these two smaller words to form a <strong>Compound Word</strong>: <strong>"${item.w1}" + "${item.w2}"</strong>`,
                         options: shuffleArr([item.res, `${item.w1}ing`, `${item.w2}ed`, `${item.w1}less`]),
@@ -971,6 +1262,7 @@
                     ];
                     const item = rhymes[randInt(0, rhymes.length - 1)];
                     return {
+                        signature: `eng_rhyme_${item.word}`,
                         badge: "Santoor English: Rhyming Words",
                         q: `Which word rhymes with <strong>"${item.word}"</strong>?`,
                         options: shuffleArr([item.rhyme, ...item.nonRhymes]),
@@ -993,6 +1285,7 @@
                     ];
                     const item = silentItems[randInt(0, silentItems.length - 1)];
                     return {
+                        signature: `eng_silent_${item.word}`,
                         badge: "Echoes English: Silent Letters",
                         q: `Which letter is <strong>SILENT</strong> in the word <strong>"${item.word}"</strong>?`,
                         options: shuffleArr(item.options),
@@ -1009,6 +1302,7 @@
                     ];
                     const item = syllableItems[randInt(0, syllableItems.length - 1)];
                     return {
+                        signature: `eng_syllable_${item.word}`,
                         badge: "Echoes English: Syllable Count",
                         q: `How many syllables (vowels beats) are in the word <strong>"${item.word}"</strong>?`,
                         options: shuffleArr(["1 Syllable (Sun)", "2 Syllables (Gar-den)", "3 Syllables (But-ter-fly)", "4 Syllables"]),
@@ -1028,6 +1322,7 @@
                 ];
                 const item = adjList[randInt(0, adjList.length - 1)];
                 return {
+                    signature: `eng_adj_adv_${item.word}`,
                     badge: `Santoor English: ${item.type}`,
                     q: `Complete the sentence with the correct <strong>${item.type}</strong>:<br><em>"${item.sent}"</em>`,
                     options: shuffleArr([item.word, "running", "table", "under"]),
@@ -1046,6 +1341,7 @@
                 ];
                 const item = degrees[randInt(0, degrees.length - 1)];
                 return {
+                    signature: `eng_degrees_${item.pos}`,
                     badge: "Santoor English: Degrees of Comparison",
                     q: `Complete the comparison: <strong>"${item.pos}" → "${item.comp}" → [ ? ]</strong>`,
                     options: shuffleArr([item.sup, `${item.pos}ly`, `${item.pos}ness`, `more ${item.pos}`]),
@@ -1062,6 +1358,7 @@
                 ];
                 const item = items[randInt(0, items.length - 1)];
                 return {
+                    signature: `eng_comma_alpha_${item.ans.slice(0, 10)}`,
                     badge: "Echoes English: Alphabetical Order & Punctuation",
                     q: item.q,
                     options: shuffleArr([item.ans, ...item.wrong]),
@@ -1085,6 +1382,7 @@
                 pool.forEach(p => { if (optsSet.size < 4) optsSet.add(p); });
 
                 return {
+                    signature: `eng_be_verbs_${item.sent.slice(0, 10)}`,
                     badge: "Santoor English: Forms of Verb 'be'",
                     q: `Choose the correct form of the verb 'be' (am/is/was/are/were):<br><em>"${item.sent}"</em>`,
                     options: shuffleArr(Array.from(optsSet)),
@@ -1101,10 +1399,15 @@
                     { pres: "dance", past: "dances", sent: "She ___ gracefully every morning.", tense: "Simple Present" }
                 ];
                 const item = tenses[randInt(0, tenses.length - 1)];
+
+                // QA Fix: Avoid double-e typos like "danceed"
+                const regularPastDistractor = item.pres.endsWith('e') ? `${item.pres}d` : `${item.pres}ed`;
+
                 return {
+                    signature: `eng_tenses_${item.pres}_${item.tense}`,
                     badge: `Santoor English: ${item.tense}`,
                     q: `Fill in the blank with the correct verb form:<br><em>"${item.sent}"</em>`,
-                    options: shuffleArr([item.past, item.pres, `${item.pres}ed`, `will ${item.pres}`]),
+                    options: shuffleArr([item.past, item.pres, regularPastDistractor, `will ${item.pres}`]),
                     ans: item.past,
                     hint: "Look at time indicators like 'yesterday', 'right now', or 'every morning'.",
                     exp: `The correct ${item.tense} form is "${item.past}".`
@@ -1120,6 +1423,7 @@
                 ];
                 const item = items[randInt(0, items.length - 1)];
                 return {
+                    signature: `eng_nouns_${item.word}`,
                     badge: "Santoor English: Nouns Classification",
                     q: `What type of noun is the word <strong>"${item.word}"</strong>?`,
                     options: shuffleArr(["Proper Noun", "Common Noun", "Uncountable Noun", "Countable Plural Noun"]),
@@ -1140,6 +1444,7 @@
                     ];
                     const item = items[randInt(0, items.length - 1)];
                     return {
+                        signature: `eng_article_${item.qStr}`,
                         badge: "Santoor English: Indefinite Articles",
                         q: `Choose the correct indefinite article (a/an):<br><em>"<strong>${item.qStr}</strong>"</em>`,
                         options: shuffleArr(["A", "An", "The", "Some"]),
@@ -1155,6 +1460,7 @@
                     ];
                     const item = preps[randInt(0, preps.length - 1)];
                     return {
+                        signature: `eng_prep_${item.ans}`,
                         badge: "Santoor English: Preposition of Place",
                         q: `Fill in the preposition of place:<br><em>"${item.sent}"</em>`,
                         options: shuffleArr([item.ans, "slowly", "because", "and"]),
@@ -1178,6 +1484,7 @@
                 pool.forEach(p => { if (optsSet.size < 4) optsSet.add(p); });
 
                 return {
+                    signature: `eng_interrogative_${item.ans}`,
                     badge: `Echoes English: ${item.type}`,
                     q: `Fill in the blank with the correct word:<br><em>"${item.sent}"</em>`,
                     options: shuffleArr(Array.from(optsSet)),
@@ -1198,6 +1505,7 @@
                 ];
                 const item = festivals[randInt(0, festivals.length - 1)];
                 return {
+                    signature: `evs_ch3_${item.name}`,
                     badge: "Ch-3: Celebrating Festivals",
                     q: `Which category does <strong>${item.name}</strong> belong to?`,
                     options: shuffleArr(["Harvest Festivals", "Festival of Lights", "Festival of Colors", "National Festival"]),
@@ -1216,6 +1524,7 @@
                 ];
                 const item = plantParts[randInt(0, plantParts.length - 1)];
                 return {
+                    signature: `evs_ch4_${item.part}`,
                     badge: "Ch-4: Getting to Know Plants",
                     q: `Which plant part has the primary function to: <strong>"${item.function}"</strong>?`,
                     options: shuffleArr(["Roots", "Leaves", "Stem", "Flowers"]),
@@ -1233,6 +1542,7 @@
                 ];
                 const item = scenarios[randInt(0, scenarios.length - 1)];
                 return {
+                    signature: `evs_ch5_${item.ans.slice(0, 10)}`,
                     badge: "Ch-5: Plants and Animals Live Together",
                     q: item.q,
                     options: shuffleArr([item.ans, ...item.wrong]),
@@ -1250,6 +1560,7 @@
                 ];
                 const item = actions[randInt(0, actions.length - 1)];
                 return {
+                    signature: `evs_ch6_${item.category}`,
                     badge: "Ch-6: Living in Harmony",
                     q: `Why is <strong>"${item.action}"</strong> an important habit?`,
                     options: shuffleArr([
@@ -1383,20 +1694,21 @@
             if (practiceAnswered) return;
             practiceAnswered = true;
             
-            const currentSubjStats = stats[currentSubject];
-            currentSubjStats.total++;
+            const st = appData.stats[currentSubject];
+            st.total++;
 
             const isCorrect = String(selectedOpt) === String(currentPracticeQ.ans);
 
             if (isCorrect) {
                 playSound('correct');
-                currentSubjStats.score++;
-                currentSubjStats.streak++;
+                st.score++;
+                st.streak++;
                 btn.className = "p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-100 text-emerald-900 font-black text-base text-left shadow-md bounce-short block-3d";
                 btn.innerHTML += " <i class='fa-solid fa-circle-check text-emerald-600 float-right mt-1'></i>";
             } else {
                 playSound('wrong');
-                currentSubjStats.streak = 0;
+                st.wrong = (st.wrong || 0) + 1;
+                st.streak = 0;
                 btn.className = "p-4 rounded-2xl border-2 border-rose-500 bg-rose-100 text-rose-900 font-black text-base text-left shadow-md block-3d";
                 btn.innerHTML += " <i class='fa-solid fa-circle-xmark text-rose-600 float-right mt-1'></i>";
 
@@ -1407,6 +1719,7 @@
                 });
             }
 
+            saveAppData();
             document.getElementById('explanation-box').classList.remove('hidden');
             updateStats();
         }
@@ -1418,7 +1731,7 @@
         }
 
         function updateStats() {
-            const st = stats[currentSubject];
+            const st = appData.stats[currentSubject];
             document.getElementById('stat-score').innerText = st.score;
             document.getElementById('stat-total').innerText = st.total;
             document.getElementById('stat-streak').innerText = `${st.streak} 🔥`;
@@ -1438,11 +1751,50 @@
             else if (currentSubject === 'evs') pool = evsGenerators;
 
             const keys = Object.keys(pool);
+            let usedSigs = appData.usedExamSignatures[currentSubject] || [];
+
             for (let i = 0; i < 20; i++) {
-                const randomKey = keys[randInt(0, keys.length - 1)];
-                examQuestions.push(pool[randomKey]());
+                let chosenQ = null;
+                let attempts = 0;
+
+                // Smart no-repeat lookup
+                while (attempts++ < 30) {
+                    const randomKey = keys[randInt(0, keys.length - 1)];
+                    const candidate = pool[randomKey]();
+                    if (!usedSigs.includes(candidate.signature) && !examQuestions.some(q => q.signature === candidate.signature)) {
+                        chosenQ = candidate;
+                        break;
+                    }
+                }
+
+                // QA Secondary Fallback: avoid duplicate question signatures within the current exam run
+                if (!chosenQ) {
+                    let fallbackAttempts = 0;
+                    while (fallbackAttempts++ < 20) {
+                        const randomKey = keys[randInt(0, keys.length - 1)];
+                        const candidate = pool[randomKey]();
+                        if (!examQuestions.some(q => q.signature === candidate.signature)) {
+                            chosenQ = candidate;
+                            break;
+                        }
+                    }
+                    if (!chosenQ) {
+                        const randomKey = keys[randInt(0, keys.length - 1)];
+                        chosenQ = pool[randomKey]();
+                    }
+                }
+
+                examQuestions.push(chosenQ);
+                usedSigs.push(chosenQ.signature);
                 examUserAnswers.push(null);
             }
+
+            // Keep signature history manageable
+            if (usedSigs.length > 200) {
+                usedSigs = usedSigs.slice(-100);
+            }
+            appData.usedExamSignatures[currentSubject] = usedSigs;
+            saveAppData();
 
             document.getElementById('exam-start-card').classList.add('hidden');
             document.getElementById('exam-report-card').classList.add('hidden');
@@ -1470,7 +1822,7 @@
             optionsBox.innerHTML = '';
 
             q.options.forEach(opt => {
-                const selected = examUserAnswers[examCurrentIdx] === opt;
+                const selected = String(examUserAnswers[examCurrentIdx]) === String(opt);
                 const btn = document.createElement('button');
                 btn.className = selected ? 
                     "p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-100 text-indigo-900 font-black text-base text-left block-3d" :
@@ -1508,7 +1860,10 @@
             });
 
             const pct = Math.round((correctCount / 20) * 100);
-            document.getElementById('report-score').innerText = `${correctCount}/20`;
+            const wrongCount = 20 - correctCount;
+
+            document.getElementById('report-correct-count').innerText = correctCount;
+            document.getElementById('report-wrong-count').innerText = wrongCount;
             document.getElementById('report-pct').innerText = `${pct}%`;
 
             let grade = 'A+';
@@ -1523,6 +1878,20 @@
 
             document.getElementById('report-grade').innerText = grade;
             document.getElementById('report-feedback').innerText = feedback;
+
+            // Save Quiz Attempt in History & Subject Stats
+            const subjName = subjectConfigs[currentSubject].title;
+            const historyEntry = {
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                subject: currentSubject,
+                subjectName: subjName.split(' ')[0],
+                correct: correctCount,
+                percentage: pct,
+                grade: grade
+            };
+
+            appData.quizHistory.push(historyEntry);
+            saveAppData();
 
             document.getElementById('exam-playing-card').classList.add('hidden');
             document.getElementById('exam-report-card').classList.remove('hidden');
@@ -1600,6 +1969,7 @@
             if (topic === 'plant') {
                 box.innerHTML = `
                     <div class="text-xl font-black text-slate-800 mb-2">🌱 Plant Anatomy STEAM Lab</div>
+                    <div class="text-3xl my-3">🌺 ➔ 🍃 ➔ 🪵 ➔ 🌿</div>
                     <div class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
                         Plants have <strong>Roots</strong> (anchor & water absorption), <strong>Stems</strong> (conduction), <strong>Leaves</strong> (food factory via photosynthesis using sunlight), and <strong>Flowers</strong> (reproduction & seeds).
                     </div>
@@ -1607,28 +1977,32 @@
             } else if (topic === 'ecosystem') {
                 box.innerHTML = `
                     <div class="text-xl font-black text-slate-800 mb-2">🐝 Ecosystem Interdependence Lab</div>
+                    <div class="text-3xl my-3">🐝 ➔ 🌸 ➔ 🍎 ➔ 🦜</div>
                     <div class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                        Honeybees pollinate 70% of flowering plants while collecting nectar. Trees supply Oxygen ($O_2$) and absorb Carbon Dioxide ($CO_2$), keeping Earth balanced.
+                        Honeybees pollinate 70% of flowering plants while collecting nectar. Trees supply Oxygen (O₂) and absorb Carbon Dioxide (CO₂), keeping Earth balanced.
                     </div>
                 `;
             } else if (topic === 'festivals') {
                 box.innerHTML = `
                     <div class="text-xl font-black text-slate-800 mb-2">🪔 Festival Science & Light Lab</div>
+                    <div class="text-3xl my-3">🪔 ✨ 🌾 🎇</div>
                     <div class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                        Traditional clay diyas use cotton wicks and oil via capillary action to produce warm light during Diwali!
+                        Traditional clay diyas use cotton wicks and oil via capillary action to produce warm light during Diwali! Harvest festivals like Baisakhi celebrate seasonal crop cycles.
                     </div>
                 `;
             } else if (topic === 'harmony') {
                 box.innerHTML = `
                     <div class="text-xl font-black text-slate-800 mb-2">🕊️ Eco-Harmony & Bird Care Lab</div>
+                    <div class="text-3xl my-3">🥣 🕊️ 🌳 ☀️</div>
                     <div class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                        Placing shallow bird baths with fresh water saves urban birds during hot summer months!
+                        Placing shallow bird baths with fresh water saves urban birds during hot summer months! Segregating wet and dry waste keeps ecosystems clean.
                     </div>
                 `;
             }
         }
 
         window.onload = () => {
+            loadAppData();
             showPortal();
         };
     </script>
