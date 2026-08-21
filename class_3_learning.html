@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Font: Inter -->
+    <!-- Google Font: Inter & Fredoka -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -768,7 +768,7 @@
             } catch (e) { }
         }
 
-        // --- STREAMING_CHUNK:Defining subject configs and dynamic question generators... ---
+        // --- STREAMING_CHUNK:Defining subject configs and dynamic question generators... -->
         // --- 3. SUBJECT CONFIGURATIONS & GENERATORS ---
         const subjectConfigs = {
             math: {
@@ -847,7 +847,7 @@
 
         const mathGenerators = {
             ch1_names: () => {
-                const names = ["AARAV", "ANANYA", "KABIR", "DHYANA", "ROHAN"];
+                const names = ["AARAV", "ANANYA", "KABIR", "DHYANA", "ROHAN", "PRIYA", "ARJUN"];
                 const name = names[randInt(0, names.length - 1)];
                 const len = name.length;
                 return {
@@ -861,7 +861,7 @@
                 };
             },
             ch2_toys: () => {
-                const groupCount = randInt(3, 8);
+                const groupCount = randInt(3, 9);
                 const itemPerGroup = 10;
                 const total = groupCount * itemPerGroup;
                 return {
@@ -1083,7 +1083,12 @@
                     signature: `math_ch6_building_${digits.join('')}`,
                     badge: "Ch-6: Building Numbers",
                     q: `What is the <strong>smallest 3-digit number</strong> you can make using digits <strong>${digits.join(', ')}</strong> without repetition?`,
-                    options: shuffleArr([smallest, digits.reverse().join(''), `${digits[1]}${digits[0]}${digits[2]}`, `${digits[0]}${digits[2]}${digits[1]}`]),
+                    options: shuffleArr([
+                        smallest, 
+                        [...digits].reverse().join(''), 
+                        `${digits[1]}${digits[0]}${digits[2]}`, 
+                        `${digits[0]}${digits[2]}${digits[1]}`
+                    ]),
                     ans: smallest,
                     hint: "To make the smallest number, arrange digits from smallest to largest.",
                     exp: `Arranging ${digits.join(', ')} from smallest to largest gives ${smallest}.`
@@ -1333,12 +1338,8 @@
             eng_alphabetical_comma: () => {
                 const isAlpha = Math.random() > 0.5;
                 if (isAlpha) {
-                    const sets = [
-                        { words: ["Apple", "Banana", "Cat", "Dog"], correct: true },
-                        { words: ["Zebra", "Lion", "Tiger", "Bear"], correct: false }
-                    ];
                     return {
-                        signature: `eng_alpha_set`,
+                        signature: `eng_alpha_set_${randInt(1, 100)}`,
                         badge: "English: Alphabetical Order",
                         q: "Which set of words is correctly arranged in <strong>Alphabetical Order (A to Z)</strong>?",
                         options: shuffleArr([
@@ -1353,7 +1354,7 @@
                     };
                 } else {
                     return {
-                        signature: `eng_comma_usage`,
+                        signature: `eng_comma_usage_${randInt(1, 100)}`,
                         badge: "English: Comma Usage",
                         q: "Which sentence uses <strong>commas</strong> correctly to separate items in a list?",
                         options: shuffleArr([
@@ -1440,7 +1441,7 @@
                     ];
                     const item = items[randInt(0, items.length - 1)];
                     return {
-                        signature: `eng_art_${item.ans}`,
+                        signature: `eng_art_${item.ans}_${item.sentence.slice(0, 6)}`,
                         badge: "English: Indefinite Articles (a/an)",
                         q: `Fill in the blank with 'a' or 'an': "${item.sentence}"`,
                         options: shuffleArr(["a", "an", "the", "no article"]),
@@ -1456,7 +1457,7 @@
                     ];
                     const item = items[randInt(0, items.length - 1)];
                     return {
-                        signature: `eng_prep_${item.ans}`,
+                        signature: `eng_prep_${item.ans}_${item.sentence.slice(0, 6)}`,
                         badge: "English: Prepositions of Place",
                         q: `Choose the correct preposition of place: "${item.sentence}"`,
                         options: shuffleArr([item.ans, "because", "quickly", "and"]),
@@ -1480,7 +1481,7 @@
                 const selectedWrong = shuffleArr(wrongOptions).slice(0, 3);
 
                 return {
-                    signature: `eng_interrogative_${item.ans}`,
+                    signature: `eng_interrogative_${item.ans}_${item.sentence.slice(0, 6)}`,
                     badge: "English: Interrogative Question Words",
                     q: `Fill in the blank with the correct question word: "${item.sentence}"`,
                     options: shuffleArr([item.ans, ...selectedWrong]),
@@ -1494,35 +1495,36 @@
         // --- EVS GENERATORS ---
         const evsGenerators = {
             evs_ch1_family: () => {
+                const items = [
+                    { q: "What is a nuclear family?", ans: "A family consisting of parents and their children living together", wrong: ["A very large family with grandparents, uncles, aunts and cousins", "A group of school friends", "A neighborhood community"] },
+                    { q: "What is a joint family?", ans: "A family where grandparents, parents, uncles, aunts, and cousins live together", wrong: ["Only parents and one child", "A group of teachers in school", "A sports team"] },
+                    { q: "How do family members help each other?", ans: "By sharing household chores, love, and care", wrong: ["By fighting for toys", "By never talking to each other", "By ignoring elders"] }
+                ];
+                const item = items[randInt(0, items.length - 1)];
                 return {
-                    signature: `evs_ch1_family_roles`,
+                    signature: `evs_ch1_${item.q.slice(0, 10)}`,
                     badge: "Ch-1: My Family and Me",
-                    q: "What is a nuclear family?",
-                    options: shuffleArr([
-                        "A family consisting of parents and their children living together",
-                        "A very large family with grandparents, uncles, aunts and cousins",
-                        "A group of school friends",
-                        "A neighborhood community"
-                    ]),
-                    ans: "A family consisting of parents and their children living together",
-                    hint: "Nuclear families have a smaller unit of parents and kids.",
-                    exp: "A nuclear family includes parents and their children."
+                    q: item.q,
+                    options: shuffleArr([item.ans, ...item.wrong]),
+                    ans: item.ans,
+                    hint: "Think about family roles and support systems.",
+                    exp: `Family concept: ${item.ans}.`
                 };
             },
             evs_ch2_caring: () => {
+                const items = [
+                    { q: "How can we help elderly grandparents at home?", ans: "By helping them carry heavy items and spending time talking with them", wrong: ["By making loud noise near them", "By ignoring their daily needs", "By taking away their walking stick"] },
+                    { q: "What should we do when a pet animal at home gets sick?", ans: "Take them to a veterinary doctor for medical care", wrong: ["Leave them outside alone", "Give them spicy food", "Shout at them"] }
+                ];
+                const item = items[randInt(0, items.length - 1)];
                 return {
-                    signature: `evs_ch2_caring_elderly`,
+                    signature: `evs_ch2_${item.q.slice(0, 10)}`,
                     badge: "Ch-2: Caring for Family & Animals",
-                    q: "How can we help elderly grandparents at home?",
-                    options: shuffleArr([
-                        "By helping them carry heavy items and spending time talking with them",
-                        "By making loud noise near them",
-                        "By ignoring their daily needs",
-                        "By taking away their walking stick"
-                    ]),
-                    ans: "By helping them carry heavy items and spending time talking with them",
-                    hint: "Show love, respect, and assistance to family elders.",
-                    exp: "Caring for elders with love and help is an important value."
+                    q: item.q,
+                    options: shuffleArr([item.ans, ...item.wrong]),
+                    ans: item.ans,
+                    hint: "Show love, respect, and assistance to elders and animals.",
+                    exp: `Caring action: ${item.ans}.`
                 };
             },
             evs_ch3_festivals: () => {
@@ -1530,14 +1532,15 @@
                     { fest: "Bihu", state: "Assam", type: "Harvest Festival" },
                     { fest: "Pongal", state: "Tamil Nadu", type: "Harvest Festival" },
                     { fest: "Onam", state: "Kerala", type: "Harvest Festival" },
-                    { fest: "Diwali", state: "India", type: "Festival of Lights" }
+                    { fest: "Diwali", state: "India", type: "Festival of Lights" },
+                    { fest: "Baisakhi", state: "Punjab", type: "Harvest Festival" }
                 ];
                 const item = items[randInt(0, items.length - 1)];
                 return {
                     signature: `evs_ch3_${item.fest}`,
                     badge: "Ch-3: Celebrating Festivals",
                     q: `<strong>${item.fest}</strong> is a popular ${item.type} celebrated in which region/state?`,
-                    options: shuffleArr([item.state, "Gujarat", "Punjab", "Kashmir"]),
+                    options: shuffleArr([item.state, "Gujarat", "Rajasthan", "Kashmir"]),
                     ans: item.state,
                     hint: "Think about regional harvest festivals across India.",
                     exp: `${item.fest} is celebrated with joyful harvest traditions in ${item.state}.`
@@ -1605,56 +1608,72 @@
                 };
             },
             evs_ch7_water: () => {
+                const items = [
+                    { q: "Which of the following is the main natural source of fresh water on Earth?", ans: "Rainfall", wrong: ["Salty Ocean", "Tap Water", "Bottled Water"] },
+                    { q: "How can we conserve water at home while brushing teeth?", ans: "Turn off the running tap while brushing", wrong: ["Keep the tap running fully", "Wash driveway with bucketfuls of water", "Throw away fresh water"] }
+                ];
+                const item = items[randInt(0, items.length - 1)];
                 return {
-                    signature: `evs_ch7_water_source`,
+                    signature: `evs_ch7_${item.q.slice(0, 10)}`,
                     badge: "Ch-7: Water for Life",
-                    q: "Which of the following is the main natural source of fresh water on Earth?",
-                    options: shuffleArr(["Rainfall", "Salty Ocean", "Tap Water", "Bottled Water"]),
-                    ans: "Rainfall",
-                    hint: "Rain fills rivers, lakes, ponds, and underground water aquifers.",
-                    exp: "Rainfall is the main source of fresh water on Earth."
+                    q: item.q,
+                    options: shuffleArr([item.ans, ...item.wrong]),
+                    ans: item.ans,
+                    hint: "Think about natural water cycles and water conservation habits.",
+                    exp: `Water science: ${item.ans}.`
                 };
             },
             evs_ch8_shelter: () => {
+                const items = [
+                    { q: "Which type of house is made of mud, straw, and thatch commonly found in villages?", ans: "Kutcha House", wrong: ["Pucca House", "Skyscraper", "Apartment"] },
+                    { q: "Which shelter floats on water bodies like rivers and lakes?", ans: "Houseboat", wrong: ["Igloo", "Caravan", "Stilt House"] }
+                ];
+                const item = items[randInt(0, items.length - 1)];
                 return {
-                    signature: `evs_ch8_shelter_types`,
+                    signature: `evs_ch8_${item.q.slice(0, 10)}`,
                     badge: "Ch-8: Our Shelter & Houses",
-                    q: "Which type of house is made of mud, straw, and thatch commonly found in villages?",
-                    options: shuffleArr(["Kutcha House", "Pucca House", "Skyscraper", "Apartment"]),
-                    ans: "Kutcha House",
-                    hint: "Temporary or traditional houses built from natural local materials.",
-                    exp: "Kutcha houses are made of mud, bamboo, and straw."
+                    q: item.q,
+                    options: shuffleArr([item.ans, ...item.wrong]),
+                    ans: item.ans,
+                    hint: "Think about traditional vs modern housing types.",
+                    exp: `Shelter fact: ${item.ans}.`
                 };
             },
             evs_ch9_food: () => {
+                const items = [
+                    { q: "Which group of foods gives us energy to play and study?", ans: "Rice, Wheat, Potatoes and Bananas", wrong: ["Junk chips and sodas", "Only water", "Salt and spices"] },
+                    { q: "Which nutrients help build strong muscles and repair our body?", ans: "Proteins (Pulses, Milk, Eggs)", wrong: ["Only sugar", "Plain water", "Spices"] }
+                ];
+                const item = items[randInt(0, items.length - 1)];
                 return {
-                    signature: `evs_ch9_food_health`,
+                    signature: `evs_ch9_${item.q.slice(0, 10)}`,
                     badge: "Ch-9: Food We Eat",
-                    q: "Which group of foods gives us energy to play and study?",
-                    options: shuffleArr(["Rice, Wheat, Potatoes and Bananas", "Junk chips and sodas", "Only water", "Salt and spices"]),
-                    ans: "Rice, Wheat, Potatoes and Bananas",
-                    hint: "Carbohydrate-rich energy-giving foods.",
-                    exp: "Carbohydrates like rice and wheat provide energy for daily activity."
+                    q: item.q,
+                    options: shuffleArr([item.ans, ...item.wrong]),
+                    ans: item.ans,
+                    hint: "Think about energy-giving and body-building food groups.",
+                    exp: `Nutrition rule: ${item.ans}.`
                 };
             },
             evs_ch10_travel: () => {
+                const items = [
+                    { q: "What is a map used for during travel?", ans: "To show routes, directions, and places in an area", wrong: ["To measure body temperature", "To tell the current time", "To calculate weight"] },
+                    { q: "Which mode of transport is fastest for traveling long distances across countries?", ans: "Aeroplane", wrong: ["Bicycle", "Bullock cart", "Auto rickshaw"] }
+                ];
+                const item = items[randInt(0, items.length - 1)];
                 return {
-                    signature: `evs_ch10_travel_maps`,
+                    signature: `evs_ch10_${item.q.slice(0, 10)}`,
                     badge: "Ch-10: Travel & Discovery",
-                    q: "What is a map used for during travel?",
-                    options: shuffleArr([
-                        "To show routes, directions, and places in a area",
-                        "To measure body temperature",
-                        "To tell the current time",
-                        "To calculate weight"
-                    ]),
-                    ans: "To show routes, directions, and places in a area",
-                    hint: "Maps help travelers navigate routes.",
-                    exp: "Maps show layout, routes, and landmarks of places."
+                    q: item.q,
+                    options: shuffleArr([item.ans, ...item.wrong]),
+                    ans: item.ans,
+                    hint: "Think about navigation and speed of vehicles.",
+                    exp: `Travel fact: ${item.ans}.`
                 };
             }
         };
 
+        // --- STREAMING_CHUNK:Building page navigation and practice mode functions... -->
         // --- 4. NAVIGATION & UI STATE SYNC ---
         let currentSubject = 'math';
         let currentPracticeQ = null;
@@ -1805,7 +1824,7 @@
                 optionsContainer.innerHTML = '';
                 currentPracticeQ.options.forEach(opt => {
                     const btn = document.createElement('button');
-                    btn.className = "p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-400 font-bold text-base text-slate-800 text-left transition shadow-sm block-3d";
+                    btn.className = "p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-400 font-bold text-base text-slate-800 text-left transition shadow-sm block-3d touch-manipulation";
                     btn.dataset.optVal = opt;
                     btn.innerHTML = opt;
                     btn.onclick = () => checkPracticeAnswer(btn, opt);
@@ -1967,7 +1986,7 @@
                 q.options.forEach(opt => {
                     const btn = document.createElement('button');
                     const isSelected = examUserAnswers[examCurrentIdx] === opt;
-                    btn.className = `p-4 rounded-2xl border-2 font-bold text-base text-left transition shadow-sm block-3d ${isSelected ? 'border-indigo-600 bg-indigo-100 text-indigo-900 font-black' : 'border-slate-200 bg-slate-50 text-slate-800 hover:bg-indigo-50'}`;
+                    btn.className = `p-4 rounded-2xl border-2 font-bold text-base text-left transition shadow-sm block-3d touch-manipulation ${isSelected ? 'border-indigo-600 bg-indigo-100 text-indigo-900 font-black' : 'border-slate-200 bg-slate-50 text-slate-800 hover:bg-indigo-50'}`;
                     btn.innerHTML = opt;
                     btn.onclick = () => selectExamOption(opt);
                     optionsGrid.appendChild(btn);
@@ -2415,6 +2434,14 @@
                 renderAnalyticsModal();
             }
         }
+
+        // Global Keyboard Shortcut Handler
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSettingsModal();
+                closeChapterManagerModal();
+            }
+        });
 
         // Initialization on Window Load
         window.onload = function() {
