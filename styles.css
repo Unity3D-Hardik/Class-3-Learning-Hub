@@ -1,0 +1,203 @@
+/* =================================================================
+   Class 3 Joyful Hub — kid-friendly theme
+   Designed for 8–9 year olds: big text, chunky targets, bright
+   colours, playful motion.
+   ================================================================= */
+
+:root {
+    --sky-top: #dbeafe;
+    --sky-bottom: #fce7f3;
+    --ink: #1e293b;
+    --shadow-depth: 6px;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    /* Cheerful sky-to-sunset wash behind everything. */
+    background: linear-gradient(170deg, var(--sky-top) 0%, #f0f9ff 40%, var(--sky-bottom) 100%);
+    background-attachment: fixed;
+    font-family: 'Fredoka', 'Baloo 2', 'Comic Sans MS', system-ui, sans-serif;
+    font-size: 17px;
+    letter-spacing: 0.01em;
+}
+
+@media (min-width: 640px) {
+    body { font-size: 18px; }
+}
+
+/* Floating clouds/sparkles in the page background. */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+        radial-gradient(circle at 12% 18%, rgba(255,255,255,.85) 0 42px, transparent 43px),
+        radial-gradient(circle at 86% 26%, rgba(255,255,255,.7) 0 34px, transparent 35px),
+        radial-gradient(circle at 72% 78%, rgba(255,255,255,.55) 0 28px, transparent 29px);
+    opacity: .55;
+}
+
+body > * { position: relative; z-index: 1; }
+
+/* ---------- Touch targets ---------- */
+
+button, select, input {
+    min-height: 52px;
+    font-family: inherit;
+}
+
+button { touch-action: manipulation; }
+
+/* ---------- Chunky 3D press effect ---------- */
+
+.block-3d {
+    box-shadow: 0 var(--shadow-depth) 0 rgba(15, 23, 42, 0.18);
+    transition: transform .12s ease, box-shadow .12s ease, background-color .15s ease;
+}
+
+.block-3d:hover:not(:disabled) { transform: translateY(-2px); }
+
+.block-3d:active:not(:disabled) {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 rgba(15, 23, 42, 0.18);
+}
+
+.block-3d:disabled { box-shadow: 0 2px 0 rgba(15, 23, 42, 0.10); }
+
+/* ---------- Answer option cards ---------- */
+
+.opt-btn {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    font-size: 1.05rem;
+    line-height: 1.45;
+}
+
+.opt-letter {
+    flex: 0 0 auto;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: #fff;
+    color: #6366f1;
+    font-weight: 800;
+    box-shadow: inset 0 0 0 2px currentColor;
+}
+
+/* ---------- Animations ---------- */
+
+.pop-in { animation: popIn .32s cubic-bezier(.175,.885,.32,1.275); }
+@keyframes popIn {
+    0% { transform: scale(.95); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.bounce-short { animation: bounceShort .6s ease; }
+@keyframes bounceShort {
+    0%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-12px); }
+    60% { transform: translateY(-4px); }
+}
+
+.shake { animation: shake .4s ease; }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-7px) rotate(-1.5deg); }
+    60% { transform: translateX(7px) rotate(1.5deg); }
+}
+
+.cheer { animation: cheer .5s cubic-bezier(.2,1.4,.4,1); }
+@keyframes cheer {
+    0% { transform: scale(1); }
+    45% { transform: scale(1.06) rotate(-1deg); }
+    100% { transform: scale(1); }
+}
+
+.wiggle-hover:hover { animation: wiggle .5s ease; }
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-4deg); }
+    75% { transform: rotate(4deg); }
+}
+
+.float-soft { animation: floatSoft 3.5s ease-in-out infinite; }
+@keyframes floatSoft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+
+/* ---------- Confetti burst on a correct answer ---------- */
+
+#confetti-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 60;
+}
+
+.confetti-bit {
+    position: absolute;
+    width: 11px;
+    height: 15px;
+    border-radius: 3px;
+    animation: confettiFall var(--dur, 1.5s) linear forwards;
+}
+
+@keyframes confettiFall {
+    0%   { transform: translate3d(0,0,0) rotate(0deg); opacity: 1; }
+    100% { transform: translate3d(var(--dx, 0), 105vh, 0) rotate(var(--spin, 720deg)); opacity: 0; }
+}
+
+/* ---------- Mascot ---------- */
+
+.mascot {
+    font-size: 2.5rem;
+    line-height: 1;
+    display: inline-block;
+}
+
+/* ---------- Streak flames ---------- */
+
+.streak-hot { animation: pulseHot 1s ease-in-out infinite; }
+@keyframes pulseHot {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+/* ---------- Misc ---------- */
+
+/* Skip layout/paint work for off-screen panels. */
+.lazy-panel { content-visibility: auto; contain-intrinsic-size: 600px; }
+
+.sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+:focus-visible {
+    outline: 4px solid #f59e0b;
+    outline-offset: 3px;
+    border-radius: .75rem;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #c7d2fe; border-radius: 9999px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+    body::before { display: none; }
+}

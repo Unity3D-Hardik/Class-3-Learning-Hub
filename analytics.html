@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Analytics • Class 3 Learning Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+
+    <!-- GATE -->
+    <div id="gate" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950">
+        <div class="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-7 space-y-5 shadow-2xl">
+            <div class="space-y-1">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h1 class="text-2xl font-black">Admin Analytics</h1>
+                <p class="text-xs text-slate-400">Enter the passphrase you set as <code class="text-amber-400">SECRET</code> in the Apps Script backend.</p>
+            </div>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1" for="gate-endpoint">Backend URL (Apps Script /exec)</label>
+                    <input id="gate-endpoint" type="url" placeholder="https://script.google.com/macros/s/.../exec"
+                           class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-500">
+                    <p class="text-[11px] text-slate-500 mt-1">Leave blank to view only this browser's locally stored events.</p>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1" for="gate-key">Passphrase</label>
+                    <input id="gate-key" type="password" autocomplete="current-password"
+                           class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-500">
+                </div>
+                <label class="flex items-center gap-2 text-xs text-slate-400">
+                    <input id="gate-remember" type="checkbox" class="accent-indigo-500"> Remember on this device
+                </label>
+            </div>
+
+            <button id="gate-btn" class="w-full bg-indigo-600 hover:bg-indigo-500 rounded-xl py-3 font-black text-sm transition">
+                Unlock Dashboard
+            </button>
+            <p id="gate-error" class="text-xs text-rose-400 font-semibold hidden"></p>
+
+            <p class="text-[11px] text-slate-500 leading-relaxed border-t border-slate-800 pt-3">
+                This page is protected by a passphrase that is verified by the backend, so nobody can read the data
+                without it. Anyone who knows the URL can still <em>open</em> this page.
+            </p>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dash" class="hidden max-w-7xl mx-auto p-4 sm:p-6 space-y-6">
+
+        <header class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-black flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line text-indigo-400"></i> Learning Hub Analytics
+                </h1>
+                <p id="source-label" class="text-xs text-slate-400 font-medium"></p>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="btn-refresh" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 px-4 py-2.5 rounded-xl text-xs font-bold">
+                    <i class="fa-solid fa-rotate"></i> Refresh
+                </button>
+                <button id="btn-csv" class="bg-emerald-600 hover:bg-emerald-500 px-4 py-2.5 rounded-xl text-xs font-bold">
+                    <i class="fa-solid fa-file-csv"></i> Export CSV
+                </button>
+                <button id="btn-lock" class="bg-rose-600/80 hover:bg-rose-600 px-4 py-2.5 rounded-xl text-xs font-bold">
+                    <i class="fa-solid fa-lock"></i> Lock
+                </button>
+            </div>
+        </header>
+
+        <div id="loading" class="hidden bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center text-sm text-slate-400">
+            <i class="fa-solid fa-spinner fa-spin"></i> Loading data…
+        </div>
+        <div id="error" class="hidden bg-rose-950/60 border border-rose-800 rounded-2xl p-4 text-sm text-rose-200"></div>
+
+        <!-- KPI cards -->
+        <section class="grid grid-cols-2 lg:grid-cols-6 gap-3">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Unique Users</div>
+                <div id="kpi-users" class="text-2xl font-black text-indigo-400">0</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Named Users</div>
+                <div id="kpi-named" class="text-2xl font-black text-sky-400">0</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Unique IPs</div>
+                <div id="kpi-ips" class="text-2xl font-black text-amber-400">0</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Sessions</div>
+                <div id="kpi-sessions" class="text-2xl font-black text-emerald-400">0</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Questions Answered</div>
+                <div id="kpi-answers" class="text-2xl font-black text-fuchsia-400">0</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Overall Accuracy</div>
+                <div id="kpi-accuracy" class="text-2xl font-black text-teal-400">0%</div>
+            </div>
+        </section>
+
+        <!-- Filters -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4 grid grid-cols-1 sm:grid-cols-4 gap-3">
+            <div>
+                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1" for="f-search">Search name / IP / city</label>
+                <input id="f-search" type="search" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1" for="f-subject">Subject</label>
+                <select id="f-subject" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+                    <option value="">All</option>
+                    <option value="math">Math</option>
+                    <option value="english">English</option>
+                    <option value="evs">EVS</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1" for="f-event">Event</label>
+                <select id="f-event" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+                    <option value="">All</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1" for="f-days">Period</label>
+                <select id="f-days" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+                    <option value="0">All time</option>
+                    <option value="1">Last 24 hours</option>
+                    <option value="7">Last 7 days</option>
+                    <option value="30">Last 30 days</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Visitors table -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+            <div class="px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                <h2 class="font-black text-sm uppercase tracking-wider text-slate-300">Visitors</h2>
+                <span id="visitor-count" class="text-xs text-slate-500"></span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-xs">
+                    <thead class="bg-slate-950/60 text-slate-400 uppercase text-[10px] tracking-wider">
+                        <tr>
+                            <th class="text-left px-4 py-2.5">Name</th>
+                            <th class="text-left px-4 py-2.5">IP Address</th>
+                            <th class="text-left px-4 py-2.5">Location</th>
+                            <th class="text-left px-4 py-2.5">Device</th>
+                            <th class="text-right px-4 py-2.5">Sessions</th>
+                            <th class="text-right px-4 py-2.5">Answered</th>
+                            <th class="text-right px-4 py-2.5">Accuracy</th>
+                            <th class="text-right px-4 py-2.5">Quizzes</th>
+                            <th class="text-right px-4 py-2.5">Best %</th>
+                            <th class="text-left px-4 py-2.5">Last Seen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="visitor-rows" class="divide-y divide-slate-800"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <!-- Subject breakdown -->
+            <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+                <h2 class="font-black text-sm uppercase tracking-wider text-slate-300">Subject Performance</h2>
+                <div id="subject-bars" class="space-y-3"></div>
+            </section>
+
+            <!-- Daily activity -->
+            <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+                <h2 class="font-black text-sm uppercase tracking-wider text-slate-300">Daily Activity (last 14 days)</h2>
+                <div id="daily-bars" class="space-y-1.5"></div>
+            </section>
+        </div>
+
+        <!-- Raw log -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+            <div class="px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                <h2 class="font-black text-sm uppercase tracking-wider text-slate-300">Raw Event Log</h2>
+                <span id="log-count" class="text-xs text-slate-500"></span>
+            </div>
+            <div class="overflow-x-auto max-h-[28rem]">
+                <table class="w-full text-xs">
+                    <thead class="bg-slate-950/60 text-slate-400 uppercase text-[10px] tracking-wider sticky top-0">
+                        <tr>
+                            <th class="text-left px-4 py-2.5">Time</th>
+                            <th class="text-left px-4 py-2.5">Name</th>
+                            <th class="text-left px-4 py-2.5">Event</th>
+                            <th class="text-left px-4 py-2.5">Subject</th>
+                            <th class="text-left px-4 py-2.5">Topic</th>
+                            <th class="text-left px-4 py-2.5">Result</th>
+                            <th class="text-left px-4 py-2.5">IP</th>
+                            <th class="text-left px-4 py-2.5">Location</th>
+                        </tr>
+                    </thead>
+                    <tbody id="log-rows" class="divide-y divide-slate-800"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer class="text-[11px] text-slate-500 leading-relaxed border-t border-slate-800 pt-4 pb-8">
+            <strong class="text-slate-400">Privacy note:</strong> this dashboard stores names, IP addresses and
+            approximate locations of the children using the hub. Keep the sheet and this passphrase private, tell
+            parents that usage is logged, and delete old rows when you no longer need them.
+        </footer>
+    </div>
+
+<script>
+    var DEFAULT_ENDPOINT = ''; // paste your Apps Script /exec URL here to pre-fill the gate
+
+    var LS_CFG = 'class3_hub_admin_cfg';
+    var LS_EVENTS = 'class3_hub_local_events';
+
+    var rawRows = [];
+    var cfg = { endpoint: '', key: '' };
+
+    function $(id) { return document.getElementById(id); }
+
+    function esc(s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    /* ---------------- Gate ---------------- */
+
+    function loadSavedCfg() {
+        try {
+            var saved = JSON.parse(sessionStorage.getItem(LS_CFG) || localStorage.getItem(LS_CFG) || 'null');
+            if (saved) {
+                cfg = saved;
+                $('gate-endpoint').value = saved.endpoint || '';
+                $('gate-key').value = saved.key || '';
+                return true;
+            }
+        } catch (e) { /* ignore */ }
+        $('gate-endpoint').value = DEFAULT_ENDPOINT;
+        return false;
+    }
+
+    function unlock() {
+        var endpoint = $('gate-endpoint').value.trim();
+        var key = $('gate-key').value;
+
+        if (endpoint && !key) {
+            showGateError('A passphrase is required when a backend URL is set.');
+            return;
+        }
+        cfg = { endpoint: endpoint, key: key };
+
+        var store = $('gate-remember').checked ? localStorage : sessionStorage;
+        try { store.setItem(LS_CFG, JSON.stringify(cfg)); } catch (e) { /* ignore */ }
+
+        $('gate').classList.add('hidden');
+        $('dash').classList.remove('hidden');
+        loadData();
+    }
+
+    function showGateError(msg) {
+        var el = $('gate-error');
+        el.textContent = msg;
+        el.classList.remove('hidden');
+    }
+
+    function lock() {
+        try { localStorage.removeItem(LS_CFG); sessionStorage.removeItem(LS_CFG); } catch (e) { /* ignore */ }
+        location.reload();
+    }
+
+    /* ---------------- Data ---------------- */
+
+    function jsonp(url) {
+        return new Promise(function (resolve, reject) {
+            var cbName = 'hubcb_' + Math.random().toString(36).slice(2);
+            var script = document.createElement('script');
+            var timer = setTimeout(function () { cleanup(); reject(new Error('Request timed out.')); }, 25000);
+
+            function cleanup() {
+                clearTimeout(timer);
+                delete window[cbName];
+                if (script.parentNode) script.parentNode.removeChild(script);
+            }
+
+            window[cbName] = function (data) { cleanup(); resolve(data); };
+            script.onerror = function () { cleanup(); reject(new Error('Could not reach the backend URL.')); };
+            script.src = url + (url.indexOf('?') === -1 ? '?' : '&') + 'callback=' + cbName;
+            document.body.appendChild(script);
+        });
+    }
+
+    function readLocalEvents() {
+        try { return JSON.parse(localStorage.getItem(LS_EVENTS) || '[]'); }
+        catch (e) { return []; }
+    }
+
+    function loadData() {
+        $('error').classList.add('hidden');
+
+        if (!cfg.endpoint) {
+            rawRows = readLocalEvents();
+            $('source-label').textContent = 'Source: this browser only (no backend configured) • ' + rawRows.length + ' events';
+            render();
+            return;
+        }
+
+        $('loading').classList.remove('hidden');
+        var url = cfg.endpoint + '?action=list&limit=10000&key=' + encodeURIComponent(cfg.key);
+
+        jsonp(url).then(function (res) {
+            $('loading').classList.add('hidden');
+            if (!res || !res.ok) {
+                showError((res && res.error) || 'Unknown error.');
+                return;
+            }
+            rawRows = res.rows || [];
+            $('source-label').textContent = 'Source: Google Sheet • ' + rawRows.length + ' events loaded (of ' + (res.total || rawRows.length) + ')';
+            render();
+        }).catch(function (err) {
+            $('loading').classList.add('hidden');
+            showError(err.message + ' Check that the deployment URL is correct and access is set to "Anyone".');
+        });
+    }
+
+    function showError(msg) {
+        var el = $('error');
+        el.textContent = 'Error: ' + msg;
+        el.classList.remove('hidden');
+    }
+
+    /* ---------------- Rendering ---------------- */
+
+    function applyFilters(rows) {
+        var q = $('f-search').value.trim().toLowerCase();
+        var subject = $('f-subject').value;
+        var event = $('f-event').value;
+        var days = parseInt($('f-days').value, 10);
+        var cutoff = days ? Date.now() - days * 86400000 : 0;
+
+        return rows.filter(function (r) {
+            if (subject && r.subject !== subject) return false;
+            if (event && r.event !== event) return false;
+            if (cutoff && new Date(r.ts).getTime() < cutoff) return false;
+            if (q) {
+                var hay = [r.name, r.ip, r.city, r.country, r.topic].join(' ').toLowerCase();
+                if (hay.indexOf(q) === -1) return false;
+            }
+            return true;
+        });
+    }
+
+    function refreshEventOptions(rows) {
+        var sel = $('f-event');
+        var current = sel.value;
+        var names = Array.from(new Set(rows.map(function (r) { return r.event; }).filter(Boolean))).sort();
+        sel.innerHTML = '<option value="">All</option>' +
+            names.map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + '</option>'; }).join('');
+        sel.value = current;
+    }
+
+    function render() {
+        refreshEventOptions(rawRows);
+        var rows = applyFilters(rawRows);
+
+        var visitors = {};
+        var ips = new Set();
+        var sessions = new Set();
+        var answered = 0, correct = 0;
+        var subjectStats = {};
+        var daily = {};
+
+        rows.forEach(function (r) {
+            var id = r.visitorId || r.ip || 'unknown';
+            if (!visitors[id]) {
+                visitors[id] = {
+                    name: '', ip: '', location: '', device: '',
+                    sessions: new Set(), answered: 0, correct: 0,
+                    quizzes: 0, best: 0, last: 0
+                };
+            }
+            var v = visitors[id];
+            if (r.name && r.name !== 'Anonymous') v.name = r.name;
+            if (r.ip) v.ip = r.ip;
+            var loc = [r.city, r.country].filter(Boolean).join(', ');
+            if (loc) v.location = loc;
+            if (r.browser || r.os) v.device = [r.deviceType, r.os, r.browser].filter(Boolean).join(' / ');
+            if (r.sessionId) v.sessions.add(r.sessionId);
+            var t = new Date(r.ts).getTime();
+            if (t > v.last) v.last = t;
+
+            if (r.ip) ips.add(r.ip);
+            if (r.sessionId) sessions.add(r.sessionId);
+
+            var day = String(r.ts).slice(0, 10);
+            daily[day] = (daily[day] || 0) + 1;
+
+            if (r.event === 'practice_answer') {
+                answered++;
+                v.answered++;
+                var ok = String(r.correct) === '1' || r.correct === 1 || r.correct === true;
+                if (ok) { correct++; v.correct++; }
+
+                var s = r.subject || 'unknown';
+                if (!subjectStats[s]) subjectStats[s] = { total: 0, correct: 0 };
+                subjectStats[s].total++;
+                if (ok) subjectStats[s].correct++;
+            }
+
+            if (r.event === 'quiz_submit') {
+                v.quizzes++;
+                var pct = Number(r.score) || 0;
+                if (pct > v.best) v.best = pct;
+            }
+        });
+
+        var visitorList = Object.keys(visitors).map(function (k) {
+            var v = visitors[k];
+            v.id = k;
+            v.sessionCount = v.sessions.size;
+            return v;
+        }).sort(function (a, b) { return b.last - a.last; });
+
+        $('kpi-users').textContent = visitorList.length;
+        $('kpi-named').textContent = visitorList.filter(function (v) { return v.name; }).length;
+        $('kpi-ips').textContent = ips.size;
+        $('kpi-sessions').textContent = sessions.size;
+        $('kpi-answers').textContent = answered;
+        $('kpi-accuracy').textContent = (answered ? Math.round(correct / answered * 100) : 0) + '%';
+
+        // Visitors table
+        $('visitor-count').textContent = visitorList.length + ' visitor(s)';
+        $('visitor-rows').innerHTML = visitorList.length
+            ? visitorList.map(function (v) {
+                var acc = v.answered ? Math.round(v.correct / v.answered * 100) : 0;
+                return '<tr class="hover:bg-slate-800/50">' +
+                    '<td class="px-4 py-2.5 font-bold">' + esc(v.name || '—') + '</td>' +
+                    '<td class="px-4 py-2.5 font-mono text-amber-300">' + esc(v.ip || '—') + '</td>' +
+                    '<td class="px-4 py-2.5 text-slate-300">' + esc(v.location || '—') + '</td>' +
+                    '<td class="px-4 py-2.5 text-slate-400">' + esc(v.device || '—') + '</td>' +
+                    '<td class="px-4 py-2.5 text-right">' + v.sessionCount + '</td>' +
+                    '<td class="px-4 py-2.5 text-right">' + v.answered + '</td>' +
+                    '<td class="px-4 py-2.5 text-right ' + (acc >= 70 ? 'text-emerald-400' : acc >= 40 ? 'text-amber-400' : 'text-rose-400') + '">' + acc + '%</td>' +
+                    '<td class="px-4 py-2.5 text-right">' + v.quizzes + '</td>' +
+                    '<td class="px-4 py-2.5 text-right">' + (v.best || 0) + '%</td>' +
+                    '<td class="px-4 py-2.5 text-slate-400">' + (v.last ? new Date(v.last).toLocaleString() : '—') + '</td>' +
+                    '</tr>';
+            }).join('')
+            : '<tr><td colspan="10" class="px-4 py-8 text-center text-slate-500">No data yet.</td></tr>';
+
+        // Subject bars
+        var subjectKeys = Object.keys(subjectStats);
+        $('subject-bars').innerHTML = subjectKeys.length
+            ? subjectKeys.map(function (s) {
+                var st = subjectStats[s];
+                var pct = Math.round(st.correct / st.total * 100);
+                return '<div class="space-y-1">' +
+                    '<div class="flex justify-between text-xs font-bold"><span class="capitalize">' + esc(s) + '</span>' +
+                    '<span class="text-slate-400">' + st.correct + '/' + st.total + ' • ' + pct + '%</span></div>' +
+                    '<div class="h-2.5 bg-slate-800 rounded-full overflow-hidden"><div class="h-2.5 bg-indigo-500 rounded-full" style="width:' + pct + '%"></div></div>' +
+                    '</div>';
+            }).join('')
+            : '<p class="text-xs text-slate-500">No practice answers recorded yet.</p>';
+
+        // Daily bars
+        var days = Object.keys(daily).sort().slice(-14);
+        var max = Math.max.apply(null, days.map(function (d) { return daily[d]; }).concat([1]));
+        $('daily-bars').innerHTML = days.length
+            ? days.map(function (d) {
+                var w = Math.round(daily[d] / max * 100);
+                return '<div class="flex items-center gap-2 text-[11px]">' +
+                    '<span class="w-20 text-slate-500 shrink-0">' + esc(d) + '</span>' +
+                    '<div class="flex-1 h-3 bg-slate-800 rounded-full overflow-hidden"><div class="h-3 bg-emerald-500 rounded-full" style="width:' + w + '%"></div></div>' +
+                    '<span class="w-10 text-right text-slate-400">' + daily[d] + '</span>' +
+                    '</div>';
+            }).join('')
+            : '<p class="text-xs text-slate-500">No activity recorded yet.</p>';
+
+        // Raw log (newest first, capped for performance)
+        var log = rows.slice().sort(function (a, b) { return new Date(b.ts) - new Date(a.ts); }).slice(0, 500);
+        $('log-count').textContent = 'showing ' + log.length + ' of ' + rows.length;
+        $('log-rows').innerHTML = log.length
+            ? log.map(function (r) {
+                var result = r.event === 'practice_answer'
+                    ? (String(r.correct) === '1' ? '<span class="text-emerald-400">✓ correct</span>' : '<span class="text-rose-400">✕ wrong</span>')
+                    : (r.score !== '' && r.score != null ? esc(r.score) + '%' : '—');
+                return '<tr class="hover:bg-slate-800/50">' +
+                    '<td class="px-4 py-2 text-slate-400 whitespace-nowrap">' + esc(new Date(r.ts).toLocaleString()) + '</td>' +
+                    '<td class="px-4 py-2 font-semibold">' + esc(r.name || '—') + '</td>' +
+                    '<td class="px-4 py-2 text-indigo-300">' + esc(r.event) + '</td>' +
+                    '<td class="px-4 py-2 capitalize">' + esc(r.subject || '—') + '</td>' +
+                    '<td class="px-4 py-2 text-slate-400">' + esc(r.topic || '—') + '</td>' +
+                    '<td class="px-4 py-2">' + result + '</td>' +
+                    '<td class="px-4 py-2 font-mono text-amber-300">' + esc(r.ip || '—') + '</td>' +
+                    '<td class="px-4 py-2 text-slate-400">' + esc([r.city, r.country].filter(Boolean).join(', ') || '—') + '</td>' +
+                    '</tr>';
+            }).join('')
+            : '<tr><td colspan="8" class="px-4 py-8 text-center text-slate-500">No events match the current filters.</td></tr>';
+    }
+
+    function exportCsv() {
+        var rows = applyFilters(rawRows);
+        if (!rows.length) return;
+        var headers = Object.keys(rows[0]);
+        var lines = [headers.join(',')];
+        rows.forEach(function (r) {
+            lines.push(headers.map(function (h) {
+                var v = r[h] == null ? '' : String(r[h]);
+                return '"' + v.replace(/"/g, '""') + '"';
+            }).join(','));
+        });
+        var blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'class3-hub-analytics-' + new Date().toISOString().slice(0, 10) + '.csv';
+        a.click();
+        URL.revokeObjectURL(a.href);
+    }
+
+    /* ---------------- Wire up ---------------- */
+
+    $('gate-btn').addEventListener('click', unlock);
+    $('gate-key').addEventListener('keydown', function (e) { if (e.key === 'Enter') unlock(); });
+    $('btn-refresh').addEventListener('click', loadData);
+    $('btn-csv').addEventListener('click', exportCsv);
+    $('btn-lock').addEventListener('click', lock);
+    ['f-search', 'f-subject', 'f-event', 'f-days'].forEach(function (id) {
+        $(id).addEventListener('input', render);
+        $(id).addEventListener('change', render);
+    });
+
+    if (loadSavedCfg()) {
+        $('gate').classList.add('hidden');
+        $('dash').classList.remove('hidden');
+        loadData();
+    }
+</script>
+</body>
+</html>

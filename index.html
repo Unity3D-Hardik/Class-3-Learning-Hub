@@ -3,76 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class 3 Joyful Hub • Math, English & EVS</title>
+    <title>Class 3 Joyful Hub • Maths, English & EVS Practice</title>
+    <meta name="description" content="Free NCERT Class 3 practice for Maths (Math Mela), English (Santoor & Echoes) and EVS (Our Wondrous World). Unlimited questions, hints, quizzes and school-test practice.">
+    <meta name="theme-color" content="#7c3aed">
+    <meta name="color-scheme" content="light">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Class 3 Joyful Hub">
+    <meta property="og:description" content="Fun NCERT Class 3 practice in Maths, English and EVS — with hints, quizzes and school-test revision.">
+
+    <!-- Inline favicon avoids a 404 without shipping an extra file. -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://ipapi.co">
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' },
-                        math: '#4f46e5',
-                        english: '#0284c7',
-                        evs: '#059669',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'Comic Sans MS', 'system-ui', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- FontAwesome icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .bounce-short { animation: bounce 0.5s ease; }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        .pop-in { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes popIn {
-            0% { transform: scale(0.95); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .block-3d {
-            box-shadow: 0 5px 0 rgba(0,0,0,0.15);
-            transition: all 0.15s ease;
-        }
-        .block-3d:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 rgba(0,0,0,0.15);
-        }
-        button, select, input {
-            min-height: 48px;
-        }
-    </style>
-</head>
-<body class="bg-slate-100 min-h-screen font-sans text-slate-800 flex flex-col justify-between selection:bg-indigo-100 selection:text-indigo-800">
+    <script src="theme.js?v=1"></script>
+    <link rel="stylesheet" href="styles.css?v=1">
 
-    <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50 border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-4 py-2.5 flex items-center justify-between gap-2">
-            <div class="flex items-center space-x-2.5 cursor-pointer" onclick="showPortal()">
-                <div class="bg-gradient-to-tr from-amber-400 via-orange-400 to-indigo-500 text-slate-900 w-10 h-10 sm:w-11 sm:h-11 rounded-2xl shadow flex items-center justify-center font-black text-lg sm:text-xl">
-                    <i class="fa-solid fa-graduation-cap"></i>
+    <!-- Shared config + per-book question banks (order matters).
+         Bump ?v= on every deploy so returning devices never run stale code. -->
+    <script src="config.js?v=1" defer></script>
+    <script src="exam-presets.js?v=1" defer></script>
+    <script src="bank/core.js?v=1" defer></script>
+    <script src="bank/math-mela.js?v=1" defer></script>
+    <script src="bank/english-santoor.js?v=1" defer></script>
+    <script src="bank/evs-wondrous-world.js?v=1" defer></script>
+    <script src="analytics.js?v=1" defer></script>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col justify-between selection:bg-amber-200 selection:text-amber-900">
+
+    <div id="confetti-layer" aria-hidden="true"></div>
+    <div id="feedback-toast" class="hidden" role="status" aria-live="polite"></div>
+
+    <header class="bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showPortal()">
+                <div class="bg-gradient-to-tr from-amber-300 to-orange-400 text-white w-12 h-12 rounded-3xl shadow-lg flex items-center justify-center text-2xl wiggle-hover">
+                    🎓
                 </div>
                 <div>
-                    <h1 class="text-lg sm:text-xl font-black tracking-wide leading-none text-white flex items-center gap-1.5">
-                        Class 3 Joyful Hub <span class="text-amber-400 text-xs hidden sm:inline">✨</span>
+                    <h1 class="text-xl sm:text-2xl font-bold tracking-wide leading-none text-white flex items-center gap-1.5">
+                        Class 3 Joyful Hub <span class="text-amber-300 hidden sm:inline">✨</span>
                     </h1>
-                    <p class="text-[11px] text-slate-300 font-medium mt-0.5 hidden xs:block">Math • English • EVS</p>
+                    <p class="text-xs text-white/80 font-medium mt-1 hidden xs:block">Maths • English • EVS</p>
                 </div>
             </div>
 
             <div class="flex items-center gap-2">
-                <button onclick="showPortal()" title="Home Portal" class="bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-200 px-3 py-2 rounded-2xl text-xs sm:text-sm font-bold border border-slate-700/80 transition flex items-center gap-1.5 touch-manipulation">
-                    <i class="fa-solid fa-house text-amber-400"></i>
+                <button onclick="showPortal()" title="Go home" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2.5 rounded-2xl text-sm font-semibold border-2 border-white/25 transition flex items-center gap-2 block-3d">
+                    <span class="text-lg">🏠</span>
                     <span class="hidden sm:inline">Home</span>
                 </button>
-                
-                <button onclick="openSettingsModal()" title="Settings & Learning Dashboard" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-3.5 py-2 rounded-2xl text-xs sm:text-sm font-extrabold shadow-md border border-indigo-400/30 transition flex items-center gap-2 touch-manipulation">
-                    <i class="fa-solid fa-sliders text-amber-300"></i>
+
+                <button onclick="openSettingsModal()" title="My progress & settings" class="bg-amber-400 hover:bg-amber-300 text-amber-950 px-4 py-2.5 rounded-2xl text-sm font-bold shadow-md transition flex items-center gap-2 block-3d">
+                    <span class="text-lg">⭐</span>
                     <span id="header-user-name" class="max-w-[100px] truncate">Learner</span>
                 </button>
             </div>
@@ -84,85 +76,80 @@
         <!-- VIEW 1: MAIN PORTAL -->
         <div id="view-portal" class="space-y-8 pop-in">
             <div class="text-center max-w-2xl mx-auto space-y-3">
-                <span class="bg-indigo-100 text-indigo-800 font-black text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider inline-block">
-                    NCERT Class 3 Practice & Test Suite
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-black text-slate-800">
-                    Welcome, <span id="portal-user-greeting" class="text-indigo-600">Champion</span>! 👋
+                <div class="mascot float-soft">🦉</div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-800">
+                    Hi <span id="portal-user-greeting" class="text-violet-600">Champion</span>! 👋
                 </h2>
-                <p class="text-sm text-slate-600 font-medium">Select a subject below to practice unlimited questions, test your knowledge with non-repeating quizzes, or explore interactive STEAM labs!</p>
+                <p class="text-base text-slate-600 font-medium">Pick a subject and let's play, practise and win stars! ⭐</p>
+            </div>
+
+            <div id="upcoming-tests" class="hidden max-w-4xl mx-auto space-y-3">
+                <h3 id="upcoming-tests-title" class="text-center font-bold text-slate-700"></h3>
+                <div id="upcoming-tests-list" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
+                <p class="text-center text-xs text-slate-500 font-medium">Tap a paper to practise exactly those chapters 🎯</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Subject 1: Math -->
-                <div onclick="selectSubject('math')" class="bg-white rounded-3xl p-5 sm:p-6 border-2 border-indigo-200 shadow-md hover:shadow-xl hover:border-indigo-500 transition cursor-pointer flex flex-col justify-between group relative overflow-hidden block-3d">
-                    <div class="absolute -right-6 -bottom-6 text-slate-100 group-hover:text-indigo-50 text-8xl transition pointer-events-none">
-                        <i class="fa-solid fa-calculator"></i>
-                    </div>
-                    <div class="relative z-10 space-y-4">
-                        <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl font-black group-hover:scale-110 transition">
+                <!-- Subject 1: Maths -->
+                <div onclick="selectSubject('math')" role="button" tabindex="0" class="bg-white rounded-blob p-6 border-4 border-violet-300 hover:border-violet-500 transition cursor-pointer flex flex-col justify-between group relative overflow-hidden block-3d">
+                    <div class="absolute -right-4 -bottom-4 text-7xl opacity-10 pointer-events-none">🔢</div>
+                    <div class="relative z-10 space-y-3">
+                        <div class="w-16 h-16 bg-violet-100 rounded-3xl flex items-center justify-center text-3xl group-hover:scale-110 transition">
                             📐
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Book: Math Mela</span>
-                            <h3 class="text-2xl font-black text-slate-800 group-hover:text-indigo-600 transition">Mathematics</h3>
-                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-                                • Ch-4 Vacation with My Nani Maa (2D Shapes, Edges, Grid Paths, Footspan)<br>
-                                • Ch-6 House of Hundreds - I (Place Value, Expanded Form, Skip Counting, Building Numbers)
+                            <span class="text-xs font-semibold text-violet-500">Math Mela • Ch 1–14</span>
+                            <h3 class="text-2xl font-bold text-slate-800 group-hover:text-violet-600 transition">Maths</h3>
+                            <p class="text-sm text-slate-500 mt-2 leading-relaxed">
+                                Shapes, numbers, money, times tables and sharing.
                             </p>
                         </div>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-indigo-600 font-extrabold text-sm relative z-10">
-                        <span>Practice & Quiz</span>
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    <div class="mt-5 pt-4 border-t-2 border-dashed border-violet-100 flex items-center justify-between text-violet-600 font-bold relative z-10">
+                        <span>Let's Play</span>
+                        <span class="text-xl group-hover:translate-x-1 transition">➜</span>
                     </div>
                 </div>
 
                 <!-- Subject 2: English -->
-                <div onclick="selectSubject('english')" class="bg-white rounded-3xl p-5 sm:p-6 border-2 border-sky-200 shadow-md hover:shadow-xl hover:border-sky-500 transition cursor-pointer flex flex-col justify-between group relative overflow-hidden block-3d">
-                    <div class="absolute -right-6 -bottom-6 text-slate-100 group-hover:text-sky-50 text-8xl transition pointer-events-none">
-                        <i class="fa-solid fa-book-open"></i>
-                    </div>
-                    <div class="relative z-10 space-y-4">
-                        <div class="w-14 h-14 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-2xl font-black group-hover:scale-110 transition">
+                <div onclick="selectSubject('english')" role="button" tabindex="0" class="bg-white rounded-blob p-6 border-4 border-sky-300 hover:border-sky-500 transition cursor-pointer flex flex-col justify-between group relative overflow-hidden block-3d">
+                    <div class="absolute -right-4 -bottom-4 text-7xl opacity-10 pointer-events-none">🔤</div>
+                    <div class="relative z-10 space-y-3">
+                        <div class="w-16 h-16 bg-sky-100 rounded-3xl flex items-center justify-center text-3xl group-hover:scale-110 transition">
                             📚
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Books: Santoor 3 & Echoes</span>
-                            <h3 class="text-2xl font-black text-slate-800 group-hover:text-sky-600 transition">English</h3>
-                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-                                • 20+ Grammar & Vocabulary Topics<br>
-                                • Synonyms, Antonyms, Compound Words, Verbs, Nouns, Prepositions, Conjunctions & Tenses
+                            <span class="text-xs font-semibold text-sky-500">Santoor 3 & Echoes</span>
+                            <h3 class="text-2xl font-bold text-slate-800 group-hover:text-sky-600 transition">English</h3>
+                            <p class="text-sm text-slate-500 mt-2 leading-relaxed">
+                                Words, opposites, verbs, stories and grammar.
                             </p>
                         </div>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-sky-600 font-extrabold text-sm relative z-10">
-                        <span>Practice & Quiz</span>
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    <div class="mt-5 pt-4 border-t-2 border-dashed border-sky-100 flex items-center justify-between text-sky-600 font-bold relative z-10">
+                        <span>Let's Play</span>
+                        <span class="text-xl group-hover:translate-x-1 transition">➜</span>
                     </div>
                 </div>
 
                 <!-- Subject 3: EVS -->
-                <div onclick="selectSubject('evs')" class="bg-white rounded-3xl p-5 sm:p-6 border-2 border-emerald-200 shadow-md hover:shadow-xl hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between group relative overflow-hidden block-3d">
-                    <div class="absolute -right-6 -bottom-6 text-slate-100 group-hover:text-emerald-50 text-8xl transition pointer-events-none">
-                        <i class="fa-solid fa-leaf"></i>
-                    </div>
-                    <div class="relative z-10 space-y-4">
-                        <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl font-black group-hover:scale-110 transition">
+                <div onclick="selectSubject('evs')" role="button" tabindex="0" class="bg-white rounded-blob p-6 border-4 border-emerald-300 hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between group relative overflow-hidden block-3d">
+                    <div class="absolute -right-4 -bottom-4 text-7xl opacity-10 pointer-events-none">🌍</div>
+                    <div class="relative z-10 space-y-3">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-3xl flex items-center justify-center text-3xl group-hover:scale-110 transition">
                             🌿
                         </div>
                         <div>
-                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Book: World Around Us</span>
-                            <h3 class="text-2xl font-black text-slate-800 group-hover:text-emerald-600 transition">EVS & STEAM</h3>
-                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-                                • Ch-3 Celebrating Festivals & Harvest Traditions<br>
-                                • Ch-4 Getting to Know Plants • Ch-5 Plants & Animals Together • Ch-6 Living in Harmony
+                            <span class="text-xs font-semibold text-emerald-500">Our Wondrous World • Ch 1–10</span>
+                            <h3 class="text-2xl font-bold text-slate-800 group-hover:text-emerald-600 transition">EVS</h3>
+                            <p class="text-sm text-slate-500 mt-2 leading-relaxed">
+                                Family, festivals, plants, water, food and travel.
                             </p>
                         </div>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-emerald-600 font-extrabold text-sm relative z-10">
-                        <span>Practice & Quiz</span>
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    <div class="mt-5 pt-4 border-t-2 border-dashed border-emerald-100 flex items-center justify-between text-emerald-600 font-bold relative z-10">
+                        <span>Let's Play</span>
+                        <span class="text-xl group-hover:translate-x-1 transition">➜</span>
                     </div>
                 </div>
             </div>
@@ -181,30 +168,54 @@
                         <p id="subj-subtitle" class="text-xs sm:text-sm text-white/90 font-medium mt-0.5">NCERT Practice Suite</p>
                     </div>
                 </div>
-                <button onclick="showPortal()" class="bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm px-4 py-2 rounded-xl transition border border-white/30">
-                    ← Change Subject
+                <button onclick="showPortal()" class="bg-white/25 hover:bg-white/35 text-white font-semibold px-4 py-2.5 rounded-2xl transition border-2 border-white/30 block-3d">
+                    ← Change
+                </button>
+            </div>
+
+            <!-- Test-mode lock: only the exam syllabus is reachable while this is on -->
+            <div id="test-lock-bar" class="hidden bg-amber-100 border-4 border-amber-300 rounded-blob px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+                <span class="flex items-center gap-2.5 font-semibold text-amber-950">
+                    <span class="text-2xl">🎓</span>
+                    <span>
+                        <span id="test-lock-text" class="block"></span>
+                        <span id="test-lock-sub" class="block text-xs font-medium opacity-80"></span>
+                    </span>
+                </span>
+                <button onclick="exitTestMode()" class="bg-white/80 hover:bg-white text-amber-900 font-semibold px-4 py-2 rounded-2xl border-2 border-amber-300 block-3d text-sm">
+                    Exit test mode ✕
                 </button>
             </div>
 
             <!-- Sub-tab Navigation Bar -->
-            <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-2 rounded-2xl shadow-sm border border-slate-200">
-                <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-                    <button id="tab-practice-btn" onclick="switchSubjectTab('practice')" class="sub-tab-btn px-4 py-2 rounded-xl font-bold text-sm transition flex items-center gap-2 bg-slate-900 text-white shadow">
-                        <i class="fa-solid fa-bullseye"></i> Practice Mode
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-2.5 rounded-blob shadow-md border-2 border-violet-100">
+                <div class="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+                    <button id="tab-practice-btn" onclick="switchSubjectTab('practice')" class="sub-tab-btn px-4 py-2.5 rounded-2xl font-semibold transition flex items-center gap-2 bg-violet-600 text-white block-3d">
+                        🎯 <span>Practice</span>
                     </button>
-                    <button id="tab-exam-btn" onclick="switchSubjectTab('exam')" class="sub-tab-btn px-4 py-2 rounded-xl font-bold text-sm transition flex items-center gap-2 bg-white text-slate-600 hover:bg-slate-50">
-                        <i class="fa-solid fa-award text-amber-500"></i> 20-Q Quiz Challenge
+                    <button id="tab-exam-btn" onclick="switchSubjectTab('exam')" class="sub-tab-btn px-4 py-2.5 rounded-2xl font-semibold transition flex items-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 block-3d">
+                        🏆 <span>Quiz</span>
                     </button>
-                    <button id="tab-lab-btn" onclick="switchSubjectTab('lab')" class="sub-tab-btn px-4 py-2 rounded-xl font-bold text-sm transition flex items-center gap-2 bg-white text-slate-600 hover:bg-slate-50">
-                        <i class="fa-solid fa-flask text-purple-500"></i> <span id="lab-tab-label">Interactive Tools</span>
+                    <button id="tab-school-btn" onclick="switchSubjectTab('school')" class="sub-tab-btn px-4 py-2.5 rounded-2xl font-semibold transition flex items-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 block-3d">
+                        🎓 <span>School Test</span>
+                    </button>
+                    <button id="tab-lab-btn" onclick="switchSubjectTab('lab')" class="sub-tab-btn px-4 py-2.5 rounded-2xl font-semibold transition flex items-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 block-3d">
+                        🔬 <span id="lab-tab-label">Fun Lab</span>
                     </button>
                 </div>
 
-                <!-- Topic Selector Dropdown -->
-                <div class="w-full sm:w-auto">
-                    <select id="topic-select" onchange="generateNewQuestion()" class="w-full bg-slate-50 border-2 border-slate-200 text-slate-800 font-bold text-xs sm:text-sm rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500">
-                        <!-- Options generated dynamically -->
-                    </select>
+                <!-- Chapter filter + Topic Selector -->
+                <div id="filter-bar" class="flex items-center gap-2 w-full sm:w-auto">
+                    <button id="chapters-btn" onclick="openChapterModal()" title="Choose which chapters are included" class="shrink-0 bg-amber-100 hover:bg-amber-200 text-amber-900 font-semibold px-3.5 py-2.5 rounded-2xl border-2 border-amber-200 transition flex items-center gap-2 block-3d">
+                        📚<span class="hidden sm:inline">Chapters</span>
+                        <span id="active-chapter-count" class="bg-amber-500 text-white rounded-full px-2 py-0.5 text-xs font-bold">0</span>
+                    </button>
+                    <div id="topic-select-wrap" class="flex-1 sm:w-auto">
+                        <label for="topic-select" class="sr-only">Choose a chapter or topic</label>
+                        <select id="topic-select" onchange="generateNewQuestion()" class="w-full bg-slate-50 border-2 border-slate-200 text-slate-800 font-medium text-sm rounded-2xl px-3 py-2.5 focus:outline-none focus:border-violet-500">
+                            <!-- Options generated dynamically -->
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -212,60 +223,69 @@
             <div id="sub-view-practice" class="space-y-4">
                 <!-- Score Stats Toolbar -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                    <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm">
-                        <div class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Score</div>
-                        <div id="stat-score" class="text-xl font-black text-indigo-600">0</div>
+                    <div class="bg-white p-3 rounded-2xl border-2 border-violet-100">
+                        <div class="text-xs font-semibold text-slate-400">⭐ Stars</div>
+                        <div id="stat-score" class="text-2xl font-bold text-violet-600">0</div>
                     </div>
-                    <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm">
-                        <div class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Attempted</div>
-                        <div id="stat-total" class="text-xl font-black text-slate-700">0</div>
+                    <div class="bg-white p-3 rounded-2xl border-2 border-violet-100">
+                        <div class="text-xs font-semibold text-slate-400">📝 Tried</div>
+                        <div id="stat-total" class="text-2xl font-bold text-slate-700">0</div>
                     </div>
-                    <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm">
-                        <div class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Streak</div>
-                        <div id="stat-streak" class="text-xl font-black text-amber-500">0 🔥</div>
+                    <div class="bg-white p-3 rounded-2xl border-2 border-violet-100">
+                        <div class="text-xs font-semibold text-slate-400">🔥 Streak</div>
+                        <div id="stat-streak" class="text-2xl font-bold text-amber-500">0</div>
                     </div>
-                    <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm">
-                        <div class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Accuracy</div>
-                        <div id="stat-accuracy" class="text-xl font-black text-emerald-600">0%</div>
+                    <div class="bg-white p-3 rounded-2xl border-2 border-violet-100">
+                        <div class="text-xs font-semibold text-slate-400">🎯 Correct</div>
+                        <div id="stat-accuracy" class="text-2xl font-bold text-emerald-600">0%</div>
                     </div>
                 </div>
 
                 <!-- Question Box Card -->
-                <div id="practice-card" class="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-md space-y-6 pop-in">
-                    <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                        <span id="q-badge" class="bg-indigo-100 text-indigo-800 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                <div id="practice-card" class="bg-white rounded-blob p-5 sm:p-8 border-4 border-violet-200 shadow-lg space-y-6 pop-in">
+                    <div class="flex items-center justify-between gap-2 border-b-2 border-dashed border-violet-100 pb-3">
+                        <span id="q-badge" class="bg-violet-100 text-violet-800 text-xs font-semibold px-3 py-1.5 rounded-full">
                             Topic Badge
                         </span>
-                        <button onclick="toggleHint()" class="text-xs font-black text-amber-600 hover:text-amber-700 bg-amber-50 px-3 py-1.5 rounded-xl border border-amber-200 transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-lightbulb"></i> Need a Hint?
+                        <button onclick="toggleHint()" class="font-semibold text-amber-800 bg-amber-100 hover:bg-amber-200 px-4 py-2 rounded-2xl border-2 border-amber-200 transition flex items-center gap-2 block-3d">
+                            💡 <span class="hidden sm:inline">Hint</span>
                         </button>
                     </div>
 
                     <!-- Hint Drawer -->
-                    <div id="hint-box" class="bg-amber-50 border-2 border-amber-200 text-amber-900 rounded-2xl p-4 text-xs sm:text-sm font-semibold hidden space-y-1">
-                        <div class="font-black text-amber-700 flex items-center gap-1.5">
-                            💡 Hint Assistant
+                    <div id="hint-box" class="bg-amber-50 border-4 border-amber-200 text-amber-900 rounded-2xl p-4 font-medium hidden space-y-1">
+                        <div class="font-bold text-amber-700 flex items-center gap-2">
+                            💡 Little Hint
                         </div>
                         <p id="hint-text">Think step by step!</p>
                     </div>
 
                     <!-- Question Prompt -->
-                    <div id="q-text" class="text-lg sm:text-xl font-extrabold text-slate-800 leading-relaxed">
+                    <div id="q-text" class="text-xl sm:text-2xl font-semibold text-slate-800 leading-relaxed">
                         Question text loading...
                     </div>
 
                     <!-- Visual Diagram SVG Box (if present) -->
-                    <div id="q-visual" class="p-4 bg-slate-50 border border-slate-200 rounded-2xl hidden"></div>
+                    <div id="q-visual" class="p-4 bg-sky-50 border-2 border-sky-100 rounded-2xl hidden"></div>
 
                     <!-- Options Grid -->
-                    <div id="q-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div id="q-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <!-- Dynamic options generated here -->
                     </div>
 
+                    <!-- Correct Answer Reveal (shown after a wrong attempt) -->
+                    <div id="answer-reveal" class="hidden rounded-2xl border-4 border-emerald-300 bg-emerald-50 p-4 space-y-2 pop-in" role="status" aria-live="polite">
+                        <div class="font-bold text-emerald-700 flex items-center gap-2">
+                            ✅ The right answer is
+                        </div>
+                        <p id="answer-reveal-text" class="text-lg sm:text-xl font-bold text-emerald-900"></p>
+                        <p id="answer-reveal-hint" class="text-sm font-medium text-emerald-800/90 pt-2 border-t-2 border-dashed border-emerald-200"></p>
+                    </div>
+
                     <!-- Solution Explanation Box -->
-                    <div id="explanation-box" class="bg-indigo-50 border-2 border-indigo-200 rounded-2xl p-4 text-xs sm:text-sm text-indigo-900 hidden space-y-1">
-                        <div class="font-black text-indigo-700 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-info"></i> Concept Solution
+                    <div id="explanation-box" class="bg-sky-50 border-4 border-sky-200 rounded-2xl p-4 text-sky-900 hidden space-y-1">
+                        <div class="font-bold text-sky-700 flex items-center gap-1.5">
+                            🧠 How it works
                         </div>
                         <p id="explanation-text">Explanation goes here.</p>
                     </div>
@@ -273,35 +293,33 @@
                     <!-- Action Toolbar -->
                     <div class="flex justify-end pt-2">
                         <button onclick="generateNewQuestion()" class="bg-slate-900 hover:bg-slate-800 text-white font-extrabold px-6 py-3 rounded-2xl text-sm shadow transition flex items-center gap-2">
-                            Next Question <i class="fa-solid fa-arrow-right"></i>
+                            Next Question ➜
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- SUB-VIEW B: 20-Q QUIZ EXAM MODE -->
+            <!-- SUB-VIEW B: QUIZ MODE -->
             <div id="sub-view-exam" class="hidden space-y-4">
                 <!-- Exam Welcome Start Card -->
-                <div id="exam-start-card" class="bg-white rounded-3xl p-6 sm:p-10 border-2 border-amber-200 shadow-md text-center space-y-5">
-                    <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-3xl flex items-center justify-center text-3xl font-black mx-auto bounce-short">
-                        🏆
-                    </div>
+                <div id="exam-start-card" class="bg-white rounded-blob p-6 sm:p-10 border-4 border-amber-300 shadow-lg text-center space-y-5">
+                    <div class="mascot bounce-short">🏆</div>
                     <div class="max-w-md mx-auto space-y-2">
-                        <h3 class="text-2xl font-black text-slate-800">20-Question Non-Repeating Challenge</h3>
-                        <p class="text-xs sm:text-sm text-slate-500 font-medium">
-                            Test your knowledge! You will be given 20 unique questions selected across all chapter topics. Questions will not repeat until all options are exhausted.
+                        <h3 class="text-2xl font-bold text-slate-800">Quiz Challenge!</h3>
+                        <p class="text-base text-slate-500 font-medium">
+                            Up to 20 fresh questions from the chapters you picked. You'll see the answers and why at the end.
                         </p>
                     </div>
-                    <button onclick="startExam()" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black text-base px-8 py-3.5 rounded-2xl shadow-lg transition transform active:scale-95 inline-flex items-center gap-2">
-                        Start 20-Q Quiz Now 🚀
+                    <button onclick="startExam()" class="bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold text-lg px-8 py-4 rounded-2xl block-3d inline-flex items-center gap-2">
+                        Start Quiz 🚀
                     </button>
                 </div>
 
                 <!-- Exam Playing Card -->
-                <div id="exam-playing-card" class="bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-200 shadow-md space-y-6 hidden">
-                    <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                        <span class="text-xs font-black text-slate-400">
-                            Question <span id="exam-q-num" class="text-indigo-600 text-base">1</span> of 20
+                <div id="exam-playing-card" class="bg-white rounded-blob p-5 sm:p-8 border-4 border-violet-200 shadow-lg space-y-6 hidden">
+                    <div class="flex items-center justify-between gap-2 border-b-2 border-dashed border-violet-100 pb-3">
+                        <span class="text-sm font-semibold text-slate-400">
+                            Question <span id="exam-q-num" class="text-violet-600 text-lg">1</span> of <span id="exam-total">20</span>
                         </span>
                         <span id="exam-q-badge" class="bg-indigo-100 text-indigo-800 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
                             Exam Topic
@@ -366,12 +384,53 @@
 
                     <div class="flex flex-wrap justify-center gap-3 pt-2">
                         <button onclick="startExam()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-black px-6 py-3 rounded-2xl text-sm shadow">
-                            Retake 20-Q Quiz 🔄
+                            Try Again 🔄
                         </button>
                         <button onclick="showPortal()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3 rounded-2xl text-sm shadow">
                             Return to Portal 🏠
                         </button>
                     </div>
+
+                    <!-- Answer Review -->
+                    <div class="pt-4 border-t border-slate-200 text-left space-y-2">
+                        <h4 class="text-sm font-black text-slate-700 uppercase tracking-wider">Answer Review — every question explained</h4>
+                        <div id="exam-review-list" class="space-y-2 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-VIEW D: SCHOOL TEST PREP -->
+            <div id="sub-view-school" class="hidden space-y-4">
+                <div class="bg-white rounded-blob p-5 sm:p-8 border-4 border-amber-300 shadow-lg space-y-5">
+                    <div class="flex flex-wrap items-start justify-between gap-4 border-b-2 border-dashed border-amber-200 pb-4">
+                        <div>
+                            <span id="school-test-name" class="inline-block bg-amber-100 text-amber-900 font-semibold px-3 py-1.5 rounded-full text-sm">School Test</span>
+                            <h3 class="text-2xl font-bold text-slate-800 mt-2">Get ready for your test! 🎓</h3>
+                            <p id="school-test-meta" class="text-sm text-slate-500 font-medium mt-1"></p>
+                        </div>
+                        <div id="school-countdown" class="text-center bg-amber-50 border-2 border-amber-200 rounded-2xl px-5 py-3 min-w-[130px]">
+                            <div id="school-days" class="text-3xl font-bold text-amber-600">–</div>
+                            <div class="text-xs font-semibold text-amber-700">days to go</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-700 mb-2">📋 What's in the test</h4>
+                        <div id="school-chapter-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+                    </div>
+
+                    <div id="school-actions" class="flex flex-wrap gap-3 pt-2">
+                        <button onclick="practiseSchoolTest()" class="bg-violet-600 hover:bg-violet-500 text-white font-bold px-6 py-3.5 rounded-2xl block-3d flex items-center gap-2">
+                            🎯 Practise These Chapters
+                        </button>
+                        <button onclick="startSchoolTest()" class="bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold px-6 py-3.5 rounded-2xl block-3d flex items-center gap-2">
+                            📝 Take a Mock Test
+                        </button>
+                    </div>
+
+                    <p id="school-empty" class="hidden text-sm font-medium text-slate-500">
+                        No school test is set up for this subject yet.
+                    </p>
                 </div>
             </div>
 
@@ -471,7 +530,7 @@
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div>
                     <h3 class="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-2">
-                        <i class="fa-solid fa-sliders text-indigo-600"></i> Student Settings & Dashboard
+                        ⭐ My Progress
                     </h3>
                     <p class="text-xs text-slate-500 font-medium">Personalize profile and track learning progress</p>
                 </div>
@@ -482,7 +541,7 @@
             <div class="bg-indigo-50/70 border-2 border-indigo-100 rounded-2xl p-4 space-y-3">
                 <div class="flex items-center justify-between">
                     <h4 class="text-xs font-black text-indigo-900 uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fa-solid fa-user-pen text-indigo-600"></i> Student Profile & Preferences
+                        👤 My Name & Sound
                     </h4>
                     <span id="save-name-badge" class="text-xs font-bold text-emerald-600 hidden">Name Saved! ✓</span>
                 </div>
@@ -497,10 +556,10 @@
                 </div>
                 <div class="pt-2 flex items-center justify-between border-t border-indigo-100/80">
                     <span class="text-xs font-bold text-slate-700 flex items-center gap-2">
-                        <i id="settings-sound-icon" class="fa-solid fa-volume-high text-amber-500"></i> Audio Sound Effects
+                        🎵 Sound Effects
                     </span>
                     <button id="sound-btn" onclick="toggleSound()" class="bg-slate-800 hover:bg-slate-700 text-amber-300 px-4 py-1.5 rounded-xl text-xs font-bold border border-slate-700 transition">
-                        <span id="sound-label">Sound On</span>
+                        <span id="sound-label">🔊 Sound On</span>
                     </button>
                 </div>
             </div>
@@ -508,7 +567,7 @@
             <!-- Overview Analytics Cards -->
             <div class="space-y-2">
                 <h4 class="text-xs font-black text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                    <i class="fa-solid fa-chart-column text-emerald-600"></i> Overall Progress Overview
+                    📊 My Score So Far
                 </h4>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                     <div class="bg-slate-50 border border-slate-200 rounded-2xl p-2.5 text-center">
@@ -548,7 +607,7 @@
 
             <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-3">
                 <button onclick="confirmResetAnalytics()" class="text-xs text-rose-600 hover:text-rose-800 font-bold flex items-center gap-1">
-                    <i class="fa-solid fa-trash-can"></i> Clear Progress Data
+                    🗑️ Start Again
                 </button>
                 <button onclick="closeSettingsModal()" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl font-bold text-sm hover:bg-slate-800 shadow">
                     Done
@@ -558,24 +617,49 @@
     </div>
 
     <!-- FIRST TIME WELCOME MODAL -->
-    <div id="modal-welcome-name" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5 border-4 border-indigo-200 text-center pop-in">
-            <div class="w-20 h-20 bg-gradient-to-tr from-amber-300 to-indigo-500 rounded-3xl flex items-center justify-center text-4xl shadow-lg mx-auto bounce-short">
-                🌟
-            </div>
+    <div id="modal-welcome-name" class="fixed inset-0 bg-violet-900/70 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-blob max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5 border-4 border-amber-300 text-center pop-in">
+            <div class="mascot bounce-short">🦉</div>
             <div>
-                <span class="bg-indigo-100 text-indigo-700 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">NCERT Class 3 Learning Hub</span>
-                <h3 class="text-2xl sm:text-3xl font-black text-slate-800 mt-2">Welcome, Champion! 👋</h3>
-                <p class="text-xs sm:text-sm text-slate-600 font-medium mt-1 leading-relaxed">
-                    What is your name? Let's personalize your practice tests, trophies, and quiz certificates!
+                <h3 class="text-2xl sm:text-3xl font-bold text-slate-800">Hello there! 👋</h3>
+                <p class="text-base text-slate-600 font-medium mt-2 leading-relaxed">
+                    What should I call you?
                 </p>
             </div>
             <div>
-                <input id="input-welcome-student-name" type="text" onkeyup="if(event.key==='Enter') saveWelcomeStudentName()" placeholder="Type your name here..." class="w-full bg-slate-50 border-2 border-indigo-300 rounded-2xl p-3.5 text-lg font-black text-center text-slate-800 focus:outline-none focus:border-indigo-600 shadow-inner">
+                <input id="input-welcome-student-name" type="text" autocomplete="given-name" onkeyup="if(event.key==='Enter') saveWelcomeStudentName()" placeholder="Type your name…" class="w-full bg-amber-50 border-4 border-amber-200 rounded-2xl p-4 text-xl font-semibold text-center text-slate-800 focus:outline-none focus:border-amber-400">
             </div>
-            <button onclick="saveWelcomeStudentName()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-2xl py-3.5 text-base font-black shadow-lg transition transform active:scale-95">
-                Start Learning Now 🚀
+            <button onclick="saveWelcomeStudentName()" class="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-2xl py-4 text-lg font-bold block-3d">
+                Let's Go! 🚀
             </button>
+        </div>
+    </div>
+
+    <!-- CHAPTER SELECTION MODAL -->
+    <div id="modal-chapters" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border-2 border-slate-200 max-h-[92vh] flex flex-col gap-4 pop-in">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-3">
+                <div>
+                    <h3 class="text-xl font-black text-slate-800 flex items-center gap-2">
+                        📚 Choose Chapters
+                    </h3>
+                    <p id="chapter-modal-subtitle" class="text-xs text-slate-500 font-medium">Only ticked chapters appear in Practice Mode and the Quiz.</p>
+                </div>
+                <button onclick="closeChapterModal()" aria-label="Close" class="w-10 h-10 rounded-2xl bg-slate-100 text-slate-500 hover:text-slate-800 font-bold text-lg flex items-center justify-center">✕</button>
+            </div>
+
+            <div id="chapter-checkbox-list" class="flex-1 overflow-y-auto space-y-2 pr-1 min-h-0"></div>
+
+            <div class="border-t border-slate-100 pt-3 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex gap-2">
+                    <button onclick="toggleAllChapters(true)" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs">Select All</button>
+                    <button onclick="toggleAllChapters(false)" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs">Clear All</button>
+                </div>
+                <button onclick="saveChapterSelection()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow">
+                    Save Chapters ✓
+                </button>
+            </div>
+            <p id="chapter-warning" class="text-xs font-bold text-rose-600 hidden">Pick at least one chapter.</p>
         </div>
     </div>
 
@@ -583,7 +667,7 @@
     <div id="modal-confirm-reset" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4 border-2 border-rose-200 text-center pop-in">
             <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-xl font-black mx-auto">
-                <i class="fa-solid fa-triangle-exclamation"></i>
+                ⚠️
             </div>
             <h3 class="text-lg font-black text-slate-800">Reset Analytics Data?</h3>
             <p class="text-xs text-slate-500 font-medium">This will clear all question attempts, accuracy records, and quiz history. This action cannot be undone.</p>
@@ -595,1524 +679,31 @@
     </div>
 
     <footer class="bg-white border-t border-slate-200 py-4 mt-8">
-        <div class="max-w-6xl mx-auto px-4 text-center text-xs font-semibold text-slate-400">
-            NCERT Joyful Mathematics (Math Mela) • Santoor 3 & Echoes English • World Around Us EVS
+        <div class="max-w-6xl mx-auto px-4 text-center text-xs font-semibold text-slate-400 space-y-1.5">
+            <div>NCERT Math Mela • Santoor 3 &amp; Echoes English • Our Wondrous World EVS</div>
+            <button onclick="openPrivacyModal()" class="underline hover:text-slate-600 font-semibold min-h-0 py-0">
+                Privacy &amp; what we store
+            </button>
         </div>
     </footer>
 
-    <script>
-        let soundEnabled = true;
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        let audioCtx = null;
-
-        function playSound(type) {
-            if (!soundEnabled) return;
-            try {
-                if (!audioCtx) audioCtx = new AudioContext();
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                const now = audioCtx.currentTime;
-
-                if (type === 'correct') {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, now);
-                    osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1);
-                    osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2);
-                    gain.gain.setValueAtTime(0.3, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
-                    osc.start(now);
-                    osc.stop(now + 0.35);
-                } else if (type === 'wrong') {
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(220, now);
-                    osc.frequency.linearRampToValueAtTime(160, now + 0.25);
-                    gain.gain.setValueAtTime(0.25, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
-                    osc.start(now);
-                    osc.stop(now + 0.25);
-                } else if (type === 'click') {
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(450, now);
-                    gain.gain.setValueAtTime(0.1, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
-                    osc.start(now);
-                    osc.stop(now + 0.05);
-                } else if (type === 'fanfare') {
-                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
-                        const o = audioCtx.createOscillator();
-                        const g = audioCtx.createGain();
-                        o.connect(g);
-                        g.connect(audioCtx.destination);
-                        o.frequency.setValueAtTime(freq, now + idx * 0.1);
-                        g.gain.setValueAtTime(0.2, now + idx * 0.1);
-                        g.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.25);
-                        o.start(now + idx * 0.1);
-                        o.stop(now + idx * 0.1 + 0.25);
-                    });
-                }
-            } catch (e) {
-                console.log("Audio play deferred");
-            }
-        }
-
-        function toggleSound() {
-            soundEnabled = !soundEnabled;
-            const soundIcon = document.getElementById('settings-sound-icon');
-            if (soundIcon) soundIcon.className = soundEnabled ? 'fa-solid fa-volume-high text-amber-500' : 'fa-solid fa-volume-xmark text-slate-400';
-            const soundLabel = document.getElementById('sound-label');
-            if (soundLabel) soundLabel.innerText = soundEnabled ? 'Sound On' : 'Muted';
-        }
-
-        const STORAGE_KEY = 'class3_learning_hub_data';
-
-        function getInitialState() {
-            return {
-                studentName: '',
-                hasSeenWelcome: false,
-                stats: {
-                    math: { score: 0, total: 0, wrong: 0, streak: 0 },
-                    english: { score: 0, total: 0, wrong: 0, streak: 0 },
-                    evs: { score: 0, total: 0, wrong: 0, streak: 0 }
-                },
-                quizHistory: [],
-                usedExamSignatures: { math: [], english: [], evs: [] }
-            };
-        }
-
-        let appData = getInitialState();
-
-        function loadAppData() {
-            try {
-                const stored = localStorage.getItem(STORAGE_KEY);
-                if (stored) {
-                    const parsed = JSON.parse(stored);
-                    appData = { ...getInitialState(), ...parsed };
-                }
-            } catch (e) {
-                console.log("Local storage restricted or unavailable, using in-memory state.");
-            }
-            updateUserUI();
-        }
-
-        function saveAppData() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
-            } catch (e) {
-                console.log("Failed to save to local storage.");
-            }
-            updateUserUI();
-        }
-
-        function updateUserUI() {
-            const name = appData.studentName || 'Learner';
-            const headerName = document.getElementById('header-user-name');
-            if (headerName) headerName.innerText = name;
-
-            const portalGreeting = document.getElementById('portal-user-greeting');
-            if (portalGreeting) portalGreeting.innerText = name;
-
-            const reportName = document.getElementById('report-student-name');
-            if (reportName) reportName.innerText = `Certificate of Completion for ${name}`;
-        }
-
-        function openWelcomeNameModal() {
-            const modal = document.getElementById('modal-welcome-name');
-            if (modal) {
-                modal.classList.remove('hidden');
-                const input = document.getElementById('input-welcome-student-name');
-                if (input) input.focus();
-            }
-        }
-
-        function saveWelcomeStudentName() {
-            playSound('fanfare');
-            const input = document.getElementById('input-welcome-student-name');
-            const val = input ? input.value.trim() : '';
-            appData.studentName = val || 'Learner';
-            appData.hasSeenWelcome = true;
-            saveAppData();
-            const modal = document.getElementById('modal-welcome-name');
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function openSettingsModal() {
-            playSound('click');
-            const input = document.getElementById('input-student-name');
-            if (input) input.value = appData.studentName || 'Learner';
-            renderAnalyticsModal();
-            const modal = document.getElementById('modal-settings');
-            if (modal) modal.classList.remove('hidden');
-        }
-
-        function closeSettingsModal() {
-            playSound('click');
-            const modal = document.getElementById('modal-settings');
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function saveStudentName() {
-            playSound('click');
-            const input = document.getElementById('input-student-name');
-            const val = input ? input.value.trim() : '';
-            if (val) {
-                appData.studentName = val;
-                saveAppData();
-                const badge = document.getElementById('save-name-badge');
-                if (badge) {
-                    badge.classList.remove('hidden');
-                    setTimeout(() => badge.classList.add('hidden'), 2000);
-                }
-            }
-        }
-
-        function confirmResetAnalytics() {
-            playSound('click');
-            const modal = document.getElementById('modal-confirm-reset');
-            if (modal) modal.classList.remove('hidden');
-        }
-
-        function closeConfirmResetModal() {
-            playSound('click');
-            const modal = document.getElementById('modal-confirm-reset');
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function executeResetAnalytics() {
-            playSound('click');
-            const currentName = appData.studentName;
-            appData = getInitialState();
-            appData.studentName = currentName;
-            appData.hasSeenWelcome = true;
-            saveAppData();
-            closeConfirmResetModal();
-            renderAnalyticsModal();
-            updateStats();
-        }
-
-        function renderAnalyticsModal() {
-            let totalQ = 0, totalCorrect = 0, totalWrong = 0;
-            const cardContainer = document.getElementById('an-subject-cards');
-            if (cardContainer) cardContainer.innerHTML = '';
-
-            const subjectMeta = {
-                math: { name: 'Mathematics', icon: '📐', color: 'indigo' },
-                english: { name: 'English', icon: '📚', color: 'sky' },
-                evs: { name: 'EVS', icon: '🌿', color: 'emerald' }
-            };
-
-            Object.keys(appData.stats).forEach(subj => {
-                const s = appData.stats[subj];
-                totalQ += s.total;
-                totalCorrect += s.score;
-                totalWrong += (s.wrong || (s.total - s.score));
-                const pct = s.total > 0 ? Math.round((s.score / s.total) * 100) : 0;
-                const meta = subjectMeta[subj];
-
-                if (cardContainer) {
-                    cardContainer.innerHTML += `
-                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-2.5 space-y-1">
-                            <div class="flex items-center justify-between text-xs font-extrabold text-slate-700">
-                                <span>${meta.icon} ${meta.name}</span>
-                                <span class="text-${meta.color}-600">${pct}% Acc</span>
-                            </div>
-                            <div class="text-[11px] text-slate-500 font-medium flex justify-between pt-1 border-t border-slate-200/60">
-                                <span>Total: ${s.total}</span>
-                                <span class="text-emerald-600 font-bold">✓ ${s.score}</span>
-                                <span class="text-rose-500 font-bold">✗ ${s.wrong || (s.total - s.score)}</span>
-                            </div>
-                        </div>
-                    `;
-                }
-            });
-
-            const elTotal = document.getElementById('an-total-q');
-            if (elTotal) elTotal.innerText = totalQ;
-            const elCorrect = document.getElementById('an-correct-q');
-            if (elCorrect) elCorrect.innerText = totalCorrect;
-            const elWrong = document.getElementById('an-wrong-q');
-            if (elWrong) elWrong.innerText = totalWrong;
-
-            const overallAcc = totalQ > 0 ? Math.round((totalCorrect / totalQ) * 100) : 0;
-            const elAcc = document.getElementById('an-accuracy-q');
-            if (elAcc) elAcc.innerText = `${overallAcc}%`;
-
-            // Quiz History
-            const historyContainer = document.getElementById('an-quiz-history');
-            if (historyContainer) {
-                if (appData.quizHistory.length === 0) {
-                    historyContainer.innerHTML = `<div class="p-3 bg-slate-50 rounded-xl text-center text-slate-400 font-medium text-xs">No quiz attempts recorded yet. Take a 20-Q Challenge Quiz!</div>`;
-                } else {
-                    historyContainer.innerHTML = '';
-                    appData.quizHistory.slice(-10).reverse().forEach(h => {
-                        historyContainer.innerHTML += `
-                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-2 flex items-center justify-between font-semibold text-slate-700">
-                                <div>
-                                    <span class="font-bold text-slate-900">${h.subjectName}</span>
-                                    <span class="text-slate-400 text-[10px] ml-1.5">${h.date}</span>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <span class="text-emerald-600 font-bold">✓ ${h.correct}/20</span>
-                                    <span class="bg-indigo-100 text-indigo-800 px-1.5 py-0.5 rounded font-black text-[10px]">${h.percentage}% (${h.grade})</span>
-                                </div>
-                            </div>
-                        `;
-                    });
-                }
-            }
-        }
-
-        let currentSubject = 'math';
-        let currentSubjectTab = 'practice';
-
-        let currentPracticeQ = null;
-        let practiceAnswered = false;
-
-        // Quiz State
-        let examQuestions = [];
-        let examCurrentIdx = 0;
-        let examUserAnswers = [];
-
-        // Helper Utilities
-        const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-        const shuffleArr = (arr) => [...arr].sort(() => Math.random() - 0.5);
-
-        const subjectConfigs = {
-            math: {
-                title: "Mathematics (Math Mela)",
-                subtitle: "Ch-4 Vacation with My Nani Maa • Ch-6 House of Hundreds - I",
-                icon: "📐",
-                bannerBg: "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500",
-                topics: [
-                    { id: "all", label: "🌟 All Math Topics (500+ Unique Questions)" },
-                    { id: "ch4_shapes", label: "Ch-4: 2D Shapes, Edges & Corners" },
-                    { id: "ch4_lines", label: "Ch-4: Straight vs Curved Edges" },
-                    { id: "ch4_paths", label: "Ch-4: Grid Paths & Step Counting" },
-                    { id: "ch4_spans", label: "Ch-4: Footspan & Distance Comparisons" },
-                    { id: "ch6_placeval", label: "Ch-6: Place Value & Face Value (100s, 10s, 1s)" },
-                    { id: "ch6_expanded", label: "Ch-6: Expanded Form & Standard Numbers" },
-                    { id: "ch6_words", label: "Ch-6: Number Names & Digit Translation" },
-                    { id: "ch6_compare", label: "Ch-6: Comparing & Ordering Numbers (> , < , =)" },
-                    { id: "ch6_patterns", label: "Ch-6: Skip Counting & Number Sequences" },
-                    { id: "ch6_building", label: "Ch-6: Smallest & Largest 3-Digit Numbers" }
-                ]
-            },
-            english: {
-                title: "English (Santoor 3 & Echoes)",
-                subtitle: "Grammar, Vocabulary, Verbs, Nouns & Sentence Formation",
-                icon: "📚",
-                bannerBg: "bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600",
-                topics: [
-                    { id: "all", label: "🌟 All English Topics (500+ Unique Questions)" },
-                    { id: "eng_word_meanings", label: "Word Meanings in Context" },
-                    { id: "eng_synonym_antonym", label: "Synonyms & Antonyms (Without Prefixes)" },
-                    { id: "eng_compound_rhyme", label: "Compound Words & Rhyming Words" },
-                    { id: "eng_syllables_silent", label: "2-Syllable Words & Silent Letters" },
-                    { id: "eng_adjectives_adverbs", label: "Adjectives of Quality & Adverbs of Manner (-ly)" },
-                    { id: "eng_degrees_comp", label: "Degrees of Comparison (tall / taller / tallest)" },
-                    { id: "eng_alphabetical_comma", label: "Alphabetical Ordering & Comma Usage" },
-                    { id: "eng_be_verbs", label: "Forms of 'be' (am, is, was, are, were)" },
-                    { id: "eng_verbs_tenses", label: "Simple Present, Present Continuous & Simple Past" },
-                    { id: "eng_nouns", label: "Common, Proper, Countable/Uncountable & Plurals" },
-                    { id: "eng_articles_prep", label: "Indefinite Articles (a/an) & Prepositions of Place" },
-                    { id: "eng_interrogatives_conj_pronouns", label: "Interrogatives, Conjunctions & Personal Pronouns" }
-                ]
-            },
-            evs: {
-                title: "EVS (World Around Us)",
-                subtitle: "Ch-3 Festivals, Ch-4 Plants, Ch-5 Plants & Animals, Ch-6 Living in Harmony",
-                icon: "🌿",
-                bannerBg: "bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600",
-                topics: [
-                    { id: "all", label: "🌟 All EVS Topics (500+ Unique Questions)" },
-                    { id: "evs_ch3_festivals", label: "Ch-3: Celebrating Festivals & Harvest Traditions" },
-                    { id: "evs_ch4_plants", label: "Ch-4: Getting to Know Plants (Leaves, Roots, Stems)" },
-                    { id: "evs_ch5_coexistence", label: "Ch-5: Plants and Animals Live Together (Food Chains)" },
-                    { id: "evs_ch6_harmony", label: "Ch-6: Living in Harmony (Care for Nature & Birds)" }
-                ]
-            }
-        };
-
-        const mathGenerators = {
-            ch4_shapes: () => {
-                const shapes = [
-                    { name: "Triangle", corners: 3, edges: 3, svg: `<polygon points="50,15 90,85 10,85" fill="#e0e7ff" stroke="#4f46e5" stroke-width="4"/>` },
-                    { name: "Square", corners: 4, edges: 4, svg: `<rect x="20" y="20" width="60" height="60" fill="#fef3c7" stroke="#f59e0b" stroke-width="4"/>` },
-                    { name: "Rectangle", corners: 4, edges: 4, svg: `<rect x="10" y="25" width="80" height="50" fill="#dcfce7" stroke="#10b981" stroke-width="4"/>` },
-                    { name: "Circle", corners: 0, edges: 1, svg: `<circle cx="50" cy="50" r="35" fill="#fce7f3" stroke="#ec4899" stroke-width="4"/>` },
-                    { name: "Pentagon", corners: 5, edges: 5, svg: `<polygon points="50,15 90,40 75,85 25,85 10,40" fill="#fae8ff" stroke="#a855f7" stroke-width="4"/>` }
-                ];
-                const item = shapes[randInt(0, shapes.length - 1)];
-                const askCorners = Math.random() > 0.4;
-                const target = askCorners ? "corners (vertices)" : "straight edges";
-                const ans = askCorners ? item.corners : (item.corners > 0 ? item.edges : 0);
-
-                const opts = new Set([ans]);
-                let safety = 0;
-                while (opts.size < 4 && safety++ < 50) {
-                    opts.add(Math.max(0, ans + randInt(-2, 3)));
-                }
-
-                return {
-                    signature: `math_ch4_shapes_${item.name}_${target}`,
-                    badge: "Ch-4: Shapes & Corners",
-                    q: `Look at the shape below. How many <strong>${target}</strong> does a <strong>${item.name}</strong> have?`,
-                    visualSVG: `<svg class="w-28 h-28 mx-auto" viewBox="0 0 100 100">${item.svg}</svg>`,
-                    options: shuffleArr(Array.from(opts)),
-                    ans: ans,
-                    hint: "Count where two sides meet to form sharp corner points!",
-                    exp: `A ${item.name} has exactly ${ans} ${target}.`
-                };
-            },
-
-            ch4_lines: () => {
-                const items = [
-                    { name: "Postcard / Book", type: "straight" },
-                    { name: "Bangle / Coin", type: "curved" },
-                    { name: "Bicycle Wheel", type: "curved" },
-                    { name: "Blackboard", type: "straight" }
-                ];
-                const item = items[randInt(0, items.length - 1)];
-                return {
-                    signature: `math_ch4_lines_${item.name}`,
-                    badge: "Ch-4: Straight vs Curved",
-                    q: `Does a <strong>${item.name}</strong> have straight edges or curved edges?`,
-                    options: shuffleArr(["Straight Edges", "Curved Edges", "Both Straight & Curved", "No Edges at All"]),
-                    ans: item.type === "straight" ? "Straight Edges" : "Curved Edges",
-                    hint: "Straight edges can be drawn using a ruler. Curved edges are round.",
-                    exp: `A ${item.name} has ${item.type} edges.`
-                };
-            },
-
-            ch4_paths: () => {
-                const east = randInt(2, 6);
-                const north = randInt(2, 5);
-                const total = east + north;
-                const opts = new Set([total]);
-                let safety = 0;
-                while (opts.size < 4 && safety++ < 50) {
-                    opts.add(Math.max(1, total + randInt(-3, 3)));
-                }
-
-                return {
-                    signature: `math_ch4_paths_${east}_${north}`,
-                    badge: "Ch-4: Village Grid Path",
-                    q: `Rahul walks <strong>${east} grid blocks East</strong> and <strong>${north} grid blocks North</strong> to reach the mango orchard. What is the total distance in blocks?`,
-                    visualSVG: `<div class="text-center text-3xl">🏡 ➔ 🚶‍♂️ ➔ 🥭</div>`,
-                    options: shuffleArr(Array.from(opts)),
-                    ans: total,
-                    hint: "Add the steps walked East and North together.",
-                    exp: `${east} + ${north} = ${total} total grid blocks.`
-                };
-            },
-
-            ch4_spans: () => {
-                const kidSpan = randInt(14, 18);
-                const naniSpan = randInt(9, 12);
-                return {
-                    signature: `math_ch4_spans_${kidSpan}_${naniSpan}`,
-                    badge: "Ch-4: Footspan Measurement",
-                    q: `A room floor measures <strong>${kidSpan} footspans</strong> of young Dhyana, but only <strong>${naniSpan} footspans</strong> of Nani Maa. Why does Nani Maa have a smaller step count?`,
-                    options: shuffleArr([
-                        "Nani Maa's feet are longer than Dhyana's",
-                        "Dhyana's feet are longer than Nani Maa's",
-                        "The room changed size",
-                        "Nani Maa walked faster"
-                    ]),
-                    ans: "Nani Maa's feet are longer than Dhyana's",
-                    hint: "Larger feet cover more distance per step, so fewer footsteps are needed.",
-                    exp: "Larger footsteps result in a smaller total count to cover the same distance."
-                };
-            },
-
-            ch6_placeval: () => {
-                const h = randInt(1, 9);
-                const t = randInt(0, 9);
-                const o = randInt(0, 9);
-                const num = h * 100 + t * 10 + o;
-                const places = ["Hundreds", "Tens", "Ones"];
-                const pick = places[randInt(0, 2)];
-
-                let ansVal, targetDigit;
-                if (pick === "Hundreds") { targetDigit = h; ansVal = h * 100; }
-                else if (pick === "Tens") { targetDigit = t; ansVal = t * 10; }
-                else { targetDigit = o; ansVal = o; }
-
-                const opts = new Set([ansVal]);
-                opts.add(targetDigit);
-                opts.add(h * 100);
-                opts.add(t * 10);
-                let safety = 0;
-                while (opts.size < 4 && safety++ < 50) {
-                    opts.add(randInt(1, 9) * 10);
-                }
-
-                return {
-                    signature: `math_ch6_placeval_${num}_${pick}`,
-                    badge: "Ch-6: Place Value",
-                    q: `In the number <strong>${num}</strong>, what is the <strong>place value</strong> of digit <strong>${targetDigit}</strong> (${pick} place)?`,
-                    options: shuffleArr(Array.from(opts)),
-                    ans: ansVal,
-                    hint: "Hundreds = digit × 100, Tens = digit × 10, Ones = digit × 1.",
-                    exp: `Digit ${targetDigit} in ${pick} place has a place value of ${ansVal}.`
-                };
-            },
-
-            ch6_expanded: () => {
-                const h = randInt(1, 9);
-                const t = randInt(1, 9);
-                const o = randInt(1, 9);
-                const num = h * 100 + t * 10 + o;
-                const correct = `${h * 100} + ${t * 10} + ${o}`;
-
-                const opts = [
-                    correct,
-                    `${h * 100} + ${t} + ${o}`,
-                    `${h * 10} + ${t * 10} + ${o}`,
-                    `${h * 100} + ${t * 10} + ${o * 10}`
-                ];
-
-                return {
-                    signature: `math_ch6_expanded_${num}`,
-                    badge: "Ch-6: Expanded Form",
-                    q: `What is the correct expanded form of <strong>${num}</strong>?`,
-                    options: shuffleArr(opts),
-                    ans: correct,
-                    hint: "Break the number into Hundreds + Tens + Ones.",
-                    exp: `${num} = ${h * 100} + ${t * 10} + ${o}.`
-                };
-            },
-
-            ch6_words: () => {
-                const units = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
-                const teens = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
-                const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
-
-                const h = randInt(1, 9);
-                const t = randInt(0, 9);
-                const o = randInt(0, 9);
-                const num = h * 100 + t * 10 + o;
-
-                let wordStr = units[h] + " Hundred";
-                if (t === 1) { wordStr += " " + teens[o]; }
-                else {
-                    if (t > 1) wordStr += " " + tens[t];
-                    if (o > 0) wordStr += " " + units[o];
-                }
-
-                const distractors = new Set([num]);
-                let safety = 0;
-                while (distractors.size < 4 && safety++ < 50) {
-                    distractors.add(Math.min(999, Math.max(100, num + randInt(-20, 20))));
-                }
-
-                return {
-                    signature: `math_ch6_words_${num}`,
-                    badge: "Ch-6: Number Names",
-                    q: `Which 3-digit number is written in words as: <strong>"${wordStr}"</strong>?`,
-                    options: shuffleArr(Array.from(distractors)),
-                    ans: num,
-                    hint: "Translate Hundreds first, then combine Tens and Ones.",
-                    exp: `"${wordStr}" equals the 3-digit number ${num}.`
-                };
-            },
-
-            ch6_compare: () => {
-                const a = randInt(100, 999);
-                let b = randInt(100, 999);
-                while (a === b) b = randInt(100, 999);
-                const isGreater = a > b;
-                const ans = isGreater ? "&gt; (Greater than)" : "&lt; (Less than)";
-
-                return {
-                    signature: `math_ch6_compare_${a}_${b}`,
-                    badge: "Ch-6: Comparing Numbers",
-                    q: `Fill in the correct comparison symbol: <strong>${a}  [ ? ]  ${b}</strong>`,
-                    options: shuffleArr(["&gt; (Greater than)", "&lt; (Less than)", "= (Equal to)", "≈ (Approximately)"]),
-                    ans: ans,
-                    hint: "Compare the hundreds place first. If equal, compare tens.",
-                    exp: `${a} is ${isGreater ? "greater than" : "less than"} ${b}.`
-                };
-            },
-
-            ch6_patterns: () => {
-                const start = randInt(100, 600);
-                const step = [2, 5, 10, 50, 100][randInt(0, 4)];
-                const seq = [start, start + step, start + 2 * step, start + 3 * step];
-                const ans = start + 4 * step;
-
-                const opts = new Set([ans]);
-                let mult = 1;
-                while (opts.size < 4 && mult < 10) {
-                    opts.add(ans + mult * step);
-                    if (ans - mult * step > 0) opts.add(ans - mult * step);
-                    mult++;
-                }
-
-                return {
-                    signature: `math_ch6_patterns_${start}_${step}`,
-                    badge: "Ch-6: Skip Counting",
-                    q: `Find the next number in this sequence: <strong>${seq.join(", ")}, ___</strong>`,
-                    options: shuffleArr(Array.from(opts).slice(0, 4)),
-                    ans: ans,
-                    hint: `Find the gap between numbers: (${seq[1]} - ${seq[0]} = +${step}).`,
-                    exp: `Adding ${step} to ${seq[3]} gives ${ans}.`
-                };
-            },
-
-            ch6_building: () => {
-                const digits = [];
-                while (digits.length < 3) {
-                    const d = randInt(1, 9);
-                    if (!digits.includes(d)) digits.push(d);
-                }
-                const isLargest = Math.random() > 0.5;
-                const sorted = [...digits].sort((a, b) => isLargest ? b - a : a - b);
-                const ans = parseInt(sorted.join(""));
-
-                const perms = [
-                    `${digits[0]}${digits[1]}${digits[2]}`,
-                    `${digits[0]}${digits[2]}${digits[1]}`,
-                    `${digits[1]}${digits[0]}${digits[2]}`,
-                    `${digits[1]}${digits[2]}${digits[0]}`,
-                    `${digits[2]}${digits[0]}${digits[1]}`,
-                    `${digits[2]}${digits[1]}${digits[0]}`
-                ].map(x => parseInt(x));
-
-                const optsSet = new Set([ans]);
-                perms.forEach(p => { if (optsSet.size < 4) optsSet.add(p); });
-
-                return {
-                    signature: `math_ch6_building_${digits.join('')}_${isLargest}`,
-                    badge: "Ch-6: Building Numbers",
-                    q: `Form the <strong>${isLargest ? 'LARGEST' : 'SMALLEST'}</strong> 3-digit number using digits <strong>${digits.join(", ")}</strong> without repeating!`,
-                    options: shuffleArr(Array.from(optsSet)),
-                    ans: ans,
-                    hint: isLargest ? "Put the biggest digit in the Hundreds place!" : "Put the smallest digit in Hundreds place!",
-                    exp: `Ordering digits as ${sorted.join(" → ")} forms ${ans}.`
-                };
-            }
-        };
-
-        const englishGenerators = {
-            eng_word_meanings: () => {
-                const vocabulary = [
-                    { word: "delighted", meaning: "very happy and pleased", sentence: "Anaya was delighted with her new storybook." },
-                    { word: "gather", meaning: "to bring together in one place", sentence: "The children gather around the teacher for story time." },
-                    { word: "curious", meaning: "eager to learn or know things", sentence: "The curious cat explored the garden." },
-                    { word: "spotted", meaning: "noticed or saw something", sentence: "Rohan spotted a rainbow in the sky." },
-                    { word: "ancient", meaning: "belonging to the very distant past", sentence: "The museum had ancient coins from long ago." },
-                    { word: "flutter", meaning: "to flap wings quickly and lightly", sentence: "Butterflies flutter around colorful flowers." },
-                    { word: "gleefully", meaning: "in a joyful and cheerful manner", sentence: "The kids cheered gleefully after winning." },
-                    { word: "shelter", meaning: "a place giving protection from bad weather", sentence: "The birds took shelter under big green leaves." },
-                    { word: "whisper", meaning: "to speak very softly", sentence: "Please whisper so you do not wake the baby." },
-                    { word: "harvest", meaning: "gathering mature crops from the fields", sentence: "Farmers celebrate during the autumn harvest." }
-                ];
-                const item = vocabulary[randInt(0, vocabulary.length - 1)];
-                const opts = shuffleArr([item.meaning, "sleepy and tired", "very angry", "running fast"]);
-                return {
-                    signature: `eng_meanings_${item.word}`,
-                    badge: "Santoor English: Word Meanings",
-                    q: `What is the meaning of <strong>"${item.word}"</strong> in this sentence?<br><em>"${item.sentence}"</em>`,
-                    options: opts,
-                    ans: item.meaning,
-                    hint: "Read the context of the sentence to understand the action or emotion.",
-                    exp: `In context, "${item.word}" means ${item.meaning}.`
-                };
-            },
-
-            eng_synonym_antonym: () => {
-                const pairs = [
-                    { word: "Glad", syn: "Happy", ant: "Sad" },
-                    { word: "Brave", syn: "Courageous", ant: "Cowardly" },
-                    { word: "Ancient", syn: "Old", ant: "Modern" },
-                    { word: "Rapid", syn: "Fast", ant: "Slow" },
-                    { word: "Huge", syn: "Large", ant: "Tiny" },
-                    { word: "Silent", syn: "Quiet", ant: "Noisy" },
-                    { word: "Bright", syn: "Shining", ant: "Dull" },
-                    { word: "Sweet", syn: "Sugary", ant: "Sour" },
-                    { word: "Tidy", syn: "Neat", ant: "Messy" },
-                    { word: "Gentle", syn: "Kind", ant: "Harsh" }
-                ];
-                const item = pairs[randInt(0, pairs.length - 1)];
-                const askSyn = Math.random() > 0.5;
-                const target = askSyn ? "SYNONYM (same meaning)" : "ANTONYM (opposite meaning)";
-                const ans = askSyn ? item.syn : item.ant;
-
-                const pool = ["Bright", "Heavy", "Soft", "Dark", "Sweet", item.syn, item.ant];
-                const optsSet = new Set([ans]);
-                pool.forEach(p => { if (optsSet.size < 4) optsSet.add(p); });
-
-                return {
-                    signature: `eng_syn_ant_${item.word}_${askSyn}`,
-                    badge: "Santoor English: Synonyms & Antonyms",
-                    q: `What is the <strong>${target}</strong> of the word: <strong>"${item.word}"</strong>?`,
-                    options: shuffleArr(Array.from(optsSet)),
-                    ans: ans,
-                    hint: askSyn ? "Look for a word that means the exact same thing." : "Look for the exact opposite meaning.",
-                    exp: `"${item.word}" → ${askSyn ? 'Synonym' : 'Antonym'} is "${ans}".`
-                };
-            },
-
-            eng_compound_rhyme: () => {
-                const isCompound = Math.random() > 0.5;
-                if (isCompound) {
-                    const compounds = [
-                        { w1: "Sun", w2: "flower", res: "Sunflower" },
-                        { w1: "Rain", w2: "bow", res: "Rainbow" },
-                        { w1: "Butter", w2: "fly", res: "Butterfly" },
-                        { w1: "Tooth", w2: "brush", res: "Toothbrush" },
-                        { w1: "Star", w2: "fish", res: "Starfish" }
-                    ];
-                    const item = compounds[randInt(0, compounds.length - 1)];
-                    return {
-                        signature: `eng_compound_${item.res}`,
-                        badge: "Santoor English: Compound Words",
-                        q: `Join these two smaller words to form a <strong>Compound Word</strong>: <strong>"${item.w1}" + "${item.w2}"</strong>`,
-                        options: shuffleArr([item.res, `${item.w1}ing`, `${item.w2}ed`, `${item.w1}less`]),
-                        ans: item.res,
-                        hint: "Combine both words together without spaces!",
-                        exp: `${item.w1} + ${item.w2} = ${item.res}.`
-                    };
-                } else {
-                    const rhymes = [
-                        { word: "Light", rhyme: "Night", nonRhymes: ["Tree", "Book", "Chair"] },
-                        { word: "Play", rhyme: "Day", nonRhymes: ["Bird", "Fish", "Jump"] },
-                        { word: "Ring", rhyme: "Sing", nonRhymes: ["Walk", "Table", "Apple"] }
-                    ];
-                    const item = rhymes[randInt(0, rhymes.length - 1)];
-                    return {
-                        signature: `eng_rhyme_${item.word}`,
-                        badge: "Santoor English: Rhyming Words",
-                        q: `Which word rhymes with <strong>"${item.word}"</strong>?`,
-                        options: shuffleArr([item.rhyme, ...item.nonRhymes]),
-                        ans: item.rhyme,
-                        hint: "Rhyming words end with the same sound!",
-                        exp: `"${item.word}" and "${item.rhyme}" share the same ending sound.`
-                    };
-                }
-            },
-
-            eng_syllables_silent: () => {
-                const isSilent = Math.random() > 0.5;
-                if (isSilent) {
-                    const silentItems = [
-                        { word: "Knight", silent: "K", options: ["K", "N", "I", "T"] },
-                        { word: "Climb", silent: "B", options: ["B", "L", "I", "M"] },
-                        { word: "Write", silent: "W", options: ["W", "R", "I", "T"] },
-                        { word: "Listen", silent: "T", options: ["T", "L", "S", "N"] },
-                        { word: "Wrist", silent: "W", options: ["W", "R", "S", "T"] }
-                    ];
-                    const item = silentItems[randInt(0, silentItems.length - 1)];
-                    return {
-                        signature: `eng_silent_${item.word}`,
-                        badge: "Echoes English: Silent Letters",
-                        q: `Which letter is <strong>SILENT</strong> in the word <strong>"${item.word}"</strong>?`,
-                        options: shuffleArr(item.options),
-                        ans: item.silent,
-                        hint: "A silent letter is written in the word but NOT pronounced when spoken aloud.",
-                        exp: `In "${item.word}", the letter '${item.silent}' is silent.`
-                    };
-                } else {
-                    const syllableItems = [
-                        { word: "Rainbow", count: "2 Syllables (Rain-bow)" },
-                        { word: "Butterfly", count: "3 Syllables (But-ter-fly)" },
-                        { word: "Sun", count: "1 Syllable (Sun)" },
-                        { word: "Garden", count: "2 Syllables (Gar-den)" }
-                    ];
-                    const item = syllableItems[randInt(0, syllableItems.length - 1)];
-                    return {
-                        signature: `eng_syllable_${item.word}`,
-                        badge: "Echoes English: Syllable Count",
-                        q: `How many syllables (vowels beats) are in the word <strong>"${item.word}"</strong>?`,
-                        options: shuffleArr(["1 Syllable (Sun)", "2 Syllables (Gar-den)", "3 Syllables (But-ter-fly)", "4 Syllables"]),
-                        ans: item.count,
-                        hint: "Clap your hands for each vowel sound beat you hear in the word!",
-                        exp: `"${item.word}" has ${item.count}.`
-                    };
-                }
-            },
-
-            eng_adjectives_adverbs: () => {
-                const adjList = [
-                    { sent: "The ___ peacock danced gracefully in the park.", word: "beautiful", type: "Adjective of Quality" },
-                    { sent: "The turtle walked ___ across the garden path.", word: "slowly", type: "Adverb of Manner" },
-                    { sent: "The children laughed ___ at the funny clown.", word: "happily", type: "Adverb of Manner" },
-                    { sent: "Rohan ate a ___ and juicy mango.", word: "sweet", type: "Adjective of Quality" }
-                ];
-                const item = adjList[randInt(0, adjList.length - 1)];
-                return {
-                    signature: `eng_adj_adv_${item.word}`,
-                    badge: `Santoor English: ${item.type}`,
-                    q: `Complete the sentence with the correct <strong>${item.type}</strong>:<br><em>"${item.sent}"</em>`,
-                    options: shuffleArr([item.word, "running", "table", "under"]),
-                    ans: item.word,
-                    hint: item.type.includes("Adverb") ? "Adverbs of manner describe HOW an action is done (often ending in -ly)." : "Adjectives describe nouns (color, taste, quality).",
-                    exp: `"${item.word}" is a ${item.type}.`
-                };
-            },
-
-            eng_degrees_comp: () => {
-                const degrees = [
-                    { pos: "tall", comp: "taller", sup: "tallest" },
-                    { pos: "fast", comp: "faster", sup: "fastest" },
-                    { pos: "bright", comp: "brighter", sup: "brightest" },
-                    { pos: "big", comp: "bigger", sup: "biggest" }
-                ];
-                const item = degrees[randInt(0, degrees.length - 1)];
-                return {
-                    signature: `eng_degrees_${item.pos}`,
-                    badge: "Santoor English: Degrees of Comparison",
-                    q: `Complete the comparison: <strong>"${item.pos}" → "${item.comp}" → [ ? ]</strong>`,
-                    options: shuffleArr([item.sup, `${item.pos}ly`, `${item.pos}ness`, `more ${item.pos}`]),
-                    ans: item.sup,
-                    hint: "Positive → Comparative (-er) → Superlative (-est).",
-                    exp: `The superlative degree of "${item.pos}" is "${item.sup}".`
-                };
-            },
-
-            eng_alphabetical_comma: () => {
-                const items = [
-                    { q: "Which list of words is arranged in correct <strong>Alphabetical Order</strong>?", ans: "Apple, Banana, Cat, Dog", wrong: ["Dog, Cat, Banana, Apple", "Banana, Apple, Dog, Cat", "Cat, Dog, Apple, Banana"] },
-                    { q: "Where should commas be placed in this sentence?<br><em>'I bought apples bananas oranges and mangoes.'</em>", ans: "I bought apples, bananas, oranges, and mangoes.", wrong: ["I bought, apples bananas, oranges and mangoes.", "I bought apples bananas, oranges, and, mangoes.", "I, bought apples, bananas oranges and mangoes."] }
-                ];
-                const item = items[randInt(0, items.length - 1)];
-                return {
-                    signature: `eng_comma_alpha_${item.ans.slice(0, 10)}`,
-                    badge: "Echoes English: Alphabetical Order & Punctuation",
-                    q: item.q,
-                    options: shuffleArr([item.ans, ...item.wrong]),
-                    ans: item.ans,
-                    hint: "Check first letters for alphabetical order, or use commas to separate listed items.",
-                    exp: `Correct punctuation / order: "${item.ans}"`
-                };
-            },
-
-            eng_be_verbs: () => {
-                const items = [
-                    { sent: "I ___ going to Nani Maa's village today.", ans: "am" },
-                    { sent: "They ___ playing football in the garden.", ans: "are" },
-                    { sent: "Yesterday, she ___ absent from school.", ans: "was" },
-                    { sent: "We ___ very happy to win the match yesterday.", ans: "were" },
-                    { sent: "The sun ___ shining brightly in the sky.", ans: "is" }
-                ];
-                const item = items[randInt(0, items.length - 1)];
-                const pool = ["am", "is", "are", "was", "were"];
-                const optsSet = new Set([item.ans]);
-                pool.forEach(p => { if (optsSet.size < 4) optsSet.add(p); });
-
-                return {
-                    signature: `eng_be_verbs_${item.sent.slice(0, 10)}`,
-                    badge: "Santoor English: Forms of Verb 'be'",
-                    q: `Choose the correct form of the verb 'be' (am/is/was/are/were):<br><em>"${item.sent}"</em>`,
-                    options: shuffleArr(Array.from(optsSet)),
-                    ans: item.ans,
-                    hint: "Check if the sentence subject is singular or plural, and whether it's present or past tense.",
-                    exp: `The correct verb form is "${item.ans}".`
-                };
-            },
-
-            eng_verbs_tenses: () => {
-                const tenses = [
-                    { pres: "eat", past: "ate", sent: "Yesterday, Rahul ___ a delicious apple.", tense: "Simple Past" },
-                    { pres: "play", past: "playing", sent: "Look! The puppies are ___ in the garden right now.", tense: "Present Continuous" },
-                    { pres: "dance", past: "dances", sent: "She ___ gracefully every morning.", tense: "Simple Present" }
-                ];
-                const item = tenses[randInt(0, tenses.length - 1)];
-                const regularPastDistractor = item.pres.endsWith('e') ? `${item.pres}d` : `${item.pres}ed`;
-
-                return {
-                    signature: `eng_tenses_${item.pres}_${item.tense}`,
-                    badge: `Santoor English: ${item.tense}`,
-                    q: `Fill in the blank with the correct verb form:<br><em>"${item.sent}"</em>`,
-                    options: shuffleArr([item.past, item.pres, regularPastDistractor, `will ${item.pres}`]),
-                    ans: item.past,
-                    hint: "Look at time indicators like 'yesterday', 'right now', or 'every morning'.",
-                    exp: `The correct ${item.tense} form is "${item.past}".`
-                };
-            },
-
-            eng_nouns: () => {
-                const items = [
-                    { word: "India", type: "Proper Noun" },
-                    { word: "city", type: "Common Noun" },
-                    { word: "milk", type: "Uncountable Noun" },
-                    { word: "books", type: "Countable Plural Noun" }
-                ];
-                const item = items[randInt(0, items.length - 1)];
-                return {
-                    signature: `eng_nouns_${item.word}`,
-                    badge: "Santoor English: Nouns Classification",
-                    q: `What type of noun is the word <strong>"${item.word}"</strong>?`,
-                    options: shuffleArr(["Proper Noun", "Common Noun", "Uncountable Noun", "Countable Plural Noun"]),
-                    ans: item.type,
-                    hint: "Proper Nouns start with capital letters. Countable items can be counted numerically.",
-                    exp: `"${item.word}" is categorized as a ${item.type}.`
-                };
-            },
-
-            eng_articles_prep: () => {
-                const isArticle = Math.random() > 0.5;
-                if (isArticle) {
-                    const items = [
-                        { qStr: "___ umbrella", ans: "An" },
-                        { qStr: "___ banana", ans: "A" },
-                        { qStr: "___ honest child", ans: "An" },
-                        { qStr: "___ owl", ans: "An" }
-                    ];
-                    const item = items[randInt(0, items.length - 1)];
-                    return {
-                        signature: `eng_article_${item.qStr}`,
-                        badge: "Santoor English: Indefinite Articles",
-                        q: `Choose the correct indefinite article (a/an):<br><em>"<strong>${item.qStr}</strong>"</em>`,
-                        options: shuffleArr(["A", "An", "The", "Some"]),
-                        ans: item.ans,
-                        hint: "Use 'An' before words starting with vowel sounds (a, e, i, o, u).",
-                        exp: `We use "${item.ans}" because of the vowel sound.`
-                    };
-                } else {
-                    const preps = [
-                        { sent: "The cat is sleeping ___ the table.", ans: "under" },
-                        { sent: "The bird is flying ___ the clouds.", ans: "above" },
-                        { sent: "Put the books ___ your school bag.", ans: "in" }
-                    ];
-                    const item = preps[randInt(0, preps.length - 1)];
-                    return {
-                        signature: `eng_prep_${item.ans}`,
-                        badge: "Santoor English: Preposition of Place",
-                        q: `Fill in the preposition of place:<br><em>"${item.sent}"</em>`,
-                        options: shuffleArr([item.ans, "slowly", "because", "and"]),
-                        ans: item.ans,
-                        hint: "Prepositions tell us WHERE something is located.",
-                        exp: `"${item.ans}" correctly indicates the position.`
-                    };
-                }
-            },
-
-            eng_interrogatives_conj_pronouns: () => {
-                const items = [
-                    { sent: "___ is your class teacher?", ans: "Who", type: "Interrogative" },
-                    { sent: "___ do you live?", ans: "Where", type: "Interrogative" },
-                    { sent: "Rahul was hungry, ___ he ate a sandwich.", ans: "so", type: "Conjunction" },
-                    { sent: "Riya is smart. ___ loves to read books.", ans: "She", type: "Personal Pronoun" }
-                ];
-                const item = items[randInt(0, items.length - 1)];
-                const pool = ["Who", "Where", "so", "She", "Why", "When", "because", "They"];
-                const optsSet = new Set([item.ans]);
-                pool.forEach(p => { if (optsSet.size < 4) optsSet.add(p); });
-
-                return {
-                    signature: `eng_interrogative_${item.ans}`,
-                    badge: `Echoes English: ${item.type}`,
-                    q: `Fill in the blank with the correct word:<br><em>"${item.sent}"</em>`,
-                    options: shuffleArr(Array.from(optsSet)),
-                    ans: item.ans,
-                    hint: "Determine whether the sentence asks a question, connects two ideas, or replaces a noun.",
-                    exp: `"${item.ans}" is the correct ${item.type}.`
-                };
-            }
-        };
-
-        const evsGenerators = {
-            evs_ch3_festivals: () => {
-                const festivals = [
-                    { name: "Baisakhi & Pongal", type: "Harvest Festivals", detail: "celebrating crop harvesting with family" },
-                    { name: "Diwali", type: "Festival of Lights", detail: "lighting diyas and sharing sweets" },
-                    { name: "Holi", type: "Festival of Colors", detail: "playing with herbal gulal and water" },
-                    { name: "Independence Day", type: "National Festival", detail: "hoisting the tricolor flag on 15th August" },
-                    { name: "Onam", type: "Harvest Festival", detail: "celebrated with pookkalam flower carpets and feast" },
-                    { name: "Eid-ul-Fitr", type: "Religious Festival", detail: "celebrating unity with prayers and vermicelli sweet" }
-                ];
-                const item = festivals[randInt(0, festivals.length - 1)];
-                return {
-                    signature: `evs_ch3_${item.name}`,
-                    badge: "Ch-3: Celebrating Festivals",
-                    q: `Which category does <strong>${item.name}</strong> belong to?`,
-                    options: shuffleArr(["Harvest Festivals", "Festival of Lights", "Festival of Colors", "National Festival"]),
-                    ans: item.type.includes("Harvest") ? "Harvest Festivals" : item.type,
-                    hint: "Think about why and how this festival is celebrated across India.",
-                    exp: `${item.name} is classified as a ${item.type} (${item.detail}).`
-                };
-            },
-
-            evs_ch4_plants: () => {
-                const plantParts = [
-                    { part: "Roots", function: "Absorb water and minerals from soil and anchor the plant" },
-                    { part: "Leaves", function: "Prepare food for the plant using sunlight (Photosynthesis)" },
-                    { part: "Stem", function: "Carries water and food to all parts of the plant" },
-                    { part: "Flowers", function: "Produce seeds and fruits for reproduction" },
-                    { part: "Stomata", function: "Tiny pores on leaves that help plants breathe and release water vapor" }
-                ];
-                const item = plantParts[randInt(0, plantParts.length - 1)];
-                return {
-                    signature: `evs_ch4_${item.part}`,
-                    badge: "Ch-4: Getting to Know Plants",
-                    q: `Which plant part has the primary function to: <strong>"${item.function}"</strong>?`,
-                    options: shuffleArr(["Roots", "Leaves", "Stem", "Flowers"]),
-                    ans: item.part === "Stomata" ? "Leaves" : item.part,
-                    hint: "Roots are underground, Leaves make food, Stems carry water, Flowers make seeds.",
-                    exp: `${item.part} function: ${item.function}.`
-                };
-            },
-
-            evs_ch5_coexistence: () => {
-                const scenarios = [
-                    { q: "Honeybees visit flowers to collect nectar. How do bees help plants in return?", ans: "They help in pollination to form fruits & seeds", wrong: ["They harm the plant", "They drink all plant water", "They stop leaf growth"] },
-                    { q: "Trees release which essential gas that animals and humans breathe in?", ans: "Oxygen", wrong: ["Carbon Dioxide", "Nitrogen", "Helium"] },
-                    { q: "Birds build nests in tree branches. What type of relationship is this?", ans: "Coexistence & Habitat sharing", wrong: ["Competition for food", "Plant damage", "Noise pollution"] },
-                    { q: "Earthworms dig burrows in garden soil. How do earthworms help plants?", ans: "They loosen soil and make it rich in air & nutrients", wrong: ["They eat healthy roots", "They stop water flow", "They destroy seeds"] }
-                ];
-                const item = scenarios[randInt(0, scenarios.length - 1)];
-                return {
-                    signature: `evs_ch5_${item.ans.slice(0, 10)}`,
-                    badge: "Ch-5: Plants and Animals Live Together",
-                    q: item.q,
-                    options: shuffleArr([item.ans, ...item.wrong]),
-                    ans: item.ans,
-                    hint: "Plants and animals depend on each other for survival in nature.",
-                    exp: `Correct! ${item.ans}.`
-                };
-            },
-
-            evs_ch6_harmony: () => {
-                const actions = [
-                    { action: "Placing a fresh bird bath with clean water in summer", category: "Living in Harmony with Nature" },
-                    { action: "Segregating wet kitchen waste and dry recyclable plastic", category: "Eco-Friendly Waste Management" },
-                    { action: "Planting native trees in the neighborhood park", category: "Environment Conservation" },
-                    { action: "Turning off running water taps while brushing teeth", category: "Water Conservation" }
-                ];
-                const item = actions[randInt(0, actions.length - 1)];
-                return {
-                    signature: `evs_ch6_${item.category}`,
-                    badge: "Ch-6: Living in Harmony",
-                    q: `Why is <strong>"${item.action}"</strong> an important habit?`,
-                    options: shuffleArr([
-                        item.category,
-                        "It wastes time and energy",
-                        "It harms birds and small animals",
-                        "It makes the surroundings dirty"
-                    ]),
-                    ans: item.category,
-                    hint: "Good eco-habits preserve wildlife and keep ecosystems healthy.",
-                    exp: `This action promotes ${item.category}.`
-                };
-            }
-        };
-
-        function showPortal() {
-            playSound('click');
-            const portal = document.getElementById('view-portal');
-            const subject = document.getElementById('view-subject');
-            if (portal) portal.classList.remove('hidden');
-            if (subject) subject.classList.add('hidden');
-        }
-
-        function selectSubject(subjKey) {
-            playSound('click');
-            currentSubject = subjKey;
-            const config = subjectConfigs[subjKey];
-
-            const title = document.getElementById('subj-title');
-            if (title) title.innerText = config.title;
-            const sub = document.getElementById('subj-subtitle');
-            if (sub) sub.innerText = config.subtitle;
-            const icon = document.getElementById('subj-icon-box');
-            if (icon) icon.innerText = config.icon;
-            const banner = document.getElementById('subject-banner');
-            if (banner) banner.className = `rounded-3xl p-5 sm:p-6 text-white shadow-md flex flex-wrap items-center justify-between gap-4 ${config.bannerBg}`;
-
-            // Populate Topic Select dropdown
-            const selectEl = document.getElementById('topic-select');
-            if (selectEl) {
-                selectEl.innerHTML = '';
-                config.topics.forEach(t => {
-                    const opt = document.createElement('option');
-                    opt.value = t.id;
-                    opt.innerText = t.label;
-                    selectEl.appendChild(opt);
-                });
-            }
-
-            const labLabel = document.getElementById('lab-tab-label');
-            if (labLabel) labLabel.innerText = subjKey === 'evs' ? 'STEAM Lab' : 'Interactive Tools';
-
-            const portal = document.getElementById('view-portal');
-            if (portal) portal.classList.add('hidden');
-            const subjectView = document.getElementById('view-subject');
-            if (subjectView) subjectView.classList.remove('hidden');
-
-            updateStats();
-            switchSubjectTab('practice');
-        }
-
-        function switchSubjectTab(tab) {
-            playSound('click');
-            currentSubjectTab = tab;
-
-            document.querySelectorAll('.sub-tab-btn').forEach(btn => {
-                btn.className = "sub-tab-btn px-4 py-2 rounded-xl font-bold text-sm transition flex items-center gap-2 bg-white text-slate-600 hover:bg-slate-50";
-            });
-            const activeBtn = document.getElementById(`tab-${tab}-btn`);
-            if (activeBtn) activeBtn.className = "sub-tab-btn px-4 py-2 rounded-xl font-bold text-sm transition flex items-center gap-2 bg-slate-900 text-white shadow";
-
-            const pView = document.getElementById('sub-view-practice');
-            const eView = document.getElementById('sub-view-exam');
-            const lView = document.getElementById('sub-view-lab');
-            if (pView) pView.classList.add('hidden');
-            if (eView) eView.classList.add('hidden');
-            if (lView) lView.classList.add('hidden');
-
-            const targetView = document.getElementById(`sub-view-${tab}`);
-            if (targetView) targetView.classList.remove('hidden');
-
-            if (tab === 'practice') {
-                generateNewQuestion();
-            } else if (tab === 'lab') {
-                const mLab = document.getElementById('lab-math');
-                const eLab = document.getElementById('lab-english');
-                const vLab = document.getElementById('lab-evs');
-                if (mLab) mLab.classList.add('hidden');
-                if (eLab) eLab.classList.add('hidden');
-                if (vLab) vLab.classList.add('hidden');
-
-                const targetLab = document.getElementById(`lab-${currentSubject}`);
-                if (targetLab) targetLab.classList.remove('hidden');
-            }
-        }
-
-        function generateNewQuestion() {
-            playSound('click');
-            practiceAnswered = false;
-
-            const hBox = document.getElementById('hint-box');
-            if (hBox) hBox.classList.add('hidden');
-            const eBox = document.getElementById('explanation-box');
-            if (eBox) eBox.classList.add('hidden');
-
-            const topicSel = document.getElementById('topic-select');
-            const filter = topicSel ? topicSel.value : 'all';
-
-            let pool = {};
-            if (currentSubject === 'math') pool = mathGenerators;
-            else if (currentSubject === 'english') pool = englishGenerators;
-            else if (currentSubject === 'evs') pool = evsGenerators;
-
-            let keys = Object.keys(pool);
-            if (filter !== 'all' && pool[filter]) {
-                keys = [filter];
-            }
-
-            const chosenKey = keys[randInt(0, keys.length - 1)];
-            currentPracticeQ = pool[chosenKey]();
-
-            const badge = document.getElementById('q-badge');
-            if (badge) badge.innerText = currentPracticeQ.badge;
-            const qText = document.getElementById('q-text');
-            if (qText) qText.innerHTML = currentPracticeQ.q;
-            const hText = document.getElementById('hint-text');
-            if (hText) hText.innerText = currentPracticeQ.hint;
-            const expText = document.getElementById('explanation-text');
-            if (expText) expText.innerHTML = currentPracticeQ.exp;
-
-            const visualBox = document.getElementById('q-visual');
-            if (visualBox) {
-                if (currentPracticeQ.visualSVG) {
-                    visualBox.innerHTML = currentPracticeQ.visualSVG;
-                    visualBox.classList.remove('hidden');
-                } else {
-                    visualBox.innerHTML = '';
-                    visualBox.classList.add('hidden');
-                }
-            }
-
-            const optionsContainer = document.getElementById('q-options');
-            if (optionsContainer) {
-                optionsContainer.innerHTML = '';
-                currentPracticeQ.options.forEach(opt => {
-                    const btn = document.createElement('button');
-                    btn.className = "p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-400 font-bold text-base text-slate-800 text-left transition shadow-sm block-3d";
-                    btn.dataset.optVal = opt;
-                    btn.innerHTML = opt;
-                    btn.onclick = () => checkPracticeAnswer(btn, opt);
-                    optionsContainer.appendChild(btn);
-                });
-            }
-
-            const qCard = document.getElementById('practice-card');
-            if (qCard) {
-                qCard.classList.remove('pop-in');
-                void qCard.offsetWidth;
-                qCard.classList.add('pop-in');
-            }
-        }
-
-        function checkPracticeAnswer(btn, selectedOpt) {
-            if (practiceAnswered) return;
-            practiceAnswered = true;
-            
-            const st = appData.stats[currentSubject];
-            st.total++;
-
-            const isCorrect = String(selectedOpt) === String(currentPracticeQ.ans);
-
-            if (isCorrect) {
-                playSound('correct');
-                st.score++;
-                st.streak++;
-                btn.className = "p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-100 text-emerald-900 font-black text-base text-left shadow-md bounce-short block-3d";
-                btn.innerHTML += " <i class='fa-solid fa-circle-check text-emerald-600 float-right mt-1'></i>";
-            } else {
-                playSound('wrong');
-                st.wrong = (st.wrong || 0) + 1;
-                st.streak = 0;
-                btn.className = "p-4 rounded-2xl border-2 border-rose-500 bg-rose-100 text-rose-900 font-black text-base text-left shadow-md block-3d";
-                btn.innerHTML += " <i class='fa-solid fa-circle-xmark text-rose-600 float-right mt-1'></i>";
-
-                const optsBox = document.getElementById('q-options');
-                if (optsBox) {
-                    Array.from(optsBox.children).forEach(b => {
-                        if (String(b.dataset.optVal) === String(currentPracticeQ.ans)) {
-                            b.className = "p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-base text-left block-3d";
-                        }
-                    });
-                }
-            }
-
-            saveAppData();
-            const eBox = document.getElementById('explanation-box');
-            if (eBox) eBox.classList.remove('hidden');
-            updateStats();
-        }
-
-        function toggleHint() {
-            playSound('click');
-            const hintBox = document.getElementById('hint-box');
-            if (hintBox) hintBox.classList.toggle('hidden');
-        }
-
-        function updateStats() {
-            const st = appData.stats[currentSubject];
-            const elScore = document.getElementById('stat-score');
-            if (elScore) elScore.innerText = st.score;
-            const elTotal = document.getElementById('stat-total');
-            if (elTotal) elTotal.innerText = st.total;
-            const elStreak = document.getElementById('stat-streak');
-            if (elStreak) elStreak.innerText = `${st.streak} 🔥`;
-
-            const pct = st.total > 0 ? Math.round((st.score / st.total) * 100) : 0;
-            const elAcc = document.getElementById('stat-accuracy');
-            if (elAcc) elAcc.innerText = `${pct}%`;
-        }
-
-        function startExam() {
-            playSound('fanfare');
-            examQuestions = [];
-            examUserAnswers = [];
-            examCurrentIdx = 0;
-
-            let pool = {};
-            if (currentSubject === 'math') pool = mathGenerators;
-            else if (currentSubject === 'english') pool = englishGenerators;
-            else if (currentSubject === 'evs') pool = evsGenerators;
-
-            const keys = Object.keys(pool);
-            let usedSigs = appData.usedExamSignatures[currentSubject] || [];
-
-            for (let i = 0; i < 20; i++) {
-                let chosenQ = null;
-                let attempts = 0;
-
-                while (attempts++ < 30) {
-                    const randomKey = keys[randInt(0, keys.length - 1)];
-                    const candidate = pool[randomKey]();
-                    if (!usedSigs.includes(candidate.signature) && !examQuestions.some(q => q.signature === candidate.signature)) {
-                        chosenQ = candidate;
-                        break;
-                    }
-                }
-
-                if (!chosenQ) {
-                    let fallbackAttempts = 0;
-                    while (fallbackAttempts++ < 20) {
-                        const randomKey = keys[randInt(0, keys.length - 1)];
-                        const candidate = pool[randomKey]();
-                        if (!examQuestions.some(q => q.signature === candidate.signature)) {
-                            chosenQ = candidate;
-                            break;
-                        }
-                    }
-                    if (!chosenQ) {
-                        const randomKey = keys[randInt(0, keys.length - 1)];
-                        chosenQ = pool[randomKey]();
-                    }
-                }
-
-                examQuestions.push(chosenQ);
-                usedSigs.push(chosenQ.signature);
-                examUserAnswers.push(null);
-            }
-
-            if (usedSigs.length > 200) {
-                usedSigs = usedSigs.slice(-100);
-            }
-            appData.usedExamSignatures[currentSubject] = usedSigs;
-            saveAppData();
-
-            const eStart = document.getElementById('exam-start-card');
-            const eReport = document.getElementById('exam-report-card');
-            const ePlaying = document.getElementById('exam-playing-card');
-            if (eStart) eStart.classList.add('hidden');
-            if (eReport) eReport.classList.add('hidden');
-            if (ePlaying) ePlaying.classList.remove('hidden');
-
-            renderExamQuestion();
-        }
-
-        function renderExamQuestion() {
-            const q = examQuestions[examCurrentIdx];
-            const qNum = document.getElementById('exam-q-num');
-            if (qNum) qNum.innerText = examCurrentIdx + 1;
-            const pBar = document.getElementById('exam-progress-bar');
-            if (pBar) pBar.style.width = `${((examCurrentIdx + 1) / 20) * 100}%`;
-            const qBadge = document.getElementById('exam-q-badge');
-            if (qBadge) qBadge.innerText = q.badge;
-            const qText = document.getElementById('exam-q-text');
-            if (qText) qText.innerHTML = q.q;
-
-            const visualBox = document.getElementById('exam-q-visual');
-            if (visualBox) {
-                if (q.visualSVG) {
-                    visualBox.innerHTML = q.visualSVG;
-                    visualBox.classList.remove('hidden');
-                } else {
-                    visualBox.innerHTML = '';
-                    visualBox.classList.add('hidden');
-                }
-            }
-
-            const optionsBox = document.getElementById('exam-q-options');
-            if (optionsBox) {
-                optionsBox.innerHTML = '';
-                q.options.forEach(opt => {
-                    const selected = String(examUserAnswers[examCurrentIdx]) === String(opt);
-                    const btn = document.createElement('button');
-                    btn.className = selected ? 
-                        "p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-100 text-indigo-900 font-black text-base text-left block-3d" :
-                        "p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-slate-100 font-bold text-base text-slate-800 text-left block-3d";
-                    btn.innerHTML = opt;
-                    btn.onclick = () => {
-                        playSound('click');
-                        examUserAnswers[examCurrentIdx] = opt;
-                        renderExamQuestion();
-                    };
-                    optionsBox.appendChild(btn);
-                });
-            }
-
-            const prevBtn = document.getElementById('exam-prev-btn');
-            if (prevBtn) prevBtn.disabled = examCurrentIdx === 0;
-            const nextBtn = document.getElementById('exam-next-btn');
-            if (nextBtn) nextBtn.innerText = examCurrentIdx === 19 ? "Submit Quiz 🏁" : "Next →";
-        }
-
-        function navigateExam(dir) {
-            playSound('click');
-            if (examCurrentIdx === 19 && dir === 1) {
-                submitExam();
-                return;
-            }
-            examCurrentIdx = Math.max(0, Math.min(19, examCurrentIdx + dir));
-            renderExamQuestion();
-        }
-
-        function submitExam() {
-            playSound('fanfare');
-            let correctCount = 0;
-            examQuestions.forEach((q, idx) => {
-                if (String(examUserAnswers[idx]) === String(q.ans)) {
-                    correctCount++;
-                }
-            });
-
-            const pct = Math.round((correctCount / 20) * 100);
-            const wrongCount = 20 - correctCount;
-
-            const elCorrect = document.getElementById('report-correct-count');
-            if (elCorrect) elCorrect.innerText = correctCount;
-            const elWrong = document.getElementById('report-wrong-count');
-            if (elWrong) elWrong.innerText = wrongCount;
-            const elPct = document.getElementById('report-pct');
-            if (elPct) elPct.innerText = `${pct}%`;
-
-            let grade = 'A+';
-            let feedback = 'Sensational test score! Excellent understanding of Class 3 concepts!';
-            if (pct < 60) {
-                grade = 'Needs Practice';
-                feedback = 'Keep practicing! Review the concepts and try again.';
-            } else if (pct < 85) {
-                grade = 'B+';
-                feedback = 'Good performance! Review missed items to reach 100%.';
-            }
-
-            const elGrade = document.getElementById('report-grade');
-            if (elGrade) elGrade.innerText = grade;
-            const elFeed = document.getElementById('report-feedback');
-            if (elFeed) elFeed.innerText = feedback;
-
-            // Sync exam results into overall subject stats
-            const st = appData.stats[currentSubject];
-            st.total += 20;
-            st.score += correctCount;
-            st.wrong = (st.wrong || 0) + wrongCount;
-
-            const subjName = subjectConfigs[currentSubject].title;
-            const historyEntry = {
-                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-                subject: currentSubject,
-                subjectName: subjName.split(' ')[0],
-                correct: correctCount,
-                percentage: pct,
-                grade: grade
-            };
-
-            appData.quizHistory.push(historyEntry);
-            saveAppData();
-
-            const ePlaying = document.getElementById('exam-playing-card');
-            const eReport = document.getElementById('exam-report-card');
-            if (ePlaying) ePlaying.classList.add('hidden');
-            if (eReport) eReport.classList.remove('hidden');
-        }
-
-        let wbState = { h: 0, t: 0, o: 0 };
-        function addBlock(val) {
-            playSound('click');
-            if (val === 100 && wbState.h < 9) wbState.h++;
-            if (val === 10 && wbState.t < 9) wbState.t++;
-            if (val === 1 && wbState.o < 9) wbState.o++;
-            updateWb();
-        }
-        function resetBlocks() {
-            playSound('click');
-            wbState = { h: 0, t: 0, o: 0 };
-            updateWb();
-        }
-        function updateWb() {
-            const total = wbState.h * 100 + wbState.t * 10 + wbState.o;
-            const elTotal = document.getElementById('wb-total');
-            if (elTotal) elTotal.innerText = total;
-            const elExp = document.getElementById('wb-expansion');
-            if (elExp) elExp.innerText = `${total} = ${wbState.h} Hundreds (${wbState.h*100}) + ${wbState.t} Tens (${wbState.t*10}) + ${wbState.o} Ones (${wbState.o})`;
-
-            const container = document.getElementById('wb-display');
-            if (container) {
-                if (wbState.h === 0 && wbState.t === 0 && wbState.o === 0) {
-                    container.innerHTML = `<span class="text-xs text-slate-400 font-medium">Click buttons above to add blocks here!</span>`;
-                    return;
-                }
-                let htmlBuffer = '';
-                for (let i = 0; i < wbState.h; i++) {
-                    htmlBuffer += `<div class="bg-indigo-600 text-white p-3 rounded-xl font-black text-xs shadow">100 Flat</div>`;
-                }
-                for (let i = 0; i < wbState.t; i++) {
-                    htmlBuffer += `<div class="bg-emerald-600 text-white py-3 px-2 rounded-xl font-black text-xs shadow">10 Rod</div>`;
-                }
-                for (let i = 0; i < wbState.o; i++) {
-                    htmlBuffer += `<div class="bg-amber-500 text-white p-2 rounded-lg font-black text-xs shadow">1</div>`;
-                }
-                container.innerHTML = htmlBuffer;
-            }
-        }
-
-        function analyzeEnglishWord() {
-            playSound('click');
-            const inputEl = document.getElementById('eng-word-input');
-            const input = inputEl ? inputEl.value.trim().toLowerCase() : '';
-            const box = document.getElementById('eng-word-output');
-            if (!box) return;
-
-            if (!input) {
-                box.innerText = "Please type a word first!";
-                return;
-            }
-
-            const vowels = (input.match(/[aeiou]/g) || []).length;
-            const consonants = input.length - vowels;
-
-            box.innerHTML = `
-                <div class="text-xl font-black text-slate-800 mb-2">Word Inspection: "${input}"</div>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left max-w-xl mx-auto mt-4">
-                    <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                        <div class="text-xs font-bold text-slate-400 uppercase">Past Tense</div>
-                        <div class="text-base font-bold text-sky-600">${input.endsWith('e') ? input + 'd' : input + 'ed'}</div>
-                    </div>
-                    <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                        <div class="text-xs font-bold text-slate-400 uppercase">Plural Form</div>
-                        <div class="text-base font-bold text-sky-600">${input.endsWith('y') ? input.slice(0,-1)+'ies' : input + 's'}</div>
-                    </div>
-                    <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                        <div class="text-xs font-bold text-slate-400 uppercase">Continuous (-ing)</div>
-                        <div class="text-base font-bold text-sky-600">${input.endsWith('e') ? input.slice(0,-1)+'ing' : input + 'ing'}</div>
-                    </div>
-                    <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                        <div class="text-xs font-bold text-slate-400 uppercase">Vowels / Consonants</div>
-                        <div class="text-base font-bold text-emerald-600">${vowels} V / ${consonants} C</div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function runEvsLab(topic) {
-            playSound('click');
-            const box = document.getElementById('evs-lab-output');
-            if (!box) return;
-
-            if (topic === 'plant') {
-                box.innerHTML = `
-                    <div class="text-xl font-black text-slate-800 mb-2">🌱 Plant Anatomy STEAM Lab</div>
-                    <div class="text-3xl my-3">🌺 ➔ 🍃 ➔ 🪵 ➔ 🌿</div>
-                    <div class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                        Plants have <strong>Roots</strong> (anchor & water absorption), <strong>Stems</strong> (conduction), <strong>Leaves</strong> (food factory via photosynthesis using sunlight), and <strong>Flowers</strong> (reproduction & seeds).
-                    </div>
-                `;
-            } else if (topic === 'ecosystem') {
-                box.innerHTML = `
-                    <div class="text-xl font-black text-slate-800 mb-2">🐝 Ecosystem Interdependence Lab</div>
-                    <div class="text-3xl my-3">🐝 ➔ 🌸 ➔ 🍎 ➔ 🦜</div>
-                    <div class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                        Honeybees pollinate 70% of flowering plants while collecting nectar. Trees supply Oxygen (O₂) and absorb Carbon Dioxide (CO₂), keeping Earth balanced.
-                    </div>
-                `;
-            } else if (topic === 'festivals') {
-                box.innerHTML = `
-                    <div class="text-xl font-black text-slate-800 mb-2">🪔 Festival Science & Light Lab</div>
-                    <div class="text-3xl my-3">🪔 ✨ 🌾 🎇</div>
-                    <div class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                        Traditional clay diyas use cotton wicks and oil via capillary action to produce warm light during Diwali! Harvest festivals like Baisakhi celebrate seasonal crop cycles.
-                    </div>
-                `;
-            } else if (topic === 'harmony') {
-                box.innerHTML = `
-                    <div class="text-xl font-black text-slate-800 mb-2">🕊️ Eco-Harmony & Bird Care Lab</div>
-                    <div class="text-3xl my-3">🥣 🕊️ 🌳 ☀️</div>
-                    <div class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                        Placing shallow bird baths with fresh water saves urban birds during hot summer months! Segregating wet and dry waste keeps ecosystems clean.
-                    </div>
-                `;
-            }
-        }
-
-        window.onload = () => {
-            loadAppData();
-            showPortal();
-            if (!appData.hasSeenWelcome || !appData.studentName) {
-                openWelcomeNameModal();
-            }
-        };
-    </script>
+    <!-- PRIVACY NOTICE -->
+    <div id="modal-privacy" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-blob max-w-lg w-full p-6 shadow-2xl border-4 border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto pop-in">
+            <div class="flex items-start justify-between gap-3">
+                <h3 class="text-xl font-bold text-slate-800">🔒 Privacy &amp; what we store</h3>
+                <button onclick="closePrivacyModal()" aria-label="Close" class="w-10 h-10 rounded-2xl bg-slate-100 text-slate-500 font-bold flex items-center justify-center">✕</button>
+            </div>
+            <div class="text-sm text-slate-600 space-y-3 font-medium leading-relaxed">
+                <p><strong>On this device:</strong> the name you type, your scores, streaks and quiz history are saved in your browser only. Clearing your browser data removes them.</p>
+                <p id="privacy-server-note" class="hidden"><strong>Sent to the teacher:</strong> when a question is answered we also send the name, the score, the device type and the network (IP) address and approximate city to the teacher's private spreadsheet. This is used only to see how the class is practising.</p>
+                <p><strong>Never collected:</strong> we do not ask for an email, phone number, photo or address, and we show no adverts.</p>
+                <p class="text-xs text-slate-500">Parents: this app is intended to be used with your knowledge. To remove stored progress, tap ⭐ in the header and choose “Start Again”.</p>
+            </div>
+            <button onclick="closePrivacyModal()" class="w-full bg-slate-900 text-white rounded-2xl py-3 font-bold block-3d">Got it</button>
+        </div>
+    </div>
+
+    <script src="app.js?v=1" defer></script>
 </body>
 </html>
