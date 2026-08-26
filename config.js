@@ -13,7 +13,10 @@ window.HubConfig = {
     PROVIDER: 'apps-script',
 
     // Apps Script Web App URL, ending in /exec — see apps-script/Code.gs
-    ENDPOINT: '',
+    ENDPOINT: 'https://script.google.com/macros/s/AKfycbzik-0kSRv4_TIdghu4gxZWpbHRIrA25cr14n6yiqjxtfzzGaqX435BvKX27fRcjdPb/exec',
+
+    // Keep this same as the SECRET in apps-script/Code.gs
+    SECRET: 'change-me-to-a-long-private-passphrase',
 
     // Only used when PROVIDER is "firebase".
     // Example: https://my-project-default-rtdb.asia-southeast1.firebasedatabase.app

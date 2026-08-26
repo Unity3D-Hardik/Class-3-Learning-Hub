@@ -20,9 +20,10 @@
  */
 
 // >>> CHANGE THIS <<<
-var SECRET = 'change-me-to-a-long-private-passphrase';
+var SECRET = 'class3hub-analytics-very-strong-secret-2026';
 
 var SHEET_NAME = 'events';
+var PROGRESS_SHEET_NAME = 'progress';
 var HEADERS = [
   'ts', 'visitorId', 'sessionId', 'name', 'event', 'subject', 'topic',
   'correct', 'score', 'ip', 'city', 'region', 'country', 'isp',
@@ -56,10 +57,40 @@ function json_(obj, callback) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+function getProgressSheet_() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(PROGRESS_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(PROGRESS_SHEET_NAME);
+    sheet.appendRow(['ts', 'studentName', 'visitorId', 'payload']);
+    sheet.setFrozenRows(1);
+  }
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(['ts', 'studentName', 'visitorId', 'payload']);
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
 /** Receives batched events from analytics.js */
 function doPost(e) {
   try {
-    var body = JSON.parse(e.postData.contents);
+    var body = JSON.parse(e.postData.contents || '{}');
+
+    if (body.type === 'progress') {
+      if (body.secret !== SECRET) {
+        return json_({ ok: false, error: 'Unauthorised' });
+      }
+      var progressSheet = getProgressSheet_();
+      progressSheet.appendRow([
+        new Date(),
+        body.studentName || '',
+        body.visitorId || '',
+        JSON.stringify(body.data || {})
+      ]);
+      return json_({ ok: true, written: 1, type: 'progress' });
+    }
+
     var rows = body.rows || [];
     if (!rows.length) return json_({ ok: true, written: 0 });
 
@@ -90,6 +121,32 @@ function doGet(e) {
 
   if (p.key !== SECRET) {
     return json_({ ok: false, error: 'Unauthorised' }, callback);
+  }
+
+  if (p.type === 'progress') {
+    var progressSheet = getProgressSheet_();
+    var progressLastRow = progressSheet.getLastRow();
+    if (progressLastRow < 2) return json_({ ok: true, rows: [] }, callback);
+
+    var progressValues = progressSheet.getRange(2, 1, progressLastRow - 1, 4).getValues();
+    var progressRows = progressValues.map(function (row) {
+      return {
+        ts: row[0] instanceof Date ? row[0].toISOString() : row[0],
+        studentName: row[1],
+        visitorId: row[2],
+        payload: row[3]
+      };
+    });
+
+    var filtered = progressRows.filter(function (row) {
+      if (p.visitorId && row.visitorId && row.visitorId !== p.visitorId) return false;
+      if (p.studentName && row.studentName && row.studentName !== p.studentName) return false;
+      return true;
+    });
+
+    var limit = Math.min(parseInt(p.limit, 10) || 20, 100);
+    var limited = filtered.slice(-limit);
+    return json_({ ok: true, rows: limited }, callback);
   }
 
   var sheet = getSheet_();

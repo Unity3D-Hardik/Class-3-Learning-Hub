@@ -140,7 +140,17 @@ Every visitor posts to the **same** backend URL, so all devices collect into one
 3. Change `SECRET` to a long private passphrase — **only inside the Apps Script editor**
 4. **Deploy ▸ New deployment ▸ Web app** — *Execute as: Me*, *Access: Anyone* → copy the `/exec` URL
 5. Paste that URL into `config.js` → `ENDPOINT`
-6. Open `analytics.html`, enter the URL + same passphrase
+6. Set the same value in `config.js` → `SECRET`
+7. Open `analytics.html`, enter the URL + same passphrase
+
+### Quick working notes for this project
+
+- Use the same Google Sheet for both analytics and progress. The Apps Script creates two tabs automatically: `events` and `progress`.
+- `events` stores analytics rows such as page visits, browser info, event names, and student identify data.
+- `progress` stores saved app state such as the learner name, stats, active chapters, and quiz history.
+- If `apps-script/Code.gs` changes, you must **redeploy** the Apps Script and copy the new `/exec` URL again.
+- Local testing is supported: run `python3 -m http.server 8765` and open `http://localhost:8765/index.html`.
+- Keep the Google Sheet private and do not expose the secret in public GitHub files.
 
 Firebase Realtime Database is also supported: set `PROVIDER: 'firebase'` and `FIREBASE_URL`.
 

@@ -181,6 +181,103 @@ function loadAppData() {
     updateUserUI();
 }
 
+async function loadProgressFromSheet() {
+    try {
+        const cfg = window.HubConfig || {};
+        if (!cfg.ENDPOINT || !cfg.SECRET) return;
+
+        const visitorId = (window.HubAnalytics && window.HubAnalytics.state && window.HubAnalytics.state.visitorId)
+            || localStorage.getItem('class3_hub_visitor_id')
+            || '';
+
+        if (!visitorId) return;
+
+        const url = new URL(cfg.ENDPOINT);
+        url.searchParams.set('key', cfg.SECRET);
+        url.searchParams.set('type', 'progress');
+        url.searchParams.set('visitorId', visitorId);
+        url.searchParams.set('limit', '20');
+
+        const res = await fetch(url.toString(), { method: 'GET', mode: 'cors' });
+        if (!res.ok) return;
+
+        const data = await res.json();
+        const rows = Array.isArray(data && data.rows) ? data.rows : [];
+        if (!rows.length) return;
+
+        const latest = rows[rows.length - 1];
+        if (!latest || !latest.payload) return;
+
+        let parsed;
+        try { parsed = JSON.parse(latest.payload); } catch (e) { return; }
+        if (!parsed || typeof parsed !== 'object') return;
+
+        const localRaw = localStorage.getItem(STORAGE_KEY);
+        const localState = localRaw ? JSON.parse(localRaw) : null;
+
+        if (localState && localState.studentName && (!parsed.studentName || parsed.studentName === localState.studentName)) {
+            return;
+        }
+
+        const base = getInitialState();
+        appData = {
+            ...base,
+            ...appData,
+            ...parsed,
+            stats: { ...base.stats, ...(parsed.stats || appData.stats || {}) },
+            activeChapters: { ...base.activeChapters, ...(parsed.activeChapters || appData.activeChapters || {}) },
+            usedExamSignatures: { ...base.usedExamSignatures, ...(parsed.usedExamSignatures || appData.usedExamSignatures || {}) },
+            quizHistory: Array.isArray(parsed.quizHistory) ? parsed.quizHistory : (appData.quizHistory || [])
+        };
+
+        Object.keys(base.stats).forEach(k => {
+            appData.stats[k] = { ...base.stats[k], ...(appData.stats[k] || {}) };
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+        soundEnabled = appData.soundEnabled !== false;
+        updateUserUI();
+    } catch (e) {
+        // Ignore remote restore failures and keep local data as the fallback.
+    }
+}
+
+function syncProgressToSheet() {
+    try {
+        const cfg = window.HubConfig || {};
+        if (!cfg.ENDPOINT || !cfg.SECRET) return;
+
+        const payload = {
+            appId: cfg.APP_ID || 'class3-hub',
+            type: 'progress',
+            secret: cfg.SECRET,
+            visitorId: (window.HubAnalytics && window.HubAnalytics.state && window.HubAnalytics.state.visitorId) || '',
+            studentName: appData.studentName || '',
+            data: {
+                studentName: appData.studentName || '',
+                hasSeenWelcome: !!appData.hasSeenWelcome,
+                soundEnabled: appData.soundEnabled !== false,
+                activeChapters: appData.activeChapters,
+                stats: appData.stats,
+                quizHistory: appData.quizHistory,
+                usedExamSignatures: appData.usedExamSignatures
+            }
+        };
+
+        fetch(cfg.ENDPOINT, {
+            method: 'POST',
+            mode: 'no-cors',
+            keepalive: true,
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+        }).catch(function () {
+            // Offline or blocked — local copy remains the source of truth.
+        });
+    } catch (e) {
+        // Ignore network sync failures; browser storage still works.
+    }
+}
+
 function saveAppData() {
     try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
@@ -188,6 +285,7 @@ function saveAppData() {
         // Progress simply will not persist this session.
     }
     updateUserUI();
+    syncProgressToSheet();
 }
 
 function updateUserUI() {
@@ -1409,8 +1507,9 @@ function wireOptionDelegation() {
     }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     loadAppData();
+    await loadProgressFromSheet();
     applySoundUI();
     wireOptionDelegation();
     showPortal();
