@@ -343,6 +343,21 @@
         ]
     };
 
+    const EXAM_PAPER = {
+        evs_ch3_festivals: [
+            { q: 'Look at the picture. Which festival is commonly celebrated by lighting diyas?', visual: '<div class="text-center text-4xl" role="img" aria-label="Three glowing diyas decorated with flowers">🪔 🪔 🪔<div class="text-sm font-bold">festival lights</div></div>', ans: 'Diwali', wrong: ['Holi', 'Eid', 'Baisakhi'], hint: 'It is also called the festival of lights.', exp: 'Diwali is celebrated by lighting diyas and sharing sweets.' }
+        ],
+        evs_ch4_plants: [
+            { q: 'In the picture, which part takes in water from the soil?', visual: '<svg class="w-48 h-32 mx-auto" viewBox="0 0 220 150" role="img" aria-label="A plant with leaves, stem and roots"><path d="M110 70V25 M110 45L75 28 M110 52L145 35" stroke="#15803d" stroke-width="8" fill="none"/><ellipse cx="72" cy="25" rx="28" ry="13" fill="#86efac"/><ellipse cx="148" cy="33" rx="28" ry="13" fill="#86efac"/><path d="M110 70 C80 92 85 116 55 135 M110 70 C140 92 135 116 170 135 M110 70 C105 100 108 120 110 140" stroke="#b45309" stroke-width="5" fill="none"/><path d="M25 140H195" stroke="#92400e" stroke-width="8"/></svg>', ans: 'Roots', wrong: ['Leaves', 'Flower', 'Fruit'], hint: 'This part grows below the soil.', exp: 'Roots absorb water and minerals from the soil.' }
+        ],
+        evs_ch5_coexistence: [
+            { q: 'What does the picture show about plants and animals?', visual: '<div class="text-center text-3xl" role="img" aria-label="Sun, plant, rabbit and fox connected in a food chain">☀️ → 🌱 → 🐇 → 🦊<div class="text-sm font-bold">a simple food chain</div></div>', ans: 'They depend on one another', wrong: ['They never need one another', 'Animals make sunlight', 'Plants eat all animals'], hint: 'Food and energy move from one living thing to another.', exp: 'Plants and animals are connected and depend on one another for food and other needs.' }
+        ],
+        evs_ch6_harmony: [
+            { q: 'Which item in the picture should go into wet-waste compost?', visual: '<div class="text-center text-4xl" role="img" aria-label="Banana peel, plastic bottle and metal can">🍌 &nbsp; 🧴 &nbsp; 🥫</div>', ans: 'Banana peel', wrong: ['Plastic bottle', 'Metal can', 'Glass marble'], hint: 'Choose the item that rots naturally.', exp: 'A banana peel is wet biodegradable waste and can become compost.' }
+        ]
+    };
+
     const PAPER_BADGES = {
         evs_ch1_family: 'Ch-1: My Family and Me',
         evs_ch2_caring: 'Ch-2: Caring & Sharing',
@@ -358,6 +373,11 @@
 
     Object.keys(PAPER).forEach((key) => {
         const extra = bankGenerator(key, PAPER_BADGES[key] || 'EVS', PAPER[key]);
+        evsGenerators[key] = evsGenerators[key] ? mix(evsGenerators[key], extra) : extra;
+    });
+
+    Object.keys(EXAM_PAPER).forEach((key) => {
+        const extra = bankGenerator(key, PAPER_BADGES[key] || 'EVS Exam Practice', EXAM_PAPER[key]);
         evsGenerators[key] = evsGenerators[key] ? mix(evsGenerators[key], extra) : extra;
     });
 

@@ -1063,28 +1063,32 @@
             { q: 'The blackboard in your class is shaped like a...', ans: 'Rectangle', wrong: ['Circle', 'Triangle', 'Pentagon'], hint: 'Longer than it is tall, 4 corners.', exp: 'A blackboard is a rectangle.' },
             { q: 'Which shape has all sides equal AND 4 corners?', ans: 'Square', wrong: ['Rectangle', 'Triangle', 'Oval'], hint: 'Every side is the same length.', exp: 'A square has 4 equal sides and 4 corners.' },
             { q: 'A 50-paise coin is shaped like a...', ans: 'Circle', wrong: ['Square', 'Triangle', 'Hexagon'], hint: 'Coins are round.', exp: 'Coins are circular.' },
-            { q: 'How many triangles can you see in a square cut along one diagonal?', ans: 2, wrong: [1, 3, 4], hint: 'One cut corner to corner.', exp: 'One diagonal splits a square into 2 triangles.' }
+            { q: 'How many triangles can you see in a square cut along one diagonal?', ans: 2, wrong: [1, 3, 4], hint: 'One cut corner to corner.', exp: 'One diagonal splits a square into 2 triangles.' },
+            { q: 'Look at the picture. How many <strong>triangles</strong> are shown?', visual: '<svg class="w-56 h-24 mx-auto" viewBox="0 0 280 120" role="img" aria-label="Three triangles and one circle"><polygon points="45,100 85,25 125,100" fill="#fde68a" stroke="#b45309" stroke-width="4"/><polygon points="105,100 145,25 185,100" fill="#bfdbfe" stroke="#2563eb" stroke-width="4"/><polygon points="165,100 205,25 245,100" fill="#bbf7d0" stroke="#15803d" stroke-width="4"/><circle cx="265" cy="65" r="25" fill="#fbcfe8" stroke="#be185d" stroke-width="4"/></svg>', ans: 3, wrong: [2, 4, 5], hint: 'Count only the shapes with three straight sides.', exp: 'There are 3 triangles in the picture.' }
         ],
         ch4_lines: [
             { q: 'Which of these is a <strong>curved</strong> line?', ans: 'The edge of a bangle', wrong: ['The edge of a ruler', 'The edge of a book', 'The edge of a table'], hint: 'It bends smoothly all round.', exp: 'A bangle has a curved edge.' },
             { q: 'A line that goes side to side is called...', ans: 'Horizontal', wrong: ['Vertical', 'Slanting', 'Curved'], hint: 'Like the horizon.', exp: 'Side-to-side lines are horizontal.' },
             { q: 'A line that goes straight up and down is called...', ans: 'Vertical', wrong: ['Horizontal', 'Curved', 'Zig-zag'], hint: 'Like a standing pole.', exp: 'Up-and-down lines are vertical.' },
             { q: 'Which object has both straight and curved edges?', ans: 'A half chapati', wrong: ['A full chapati', 'A postcard', 'A notebook'], hint: 'Cut a circle in half.', exp: 'A semi-circle has one straight edge and one curved edge.' },
-            { q: 'How many straight edges does a triangle have?', ans: 3, wrong: [2, 4, 1], hint: 'Count the sides.', exp: 'A triangle has 3 straight edges.' }
+            { q: 'How many straight edges does a triangle have?', ans: 3, wrong: [2, 4, 1], hint: 'Count the sides.', exp: 'A triangle has 3 straight edges.' },
+            { q: 'In the picture, which labelled line is <strong>curved</strong>?', visual: '<svg class="w-56 h-24 mx-auto" viewBox="0 0 280 120" role="img" aria-label="Line A horizontal, line B curved, line C zig-zag"><text x="15" y="25" font-size="18" font-weight="bold">A</text><line x1="40" y1="20" x2="120" y2="20" stroke="#2563eb" stroke-width="5"/><text x="15" y="67" font-size="18" font-weight="bold">B</text><path d="M40 65 Q80 20 120 65" fill="none" stroke="#db2777" stroke-width="5"/><text x="155" y="25" font-size="18" font-weight="bold">C</text><polyline points="180,20 205,55 230,20 255,55" fill="none" stroke="#16a34a" stroke-width="5"/></svg>', ans: 'B', wrong: ['A', 'C', 'A and C'], hint: 'A curved line bends smoothly without sharp corners.', exp: 'Line B bends smoothly, so it is the curved line.' }
         ],
         ch4_paths: [
             { q: 'Which direction is <strong>opposite</strong> to North?', ans: 'South', wrong: ['East', 'West', 'North-East'], hint: 'Think of a compass.', exp: 'North and South are opposite.' },
             { q: 'A child walks 3 steps forward and 3 steps back. Where is the child now?', ans: 'At the starting place', wrong: ['3 steps ahead', '6 steps ahead', '3 steps behind'], hint: 'The two moves cancel out.', exp: 'Going forward then back the same amount returns you to the start.' },
             { q: 'On a grid, Riya moves 2 right and 3 up, then 1 right. How many moves in all?', ans: 6, wrong: [5, 7, 4], hint: '2 + 3 + 1', exp: '2 + 3 + 1 = 6 moves.' },
             { q: 'If you face South, which direction is behind you?', ans: 'North', wrong: ['East', 'West', 'South'], hint: 'Behind means the opposite side.', exp: 'The opposite of South is North.' },
-            { q: 'The school is 6 blocks away. Ravi has walked 4 blocks. How many more?', ans: 2, wrong: [10, 3, 1], hint: '6 − 4', exp: 'He needs 2 more blocks.' }
+            { q: 'The school is 6 blocks away. Ravi has walked 4 blocks. How many more?', ans: 2, wrong: [10, 3, 1], hint: '6 − 4', exp: 'He needs 2 more blocks.' },
+            { q: 'The frog starts at 7 and jumps forward by 10 on the number line. Where does it land?', visual: '<svg class="w-72 h-20 mx-auto" viewBox="0 0 360 90" role="img" aria-label="Number line from 0 to 30 with a jump from 7 to 17"><line x1="25" y1="48" x2="335" y2="48" stroke="#334155" stroke-width="3"/><path d="M25 42v12 M77 42v12 M128 42v12 M180 42v12 M232 42v12 M283 42v12 M335 42v12" stroke="#334155" stroke-width="3"/><text x="20" y="75" font-size="16">0</text><text x="70" y="75" font-size="16">5</text><text x="120" y="75" font-size="16">10</text><text x="171" y="75" font-size="16">15</text><text x="222" y="75" font-size="16">20</text><text x="273" y="75" font-size="16">25</text><text x="325" y="75" font-size="16">30</text><path d="M98 30 Q155 0 200 30" fill="none" stroke="#ea580c" stroke-width="4" marker-end="url(#arrow)"/><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#ea580c"/></marker></defs></svg>', ans: 17, wrong: [27, 10, 7], hint: 'A forward jump of 10 means add 10 to 7.', exp: '7 + 10 = 17, so the frog lands on 17.' }
         ],
         ch4_spans: [
             { q: 'Which is the <strong>shortest</strong> unit?', ans: 'Fingerwidth', wrong: ['Handspan', 'Cubit', 'Pace'], hint: 'It uses just one finger.', exp: 'A fingerwidth is the smallest of these.' },
             { q: 'A desk is 6 handspans long. Which is a sensible length in handspans for a pencil?', ans: '1 handspan', wrong: ['6 handspans', '12 handspans', '20 handspans'], hint: 'A pencil is much shorter than a desk.', exp: 'A pencil is about one handspan long.' },
             { q: 'Two children measure the same wall. Aman says 12 paces, Bina says 15 paces. Whose steps are longer?', ans: 'Aman\'s', wrong: ['Bina\'s', 'Both equal', 'Cannot say'], hint: 'Fewer steps means longer steps.', exp: 'Aman needed fewer paces, so his pace is longer.' },
             { q: 'Which unit would you use to measure the length of a cricket pitch?', ans: 'Paces or metres', wrong: ['Fingerwidths', 'Handspans', 'Grams'], hint: 'It is a long distance.', exp: 'Long distances use paces or metres.' },
-            { q: 'Why is a ruler better than a handspan for measuring?', ans: 'A ruler is the same for everyone', wrong: ['A ruler is prettier', 'A ruler is longer', 'A handspan is illegal'], hint: 'Everyone\'s hand is a different size.', exp: 'Standard units give the same answer for everyone.' }
+            { q: 'Why is a ruler better than a handspan for measuring?', ans: 'A ruler is the same for everyone', wrong: ['A ruler is prettier', 'A ruler is longer', 'A handspan is illegal'], hint: 'Everyone\'s hand is a different size.', exp: 'Standard units give the same answer for everyone.' },
+            { q: 'The picture shows 18 seeds in all and 11 seeds on the table. How many seeds are hidden?', visual: '<div class="text-center text-xl" role="img" aria-label="18 total seeds, 11 visible seeds, hidden seeds unknown"><div class="mb-2"><span class="inline-block rounded border-2 border-amber-700 bg-amber-100 px-3 py-1 font-bold">Total: 18</span><span class="mx-2">−</span><span class="inline-block rounded border-2 border-green-700 bg-green-100 px-3 py-1 font-bold">On table: 11</span></div><div class="tracking-widest">🌰 🌰 🌰 🌰 🌰 🌰 🌰 🌰 🌰 🌰 🌰 &nbsp; ?</div></div>', ans: 7, wrong: [6, 8, 29], hint: 'Hidden seeds = total seeds − seeds on the table.', exp: '18 − 11 = 7 hidden seeds.' }
         ],
         ch5_shapes_fun: [
             { q: 'How many faces does a <strong>cuboid</strong> have?', ans: 6, wrong: [4, 8, 12], hint: 'Think of a matchbox.', exp: 'A cuboid has 6 flat faces.' },
@@ -1210,6 +1214,39 @@
             { q: 'A bag has 6 packets of 8 biscuits. How many biscuits?', ans: 48, wrong: [14, 42, 54], hint: '6 × 8', exp: '6 × 8 = 48 biscuits.' },
             { q: 'A library had 625 books. It gave away 148 books. How many books remain?', ans: 477, wrong: [467, 773, 523], hint: 'Subtract the books given away.', exp: '625 − 148 = 477 books remain.' },
             { q: 'There are 135 red beads and 189 blue beads. How many beads altogether?', ans: 324, wrong: [314, 334, 54], hint: 'Add the two colours.', exp: '135 + 189 = 324 beads.' }
+        ]
+    };
+
+    const EXAM_PAPER = {
+        ch4_shapes: [
+            { q: 'Look at the picture. Which shape has <strong>4 equal sides</strong>?', visual: '<svg class="w-56 h-24 mx-auto" viewBox="0 0 280 120" role="img" aria-label="A triangle, a square and a circle"><polygon points="42,95 72,30 102,95" fill="#bfdbfe" stroke="#2563eb" stroke-width="4"/><rect x="125" y="35" width="60" height="60" fill="#fde68a" stroke="#b45309" stroke-width="4"/><circle cx="235" cy="65" r="30" fill="#bbf7d0" stroke="#15803d" stroke-width="4"/></svg>', ans: 'Square', wrong: ['Triangle', 'Circle', 'Oval'], hint: 'Count the sides and check if all four are the same length.', exp: 'A square has 4 equal sides.' }
+        ],
+        ch4_lines: [
+            { q: 'Which object in the picture has a <strong>curved boundary</strong>?', visual: '<svg class="w-56 h-24 mx-auto" viewBox="0 0 280 120" role="img" aria-label="A ruler, a bangle and a book"><rect x="15" y="45" width="85" height="25" fill="#fde68a" stroke="#b45309" stroke-width="4"/><circle cx="145" cy="58" r="28" fill="none" stroke="#db2777" stroke-width="10"/><rect x="195" y="32" width="60" height="52" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="4"/></svg>', ans: 'Bangle', wrong: ['Ruler', 'Book', 'Table'], hint: 'A curved boundary bends smoothly.', exp: 'A bangle is round, so its boundary is curved.' }
+        ],
+        ch4_paths: [
+            { q: 'Use the number line in the picture. A frog at 24 jumps back 10. Where does it land?', visual: '<svg class="w-72 h-20 mx-auto" viewBox="0 0 360 90" role="img" aria-label="Number line showing a backward jump from 24 to 14"><line x1="25" y1="48" x2="335" y2="48" stroke="#334155" stroke-width="3"/><path d="M98 30 Q155 0 200 30" fill="none" stroke="#7c3aed" stroke-width="4" marker-end="url(#back-arrow)"/><defs><marker id="back-arrow" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto"><path d="M8,0 L0,4 L8,8 z" fill="#7c3aed"/></marker></defs><text x="85" y="75" font-size="18">14</text><text x="188" y="75" font-size="18">24</text><text x="130" y="20" font-size="16">back 10</text></svg>', ans: 14, wrong: [34, 10, 4], hint: 'A backward jump means subtract 10.', exp: '24 − 10 = 14.' }
+        ],
+        ch4_spans: [
+            { q: 'The picture shows a pencil and a classroom. Which unit is better for measuring the classroom?', visual: '<div class="text-center text-3xl" role="img" aria-label="A pencil and a classroom"><span class="mr-8">✏️</span><span>🏫</span><div class="mt-1 text-sm font-bold">pencil &nbsp;&nbsp;&nbsp;&nbsp; classroom</div></div>', ans: 'Paces', wrong: ['Fingerwidths', 'A spoonful', 'Grams'], hint: 'Use a larger length unit for a large object.', exp: 'Paces are suitable for measuring the length of a classroom.' }
+        ],
+        ch6_placeval: [
+            { q: 'In the picture, what is the place value of the highlighted digit in <strong>582</strong>?', visual: '<div class="text-center text-4xl font-black tracking-widest" role="img" aria-label="Number 582 with digit 8 highlighted">5 <span class="rounded bg-yellow-200 px-2 text-orange-700">8</span> 2</div>', ans: 80, wrong: [8, 800, 82], hint: 'The highlighted digit is in the tens place.', exp: '8 tens = 80.' }
+        ],
+        ch6_expanded: [
+            { q: 'Which expanded form matches the number shown in the picture: <strong>624</strong>?', visual: '<div class="text-center text-3xl" role="img" aria-label="Six hundreds, two tens and four ones">🟦🟦🟦🟦🟦🟦 &nbsp; 🟨🟨 &nbsp; 🔴🔴🔴🔴</div>', ans: '600 + 20 + 4', wrong: ['600 + 2 + 4', '60 + 20 + 4', '600 + 24 + 0'], hint: 'Count hundreds, tens and ones separately.', exp: '624 = 600 + 20 + 4.' }
+        ],
+        ch6_words: [
+            { q: 'The picture shows <strong>407</strong>. How do we write it in words?', visual: '<div class="text-center text-4xl font-black" role="img" aria-label="Number 407">4 0 7</div>', ans: 'Four Hundred and Seven', wrong: ['Four Hundred and Seventy', 'Forty Seven', 'Four Thousand and Seven'], hint: 'There are no tens in 407.', exp: '407 is Four Hundred and Seven.' }
+        ],
+        ch6_compare: [
+            { q: 'Which number is greater in the picture: <strong>463</strong> or <strong>436</strong>?', visual: '<div class="text-center text-3xl font-black" role="img" aria-label="Comparing 463 and 436">463 &nbsp; ? &nbsp; 436</div>', ans: 463, wrong: [436, 427, 'They are equal'], hint: 'Hundreds are equal; compare the tens digits.', exp: 'Both have 4 hundreds, but 6 tens is greater than 3 tens, so 463 is greater.' }
+        ],
+        ch6_patterns: [
+            { q: 'Complete the number-line pattern shown: <strong>20, 30, 40, ___</strong>.', visual: '<div class="text-center text-2xl tracking-widest" role="img" aria-label="Number pattern 20, 30, 40 and blank">20 → 30 → 40 → ?</div>', ans: 50, wrong: [45, 60, 30], hint: 'The jumps are 10 each time.', exp: '40 + 10 = 50.' }
+        ],
+        ch6_building: [
+            { q: 'Arrange the digits shown to make the <strong>smallest</strong> 3-digit number.', visual: '<div class="text-center text-4xl font-black tracking-widest" role="img" aria-label="Digits 6, 0 and 4">6 &nbsp; 0 &nbsp; 4</div>', ans: 406, wrong: [460, 604, 640], hint: '0 cannot come first; put the smallest non-zero digit first.', exp: '4, 0, 6 makes the smallest number: 406.' }
         ]
     };
 
@@ -1412,6 +1449,11 @@
     // Fold the extra paper questions into the chapters above.
     Object.keys(PAPER).forEach((key) => {
         const extra = bankGenerator(key, PAPER_BADGES[key] || 'Math Mela', PAPER[key]);
+        mathGenerators[key] = mathGenerators[key] ? mix(mathGenerators[key], extra) : extra;
+    });
+
+    Object.keys(EXAM_PAPER).forEach((key) => {
+        const extra = bankGenerator(key, PAPER_BADGES[key] || 'Math Exam Practice', EXAM_PAPER[key]);
         mathGenerators[key] = mathGenerators[key] ? mix(mathGenerators[key], extra) : extra;
     });
 

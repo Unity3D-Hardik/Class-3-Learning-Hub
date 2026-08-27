@@ -671,6 +671,48 @@
         ]
     };
 
+    const EXAM_PAPER = {
+        eng_word_meanings: [
+            { q: 'What does <strong>"enormous"</strong> mean?', ans: 'very large', wrong: ['very small', 'very quiet', 'very slow'], hint: 'Think of something much bigger than usual.', exp: 'Enormous means very large.' }
+        ],
+        eng_synonym_antonym: [
+            { q: 'Choose the opposite of <strong>"empty"</strong>.', ans: 'full', wrong: ['open', 'light', 'clean'], hint: 'An empty glass has nothing in it.', exp: 'The opposite of empty is full.' }
+        ],
+        eng_compound_rhyme: [
+            { q: 'Which word rhymes with <strong>"light"</strong>?', ans: 'kite', wrong: ['late', 'let', 'lot'], hint: 'Listen to the ending sound.', exp: 'Light and kite end with the same sound.' }
+        ],
+        eng_syllables_silent: [
+            { q: 'How many syllables are in <strong>"banana"</strong>?', ans: 3, wrong: [2, 4, 5], hint: 'Say it slowly: ba-na-na.', exp: 'Ba-na-na has 3 syllables.' }
+        ],
+        eng_adjectives_adverbs: [
+            { q: 'Pick the adjective: <strong>"The bright sun shone."</strong>', ans: 'bright', wrong: ['sun', 'shone', 'the'], hint: 'It describes the sun.', exp: 'Bright describes the noun sun, so it is an adjective.' }
+        ],
+        eng_degrees_comp: [
+            { q: 'Complete: small → smaller → ___.', ans: 'smallest', wrong: ['more small', 'smalling', 'smallful'], hint: 'The last degree compares the most.', exp: 'The three forms are small, smaller and smallest.' }
+        ],
+        eng_alphabetical_comma: [
+            { q: 'Arrange alphabetically: <strong>ball, apple, cat</strong>.', ans: 'apple, ball, cat', wrong: ['ball, cat, apple', 'cat, ball, apple', 'apple, cat, ball'], hint: 'Compare the first letters.', exp: 'A comes before B, and B comes before C.' }
+        ],
+        eng_be_verbs: [
+            { q: 'Fill in: <strong>"We ___ ready for the game."</strong>', ans: 'are', wrong: ['am', 'is', 'was'], hint: 'We is plural and the sentence is in the present.', exp: 'We takes are: We are ready.' }
+        ],
+        eng_verbs_tenses: [
+            { q: 'Choose the past tense of <strong>"write"</strong>.', ans: 'wrote', wrong: [' writed', 'writing', 'writes'], hint: 'This is an irregular verb.', exp: 'The past tense of write is wrote.' }
+        ],
+        eng_nouns: [
+            { q: 'Which is a <strong>common noun</strong>?', ans: 'river', wrong: ['Ganga', 'Riya', 'Monday'], hint: 'It names a general person, place or thing.', exp: 'River is a general name, so it is a common noun.' }
+        ],
+        eng_articles_prep: [
+            { q: 'Fill in: <strong>"The cat is hiding ___ the table."</strong>', ans: 'under', wrong: ['on', 'at', 'between'], hint: 'It is below the table.', exp: 'Under shows that the cat is below the table.' }
+        ],
+        eng_interrogatives_conj_pronouns: [
+            { q: 'Fill in: <strong>"___ are you crying?"</strong>', ans: 'Why', wrong: ['Who', 'Where', 'Which'], hint: 'Ask for a reason.', exp: 'Why asks for a reason.' }
+        ],
+        eng_sentence: [
+            { q: 'Which sentence is written correctly?', ans: 'The birds are flying.', wrong: ['the birds are flying', 'The birds is flying.', 'The birds flying are.'], hint: 'Start with a capital and end with a full stop.', exp: 'The birds are flying. has the correct order and punctuation.' }
+        ]
+    };
+
     const PAPER_BADGES = {
         eng_word_meanings: 'Santoor: Word Meanings',
         eng_synonym_antonym: 'Santoor: Synonyms & Antonyms',
@@ -691,6 +733,11 @@
 
     Object.keys(PAPER).forEach((key) => {
         const extra = bankGenerator(key, PAPER_BADGES[key] || 'English', PAPER[key]);
+        englishGenerators[key] = englishGenerators[key] ? mix(englishGenerators[key], extra) : extra;
+    });
+
+    Object.keys(EXAM_PAPER).forEach((key) => {
+        const extra = bankGenerator(key, PAPER_BADGES[key] || 'English Exam Practice', EXAM_PAPER[key]);
         englishGenerators[key] = englishGenerators[key] ? mix(englishGenerators[key], extra) : extra;
     });
 
