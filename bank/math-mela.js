@@ -1166,7 +1166,9 @@
             { q: 'You pay ₹100 for something costing ₹63. Change?', ans: 37, wrong: [47, 27, 163], hint: '100 − 63', exp: '100 − 63 = ₹37.' },
             { q: 'Which coins make exactly ₹7?', ans: 'One ₹5 and two ₹1', wrong: ['Two ₹5', 'One ₹5 and one ₹1', 'Three ₹2'], hint: '5 + 1 + 1 = 7', exp: '₹5 + ₹1 + ₹1 = ₹7.' },
             { q: 'Ravi has three ₹20 notes. How much money?', ans: 60, wrong: [23, 40, 200], hint: '3 × 20', exp: '3 × ₹20 = ₹60.' },
-            { q: 'A ticket costs ₹25. How much for 4 tickets?', ans: 100, wrong: [29, 75, 125], hint: '25 + 25 + 25 + 25', exp: '4 × ₹25 = ₹100.' }
+            { q: 'A ticket costs ₹25. How much for 4 tickets?', ans: 100, wrong: [29, 75, 125], hint: '25 + 25 + 25 + 25', exp: '4 × ₹25 = ₹100.' },
+            { q: 'A toy costs ₹68. You pay ₹100. How much change do you get?', ans: 32, wrong: [28, 38, 168], hint: 'Subtract the price from the money paid.', exp: '₹100 − ₹68 = ₹32 change.' },
+            { q: 'Maya has ₹50. She buys a pencil for ₹12 and an eraser for ₹8. How much is left?', ans: 30, wrong: [20, 38, 42], hint: 'Add the two prices, then subtract from ₹50.', exp: '₹12 + ₹8 = ₹20; ₹50 − ₹20 = ₹30.' }
         ],
         ch11_measure: [
             { q: 'Which is heavier: 2 kg or 1500 g?', ans: '2 kg', wrong: ['1500 g', 'Both equal', 'Cannot say'], hint: '2 kg = 2000 g.', exp: '2000 g > 1500 g.' },
@@ -1174,7 +1176,9 @@
             { q: '250 g + 750 g = ?', ans: '1 kg', wrong: ['500 g', '900 g', '2 kg'], hint: '250 + 750 = 1000 g.', exp: '1000 g = 1 kg.' },
             { q: 'Which would you measure in <strong>millilitres</strong>?', ans: 'Medicine in a spoon', wrong: ['Water in a tank', 'Rice in a sack', 'A person\'s height'], hint: 'Millilitres are for tiny amounts of liquid.', exp: 'Spoonfuls of medicine are measured in ml.' },
             { q: 'A watermelon weighs about...', ans: '3 kilograms', wrong: ['3 grams', '3 litres', '3 millilitres'], hint: 'It is quite heavy.', exp: 'A watermelon weighs a few kilograms.' },
-            { q: 'Half a litre is the same as...', ans: '500 ml', wrong: ['50 ml', '5 ml', '5000 ml'], hint: '1000 ÷ 2', exp: '½ litre = 500 ml.' }
+            { q: 'Half a litre is the same as...', ans: '500 ml', wrong: ['50 ml', '5 ml', '5000 ml'], hint: '1000 ÷ 2', exp: '½ litre = 500 ml.' },
+            { q: 'A 1 kg bag of rice is divided equally into 4 packets. How much rice is in each packet?', ans: '250 g', wrong: ['100 g', '400 g', '500 g'], hint: '1 kg = 1000 g; divide by 4.', exp: '1000 g ÷ 4 = 250 g in each packet.' },
+            { q: 'A jug has 750 ml of juice. How much more is needed to make 1 litre?', ans: '250 ml', wrong: ['150 ml', '350 ml', '1 ml'], hint: '1 litre = 1000 ml.', exp: '1000 ml − 750 ml = 250 ml.' }
         ],
         ch12_times: [
             { q: 'What is 7 × 8?', ans: 56, wrong: [54, 63, 48], hint: 'The 7 times table.', exp: '7 × 8 = 56.' },
@@ -1183,7 +1187,9 @@
             { q: 'A hen lays 3 eggs a day. How many in one week?', ans: 21, wrong: [10, 18, 24], hint: '3 × 7', exp: '3 × 7 = 21 eggs.' },
             { q: 'There are 5 rows of 8 chairs. How many chairs?', ans: 40, wrong: [13, 35, 45], hint: '5 × 8', exp: '5 × 8 = 40 chairs.' },
             { q: 'What is 12 × 0?', ans: 0, wrong: [12, 1, 120], hint: 'Anything times zero.', exp: '12 × 0 = 0.' },
-            { q: 'Double 35 is...', ans: 70, wrong: [65, 75, 350], hint: '35 + 35', exp: '2 × 35 = 70.' }
+            { q: 'Double 35 is...', ans: 70, wrong: [65, 75, 350], hint: '35 + 35', exp: '2 × 35 = 70.' },
+            { q: 'A gardener plants 6 rows with 7 flowers in each row. How many flowers?', ans: 42, wrong: [13, 36, 49], hint: 'Rows × flowers in each row.', exp: '6 × 7 = 42 flowers.' },
+            { q: 'Which multiplication sentence matches 5 + 5 + 5 + 5?', ans: '4 × 5 = 20', wrong: ['5 × 5 = 25', '4 × 4 = 16', '5 + 4 = 9'], hint: 'Count the number of groups of 5.', exp: 'There are 4 groups of 5, so 4 × 5 = 20.' }
         ],
         ch13_sharing: [
             { q: 'What is 48 ÷ 6?', ans: 8, wrong: [6, 7, 9], hint: '6 × ? = 48', exp: '6 × 8 = 48.' },
@@ -1191,7 +1197,9 @@
             { q: '25 sweets shared among 4 children. How many left over?', ans: 1, wrong: [0, 2, 3], hint: '4 × 6 = 24.', exp: 'Each gets 6, and 1 sweet is left over.' },
             { q: '30 books on 5 equal shelves. How many per shelf?', ans: 6, wrong: [5, 7, 25], hint: '30 ÷ 5', exp: '30 ÷ 5 = 6 books.' },
             { q: 'If 7 × 4 = 28, then 28 ÷ 7 = ?', ans: 4, wrong: [7, 28, 21], hint: 'Division undoes multiplication.', exp: '28 ÷ 7 = 4.' },
-            { q: '0 ÷ 9 = ?', ans: 0, wrong: [9, 1, 'Cannot divide'], hint: 'Nothing shared among 9.', exp: '0 divided by any number is 0.' }
+            { q: '0 ÷ 9 = ?', ans: 0, wrong: [9, 1, 'Cannot divide'], hint: 'Nothing shared among 9.', exp: '0 divided by any number is 0.' },
+            { q: '32 bananas are packed equally into 4 baskets. How many bananas in each basket?', ans: 8, wrong: [6, 7, 9], hint: '32 ÷ 4', exp: '32 ÷ 4 = 8 bananas in each basket.' },
+            { q: '27 children stand in groups of 3. How many groups are made?', ans: 9, wrong: [6, 8, 10], hint: '3 × ? = 27', exp: '27 ÷ 3 = 9 groups.' }
         ],
         ch14_give_take: [
             { q: 'A school has 245 girls and 268 boys. How many children in all?', ans: 513, wrong: [503, 523, 23], hint: 'Add both.', exp: '245 + 268 = 513.' },
@@ -1199,7 +1207,9 @@
             { q: 'Rina saved ₹150 in January and ₹175 in February. How much altogether?', ans: 325, wrong: [225, 315, 25], hint: 'Add both months.', exp: '150 + 175 = ₹325.' },
             { q: 'A tank had 500 litres. 125 litres were used. How much is left?', ans: 375, wrong: [385, 625, 275], hint: 'Subtract.', exp: '500 − 125 = 375 litres.' },
             { q: 'Estimate: 302 − 98 is closest to...', ans: 200, wrong: [100, 300, 400], hint: 'Round to 300 − 100.', exp: '300 − 100 = 200.' },
-            { q: 'A bag has 6 packets of 8 biscuits. How many biscuits?', ans: 48, wrong: [14, 42, 54], hint: '6 × 8', exp: '6 × 8 = 48 biscuits.' }
+            { q: 'A bag has 6 packets of 8 biscuits. How many biscuits?', ans: 48, wrong: [14, 42, 54], hint: '6 × 8', exp: '6 × 8 = 48 biscuits.' },
+            { q: 'A library had 625 books. It gave away 148 books. How many books remain?', ans: 477, wrong: [467, 773, 523], hint: 'Subtract the books given away.', exp: '625 − 148 = 477 books remain.' },
+            { q: 'There are 135 red beads and 189 blue beads. How many beads altogether?', ans: 324, wrong: [314, 334, 54], hint: 'Add the two colours.', exp: '135 + 189 = 324 beads.' }
         ]
     };
 
